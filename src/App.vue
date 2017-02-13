@@ -1,6 +1,9 @@
 <template>
   <div>
-    <calendar></calendar>
+    <calendar v-model="eventDates"></calendar>
+    <ul>
+      <li v-for="date in eventDates">{{date.date}} {{date.hours}}H{{date.minutes}}</li>
+    </ul>
   </div>
 </template>
 
@@ -11,7 +14,7 @@ export default {
   components: {Calendar},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      eventDates:[]
     }
   }
 }
