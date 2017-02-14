@@ -1,7 +1,11 @@
 {
   "app": {
     "menu": {
-      "datetime": "Manage the moment"
+      "datetime": "The Moment",
+      "location": "The Place",
+      "checklist": "The Checklist",
+      "polls": "The Polls",
+      "participants": "The Participants"
     }
   }
 }

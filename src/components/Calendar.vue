@@ -2,7 +2,7 @@
     <div class="calendar">
         <div class="calendar-header">
             <i class="fa fa-fw fa-chevron-left action" @click="subtractMonth"></i>
-            <h4> {{month + ' ' + year}}</h4>
+            <h3> {{month + ' ' + year}}</h3>
             <i class="fa fa-fw fa-chevron-right action" @click="addMonth"></i>
         </div>
         <ul class="weekdays">

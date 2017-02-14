@@ -12,6 +12,19 @@ $light-grey:    #fafafa;
 $grey:          #ddd;
 $strong-grey:   #4C4C4C;
 $white:         white;
+$color1:        #F44336;
+$color2:        #4CAF50;
+$color3:        #2196F3;
+$color4:        #FF9800;
+$color5:        #9C27B0;
+// $color1:        #E57373;
+// $color2:        #81C784;
+// $color3:        #64B5F6;
+// $color4:        #FFB74D;
+// $color5:        #BA68C8;
+
+$sidebar-width-percent: 40%;
+$sidebar-width-px: 550px;
 
 @font-face {
   font-family: 'Roboto';
@@ -26,6 +39,89 @@ html,body {
   height: 100%;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3 {
+  font-weight: 200;
+}
+
+#page {
+  display: flex;
+
+  aside {
+    @media only screen and (min-width:960px){
+        width: $sidebar-width-px
+    }
+    width: $sidebar-width-percent;
+    height: 100%;
+    position: fixed;
+    background-color: $strong-grey;
+    color: $white;
+    box-shadow: 2px 0 10px 0 $grey;
+    section#user {
+      display: flex;
+      align-content: center;
+      align-items: baseline;
+    }
+    nav ul{
+      list-style-type: none;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+      text-align: right;
+      text-shadow: 0 0 2px $strong-grey;
+      li{
+        padding:1em;
+        cursor: pointer;
+        i {
+          width: 2em;
+          text-align: center;
+        }
+        &.color1 {
+          background-color: $color1;
+          &:hover {
+            background-color: darken($color1,10%);
+          }
+        }
+        &.color2 {
+          background-color: $color2;
+          &:hover {
+            background-color: darken($color2,10%);
+          }
+        }
+        &.color3 {
+          background-color: $color3;
+          &:hover {
+            background-color: darken($color3,10%);
+          }
+        }
+        &.color4 {
+          background-color: $color4;
+          &:hover {
+            background-color: darken($color4,10%);
+          }
+        }
+        &.color5 {
+          background-color: $color5;
+          &:hover {
+            background-color: darken($color5,10%);
+          }
+        }
+      }
+    }
+  }
+  main {
+    flex: 1;
+    margin-left: $sidebar-width-percent;
+    @media only screen and (min-width:960px){
+        margin-left: $sidebar-width-px
+    }
+    padding: 0 1em;
+    section {
+      min-height: 100vh;
+    }
+  }
 }
 
 .calendar {
@@ -34,6 +130,10 @@ html,body {
     align-items: baseline;
     justify-content: center;
     font-size:1.5em;
+    h3 {
+      width: 250px;
+      text-align: center;
+    }
   }
   ul.dates, ul.weekdays {
     margin: 0 auto;
@@ -46,14 +146,15 @@ html,body {
       justify-content: center;
       align-items: baseline;
       width: 13.6%;
-      line-height: 2em;
+      line-height: 3em;
       vertical-align: middle;
     }
   }
   ul.weekdays {
-    border: 1px solid $grey;
+    border-top: 1px solid $grey;
+    border-bottom: 1px solid $grey;
   }
-  ul.dates{
+  ul.dates {
     li {
       &.current-day {
         background-color: $green;
