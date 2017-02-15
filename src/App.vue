@@ -1,34 +1,6 @@
 <template>
   <div id="page">
-    <aside>
-      <section id="user">
-        <figure class="userPicture">
-          <i class="fa fa-2x fa-user-o"></i>
-        </figure>
-        Pilou
-      </section>
-      <section id="menuSection">
-        <nav>
-          <ul>
-            <li class="color1" @click="scrollTo('calendar')">
-              {{$t('app.menu.datetime')}}<i class="fa fa-calendar"></i>
-            </li>
-            <li class="color2" @click="scrollTo('location')">
-              {{$t('app.menu.location')}}<i class="fa fa-map-marker"></i>
-            </li>
-            <li class="color3" @click="scrollTo('checklist')">
-              {{$t('app.menu.checklist')}}<i class="fa fa-list"></i>
-            </li>
-            <li class="color4" @click="scrollTo('polls')">
-              {{$t('app.menu.polls')}}<i class="fa fa-bullhorn"></i>
-            </li>
-            <li class="color5" @click="scrollTo('participants')">
-              {{$t('app.menu.participants')}}<i class="fa fa-users"></i>
-            </li>
-          </ul>
-        </nav>
-      </section>
-    </aside>
+    <side-bar @scrollto="scrollTo"></side-bar>
     <main>
       <section id="calendar">
         <h2>{{$t('app.menu.datetime')}}</h2>
@@ -56,10 +28,11 @@
 <script>
 import zenscroll from 'zenscroll'
 import Calendar from './components/Calendar.vue'
+import SideBar from './components/SideBar.vue'
 
 export default {
   name: 'app',
-  components: {Calendar},
+  components: {Calendar, SideBar},
   data () {
     return {
       eventDates:[]
