@@ -177,9 +177,23 @@ h1, h2, h3 {
       }
     }
   }
-  .hourInput {
+  ul.selected {
+    list-style-type: none;
+    li {
+      display: flex;
+      .formattedDate {
+        width: 110px;
+      }
+    }
+  }
+  .timeInput input {
+    margin: 0 1em;
     width: 3em;
   }
+}
+.fa {
+  min-width: 1.5em;
+  text-align: center;
 }
 
 .action:hover {

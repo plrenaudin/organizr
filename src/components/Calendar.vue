@@ -11,70 +11,77 @@
         <ul class="dates">
             <li v-for="blank in firstDayOfMonth">&nbsp;</li>
             <li v-for="date in daysInMonth"
-        		:class="[{'current-day': date == initialDate && month == initialMonth && year == initialYear},'selectable',{'selected':isSelected(dayToDateString(date))}]" @click="select(date)">
+        		:class="[
+              {'current-day': date == initialDate && month == initialMonth && year == initialYear},
+              'selectable',
+              {'selected':isSelected(dayToDateString(date))}
+              ]" @click="select(date)">
                 <span>{{date}}</span>
             </li>
         </ul>
-        <ul class="selected">
-          <li v-for="current,index in selected">
-            {{formatDate(current.date)}}
-            <template v-if="type === 'datetime'">
-              @
-              <select v-model="current.hours" class="hourInput">
-                <option v-for="n in 24">{{ leftPad(""+(n-1), 2, '0') }}</option>
-              </select>h
-              <select v-model="current.minutes" class="hourInput">
-                <option value="00">00</option>
-                <option v-for="n in 11">{{ leftPad(""+(n*5), 2, '0') }}</option>
-              </select>
-            </template>
-            <i class="fa fa-trash action" @click="selected.splice(index,1)"></i>
-          </li>
-        </ul>
+        <div class="chosenDates" v-show="selected.length > 0">
+          <div class="action" @click="timeInputDisplay = !timeInputDisplay">
+            <i class="fa fa-clock-o"></i>Add time option
+          </div>
+          <ul class="selected">
+            <li v-for="current,dateIndex in selected">
+              <i class="fa fa-trash action" @click="selected.splice(dateIndex,1)"></i>
+              <div class="formattedDate">
+                {{formatDate(current.date)}}
+              </div>
+              <div v-for="time,timeIndex in current.times">
+                <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time}}
+              </div>
+              <div class="timeInput" v-show="timeInputDisplay">
+                <input type="text"
+                  placeholder="00:00"
+                  :name="'addTime-' +dateIndex"
+                  @blur="addTime"
+                  @keyup.enter="addTime">
+              </div>
+            </li>
+          </ul>
+        </div>
     </div>
 </template>
 <script>
 import moment from 'moment'
 import Formatter from '../helpers/Formatter.js'
+
 export default {
   name: 'calendar',
-  props: {
-    value: {
-      type: Array
-    },
-    type: {
-      type: String,
-      default: 'date'
-    }
-  },
   data() {
     return{
       today: moment(),
       dateContext: moment(),
       days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-      selected: []
+      timeInputDisplay:false
     }
   },
   methods: {
     formatDate: Formatter.dateToReadableDate,
-    leftPad: Formatter.leftPad,
     addMonth() { this.dateContext = moment(this.dateContext).add(1, 'month')},
     subtractMonth() { this.dateContext = moment(this.dateContext).subtract(1, 'month')},
     dayToDateString(day) { return this.dateContext.format("YYYY-MM-") + Formatter.leftPad(""+day, 2, '0')},
     isSelected(date) { return this.selected.find(item => item.date === date) },
-    onInput() { this.$emit('input', this.selected) },
     select(day) {
       let insertable = this.dayToDateString(day)
-      let found = this.selected.find(item => item.date === insertable && item.hours === '00' && item.minutes === '00')
-      if(!found) {
-        this.selected.push({date: insertable, hours: '00', minutes: '00'})
-      } else if(this.type === 'date') {
-        this.selected.splice(this.selected.indexOf(found), 1)
-      }
-      this.onInput()
+      this.$store.commit('addDate', insertable)
+    },
+    addTime(event){
+      if(!event.target.value) return
+      const value = event.target.value
+      const index = event.target.name.substring(8)
+      this.$store.commit('addTime', {index, value})
+      event.target.value = ''
+      event.target.blur()
+    },
+    removeTime(dateIndex, timeIndex) {
+      this.$store.commit('removeTime', {dateIndex, timeIndex})
     }
   },
   computed: {
+    selected() {return this.$store.getters.selectedDates},
     year() { return this.dateContext.format('Y')},
     month() { return this.dateContext.format('MMMM')},
     daysInMonth() { return this.dateContext.daysInMonth()},
@@ -83,9 +90,6 @@ export default {
     initialDate() { return this.today.get('date')},
     initialMonth() { return this.today.format('MMMM')},
     initialYear() { return this.today.format('Y')}
-  },
-  watch: {
-    value(val) { if(val !== this.selected) this.selected = val }
   }
 }
 

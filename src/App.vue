@@ -5,9 +5,6 @@
       <section id="calendar">
         <h2>{{$t('app.menu.datetime')}}</h2>
         <calendar v-model="eventDates"></calendar>
-        <ul>
-          <li v-for="date in eventDates">{{date.date}} {{date.hours}}:{{date.minutes}}</li>
-        </ul>
       </section>
       <section id="location">
         <h2>{{$t('app.menu.location')}}</h2>
