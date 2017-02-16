@@ -6,6 +6,9 @@
       "checklist": "The Checklist",
       "polls": "The Polls",
       "participants": "The Participants"
+    },
+    "moment": {
+      "toggleTimeOptions": "Toggle time options"
     }
   }
 }

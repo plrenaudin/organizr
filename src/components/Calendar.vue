@@ -21,7 +21,7 @@
         </ul>
         <div class="chosenDates" v-show="selected.length > 0">
           <div class="action" @click="timeInputDisplay = !timeInputDisplay">
-            <i class="fa fa-clock-o"></i>Add time option
+            <i class="fa fa-clock-o"></i>{{$t('app.moment.toggleTimeOptions')}}
           </div>
           <ul class="selected">
             <li v-for="current,dateIndex in selected">
@@ -47,6 +47,7 @@
 <script>
 import moment from 'moment'
 import Formatter from '../helpers/Formatter.js'
+import Utils from '../helpers/Utils.js'
 
 export default {
   name: 'calendar',
@@ -70,11 +71,11 @@ export default {
     },
     addTime(event){
       if(!event.target.value) return
-      const value = event.target.value
+      const value = Utils.parseTimeInput(event.target.value)
       const index = event.target.name.substring(8)
       this.$store.commit('addTime', {index, value})
       event.target.value = ''
-      event.target.blur()
+      event.target.focus()
     },
     removeTime(dateIndex, timeIndex) {
       this.$store.commit('removeTime', {dateIndex, timeIndex})

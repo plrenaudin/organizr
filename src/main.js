@@ -6,15 +6,12 @@ import t from './helpers/Translate.js'
 
 Object.defineProperty(Vue.prototype, '$t', {
     get() {
-        return this.$root.t;
+        return t;
     }
 })
 
 new Vue({
   el: '#app',
   store,
-  render: h => h(App),
-  data: {
-    t
-  }
+  render: h => h(App)
 })

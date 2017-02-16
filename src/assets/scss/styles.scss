@@ -181,6 +181,8 @@ h1, h2, h3 {
     list-style-type: none;
     li {
       display: flex;
+      padding: .5em 0;
+      margin: .5em 0;
       .formattedDate {
         width: 110px;
       }
