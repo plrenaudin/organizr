@@ -25,7 +25,7 @@
           </div>
           <ul class="selected">
             <li v-for="current,dateIndex in selected">
-              <i class="fa fa-trash action" @click="selected.splice(dateIndex,1)"></i>
+              <i class="fa fa-trash action" @click="removeDate(dateIndex)"></i>
               <div class="formattedDate">
                 {{formatDate(current.date)}}
               </div>
@@ -76,6 +76,9 @@ export default {
       this.$store.commit('addTime', {index, value})
       event.target.value = ''
       event.target.focus()
+    },
+    removeDate(dateIndex) {
+      this.$store.commit('removeDate', dateIndex)
     },
     removeTime(dateIndex, timeIndex) {
       this.$store.commit('removeTime', {dateIndex, timeIndex})

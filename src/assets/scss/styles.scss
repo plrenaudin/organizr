@@ -121,6 +121,11 @@ h1, h2, h3 {
     section {
       min-height: 100vh;
     }
+    #calendar h2 { border-bottom: 2px solid $color1; }
+    #place h2 { border-bottom: 2px solid $color2; }
+    #checklist h2 { border-bottom: 2px solid $color3; }
+    #poll h2 { border-bottom: 2px solid $color4; }
+    #participant h2 { border-bottom: 2px solid $color5; }
   }
 }
 
@@ -193,6 +198,38 @@ h1, h2, h3 {
     width: 3em;
   }
 }
+
+.place {
+  .placeInput {
+    display: flex;
+    justify-content: center;
+    input {
+      width: 50%;
+    }
+  }
+  ul.placeList {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    li {
+      padding: .5em 0;
+      display: flex;
+      .placeItem {
+        width: 100%;
+        .map {
+          position: relative;
+          height: 170px;
+          width: 100%;
+          overflow: hidden;
+          iframe {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
 .fa {
   min-width: 1.5em;
   text-align: center;
