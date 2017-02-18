@@ -9,6 +9,9 @@
     <section id="menuSection">
       <nav>
         <ul>
+          <li class="color0" @click="$emit('scrollto','intro')">
+            {{$t('app.menu.intro')}}<i class="fa fa-file-text-o"></i>
+          </li>
           <li class="color1" @click="$emit('scrollto','calendar')">
             {{$t('app.menu.datetime')}}<i class="fa fa-calendar"></i>
           </li>

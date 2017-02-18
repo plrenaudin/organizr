@@ -2,6 +2,10 @@
   <div id="page">
     <side-bar @scrollto="scrollTo"></side-bar>
     <main>
+      <section id="intro">
+        <h2>{{$t('app.menu.intro')}}</h2>
+        <intro></intro>
+      </section>
       <section id="calendar">
         <h2>{{$t('app.menu.datetime')}}</h2>
         <calendar></calendar>
@@ -30,10 +34,11 @@ import Calendar from './components/Calendar.vue'
 import SideBar from './components/SideBar.vue'
 import Place from './components/Place.vue'
 import Checklist from './components/Checklist.vue'
+import Intro from './components/Intro.vue'
 
 export default {
   name: 'app',
-  components: {Calendar, Place, SideBar, Checklist},
+  components: {Calendar, Place, SideBar, Checklist, Intro},
   methods: {
     scrollTo(element) {
       zenscroll.to(document.getElementById(element), 250)

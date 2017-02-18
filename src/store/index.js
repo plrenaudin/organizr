@@ -8,6 +8,10 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   state: {
     event: {
+      info:{
+        title:'',
+        description: ''
+      },
       dates: [],
       places: [],
       checklist: []
@@ -42,6 +46,10 @@ export default new Vuex.Store({
     },
     removeChecklistItem(state,index){
       state.event.checklist.splice(index, 1)
+    },
+    updateInfo(state, info) {
+      state.event.info.title = info.title
+      state.event.info.description = info.description
     }
 
   },

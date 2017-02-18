@@ -1,11 +1,16 @@
 {
   "app": {
     "menu": {
+      "intro": "The Intro",
       "datetime": "The Moment",
       "location": "The Place",
       "checklist": "The Checklist",
       "polls": "The Polls",
       "participants": "The Participants"
+    },
+    "intro": {
+      "titleInput": "Enter a title",
+      "descInput": "Enter a description"
     },
     "moment": {
       "toggleTimeOptions": "Toggle time options"
