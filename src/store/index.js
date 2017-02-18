@@ -84,6 +84,9 @@ export default new Vuex.Store({
     },
     participants: state => {
       return state.event.participants
+    },
+    intro: state => {
+      return state.event.info
     }
   },
   strict: debug

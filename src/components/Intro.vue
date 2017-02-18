@@ -32,6 +32,11 @@
         handler (val) { this.saveInfo() },
         deep: true
       }
+    },
+    mounted(){
+      const {title, description} = this.$store.getters.intro
+      this.model.title = title
+      this.model.description = description
     }
   }
 </script>
