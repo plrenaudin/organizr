@@ -21,6 +21,9 @@
     "poll": {
       "addItem": "Add a new poll",
       "addChoice": "Add a new choice"
+    },
+    "participants": {
+      "input": "List all participants"
     }
   }
 }

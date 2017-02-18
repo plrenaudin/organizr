@@ -15,7 +15,8 @@ export default new Vuex.Store({
       dates: [],
       places: [],
       checklist: [],
-      polls: []
+      polls: [],
+      participants: [],
     }
   },
   mutations: {
@@ -63,8 +64,10 @@ export default new Vuex.Store({
     },
     removeChoice(state,{indexPoll, indexChoice}) {
       state.event.polls[indexPoll].choices.splice(indexChoice,1)
+    },
+    updateParticipants(state, participants) {
+      state.event.participants = participants
     }
-
   },
   getters: {
     selectedDates: state => {
@@ -78,6 +81,9 @@ export default new Vuex.Store({
     },
     polls: state => {
       return state.event.polls
+    },
+    participants: state => {
+      return state.event.participants
     }
   },
   strict: debug
