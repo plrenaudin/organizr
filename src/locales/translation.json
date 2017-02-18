@@ -9,6 +9,9 @@
     },
     "moment": {
       "toggleTimeOptions": "Toggle time options"
+    },
+    "checklist": {
+      "addItem": "Add an item"
     }
   }
 }

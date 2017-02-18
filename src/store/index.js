@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     event: {
       dates: [],
-      places: []
+      places: [],
+      checklist: []
     }
   },
   mutations: {
@@ -36,6 +37,13 @@ export default new Vuex.Store({
     removePlace(state, index) {
       state.event.places.splice(index, 1)
     },
+    addChecklistItem(state, item) {
+      state.event.checklist.push(item)
+    },
+    removeChecklistItem(state,index){
+      state.event.checklist.splice(index, 1)
+    }
+
   },
   getters: {
     selectedDates: state => {
@@ -43,6 +51,9 @@ export default new Vuex.Store({
     },
     selectedPlaces: state => {
       return state.event.places
+    },
+    checklist: state => {
+      return state.event.checklist
     }
   },
   strict: debug

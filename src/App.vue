@@ -12,6 +12,7 @@
       </section>
       <section id="checklist">
         <h2>{{$t('app.menu.checklist')}}</h2>
+        <checklist></checklist>
       </section>
       <section id="poll">
         <h2>{{$t('app.menu.polls')}}</h2>
@@ -28,10 +29,11 @@ import zenscroll from 'zenscroll'
 import Calendar from './components/Calendar.vue'
 import SideBar from './components/SideBar.vue'
 import Place from './components/Place.vue'
+import Checklist from './components/Checklist.vue'
 
 export default {
   name: 'app',
-  components: {Calendar, Place, SideBar},
+  components: {Calendar, Place, SideBar, Checklist},
   methods: {
     scrollTo(element) {
       zenscroll.to(document.getElementById(element), 250)
