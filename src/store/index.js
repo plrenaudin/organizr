@@ -14,7 +14,8 @@ export default new Vuex.Store({
       },
       dates: [],
       places: [],
-      checklist: []
+      checklist: [],
+      polls: []
     }
   },
   mutations: {
@@ -50,6 +51,18 @@ export default new Vuex.Store({
     updateInfo(state, info) {
       state.event.info.title = info.title
       state.event.info.description = info.description
+    },
+    addPoll(state, question) {
+      state.event.polls.push({question, choices: []})
+    },
+    removePoll(state, index) {
+      state.event.polls.splice(index, 1)
+    },
+    addChoice(state,{indexPoll, choice}) {
+      state.event.polls[indexPoll].choices.push({name:choice})
+    },
+    removeChoice(state,{indexPoll, indexChoice}) {
+      state.event.polls[indexPoll].choices.splice(indexChoice,1)
     }
 
   },
@@ -62,6 +75,9 @@ export default new Vuex.Store({
     },
     checklist: state => {
       return state.event.checklist
+    },
+    polls: state => {
+      return state.event.polls
     }
   },
   strict: debug

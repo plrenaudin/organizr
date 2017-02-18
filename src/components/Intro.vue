@@ -23,16 +23,15 @@
         clearTimeout(timeoutID);
         let me = this;
         timeoutID = setTimeout(function() {
-          console.log('saving...', me.model)
           me.$store.commit('updateInfo', {title: me.model.title, description: me.model.description})
         }, timeoutDuration);
       }
     },
     watch: {
-        model: {
-          handler (val) { this.saveInfo() },
-          deep: true
-        }
+      model: {
+        handler (val) { this.saveInfo() },
+        deep: true
+      }
     }
   }
 </script>

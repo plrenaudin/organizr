@@ -17,6 +17,10 @@
     },
     "checklist": {
       "addItem": "Add an item"
+    },
+    "poll": {
+      "addItem": "Add a new poll",
+      "addChoice": "Add a new choice"
     }
   }
 }

@@ -20,6 +20,7 @@
       </section>
       <section id="poll">
         <h2>{{$t('app.menu.polls')}}</h2>
+        <poll></poll>
       </section>
       <section id="participant">
         <h2>{{$t('app.menu.participants')}}</h2>
@@ -35,10 +36,11 @@ import SideBar from './components/SideBar.vue'
 import Place from './components/Place.vue'
 import Checklist from './components/Checklist.vue'
 import Intro from './components/Intro.vue'
+import Poll from './components/Poll.vue'
 
 export default {
   name: 'app',
-  components: {Calendar, Place, SideBar, Checklist, Intro},
+  components: {Calendar, Place, SideBar, Checklist, Intro, Poll},
   methods: {
     scrollTo(element) {
       zenscroll.to(document.getElementById(element), 250)
