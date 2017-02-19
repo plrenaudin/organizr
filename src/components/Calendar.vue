@@ -36,7 +36,6 @@
                 <input type="text"
                   placeholder="00:00"
                   :name="'addTime-' +dateIndex"
-                  @blur="addTime"
                   @keyup.enter="addTime">
               </div>
             </li>

@@ -10,10 +10,10 @@
             {{choice.name}}
           </li>
         </ul>
-        <input type="text" :placeholder="$t('app.poll.addChoice')" @keyup.enter="addChoice(indexPoll, arguments[0])" @blur="addChoice(indexPoll, arguments[0])" />
+        <input type="text" :placeholder="$t('app.poll.addChoice')" @keyup.enter="addChoice(indexPoll, arguments[0])" />
       </li>
     </ul>
-    <input type="text" :placeholder="$t('app.poll.addItem')" @keyup.enter="addPoll" @blur="addPoll" />
+    <input type="text" :placeholder="$t('app.poll.addItem')" @keyup.enter="addPoll" />
   </div>
 </template>
 <script>
