@@ -13,7 +13,8 @@
       "descInput": "Enter a description"
     },
     "moment": {
-      "toggleTimeOptions": "Toggle time options"
+      "displayTimeOptions": "Display time options",
+      "hideTimeOptions": "Hide time options"
     },
     "checklist": {
       "addItem": "Add an item"
@@ -24,6 +25,10 @@
     },
     "participants": {
       "input": "List all participants"
+    },
+    "landingPage": {
+      "createEvent": "Create an event",
+      "viewEvent": "View an event"
     }
   }
 }

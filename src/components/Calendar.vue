@@ -20,9 +20,6 @@
             </li>
         </ul>
         <div class="chosenDates" v-show="selected.length > 0">
-          <div class="action" @click="timeInputDisplay = !timeInputDisplay">
-            <i class="fa fa-clock-o"></i>{{$t('app.moment.toggleTimeOptions')}}
-          </div>
           <ul class="selected">
             <li v-for="current,dateIndex in selected">
               <i class="fa fa-trash action" @click="removeDate(dateIndex)"></i>
@@ -32,11 +29,12 @@
               <div v-for="time,timeIndex in current.times">
                 <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time}}
               </div>
-              <div class="timeInput" v-show="timeInputDisplay">
+              <div class="timeInput">
                 <input type="text"
                   placeholder="00:00"
                   :name="'addTime-' +dateIndex"
-                  @keyup.enter="addTime">
+                  @keyup.enter="addTime"
+                  @blur="addTime">
               </div>
             </li>
           </ul>
@@ -54,8 +52,7 @@ export default {
     return{
       today: moment(),
       dateContext: moment(),
-      days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-      timeInputDisplay:false
+      days: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
     }
   },
   methods: {
@@ -69,12 +66,15 @@ export default {
       this.$store.commit('addDate', insertable)
     },
     addTime(event){
+      console.log(event)
       if(!event.target.value) return
       const value = Utils.parseTimeInput(event.target.value)
       const index = event.target.name.substring(8)
       this.$store.commit('addTime', {index, value})
       event.target.value = ''
-      event.target.focus()
+      if(event.type !== "blur") {
+        event.target.focus()
+      }
     },
     removeDate(dateIndex) {
       this.$store.commit('removeDate', dateIndex)

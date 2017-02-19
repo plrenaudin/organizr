@@ -1,3 +1,5 @@
+@import './normalize.scss';
+
 $white-color-percentage: 40%;
 $sidebar-width-percent: 40%;
 $sidebar-width-px: 550px;
@@ -62,8 +64,6 @@ ul {
 }
 
 #page {
-  display: flex;
-
   aside {
     width: $sidebar-width-percent;
     height: 100%;
@@ -75,6 +75,9 @@ ul {
       display: flex;
       align-content: center;
       align-items: baseline;
+      figure {
+        margin: 1em;
+      }
     }
     nav ul{
       font-weight: bold;
@@ -248,6 +251,7 @@ ul {
   ul.selected {
     li {
       display: flex;
+      align-items: baseline;
       padding: .5em 0;
       margin: .5em 0;
       .formattedDate {
