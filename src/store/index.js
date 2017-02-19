@@ -20,6 +20,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    loadEvent(state, event) {
+      Object.assign(state,event)
+    },
     addDate(state, date) {
       let found = state.event.dates.find(item => item.date === date)
       if (found) {
