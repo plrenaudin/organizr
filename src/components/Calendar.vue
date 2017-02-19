@@ -85,7 +85,7 @@ export default {
     }
   },
   computed: {
-    selected() {return this.$store.getters.selectedDates},
+    selected() {return this.$store.getters.dates},
     year() { return this.dateContext.format('Y')},
     month() { return this.dateContext.format('MMMM')},
     daysInMonth() { return this.dateContext.daysInMonth()},

@@ -83,6 +83,20 @@ ul {
           width: 2em;
           text-align: center;
         }
+        .peek {
+          margin: 2px 0;
+          max-height: 45px;
+          overflow: hidden;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+          li {
+            border: 1px solid $white;
+            padding:2px 4px;
+            font-size: .75em;
+            background-color: $strong-grey;
+          }
+        }
         &.color0 {
           background-color: $color0;
           &:hover {

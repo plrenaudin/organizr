@@ -77,10 +77,10 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    selectedDates: state => {
+    dates: state => {
       return state.event.dates
     },
-    selectedPlaces: state => {
+    places: state => {
       return state.event.places
     },
     checklist: state => {

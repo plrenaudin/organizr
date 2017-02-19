@@ -60,7 +60,7 @@
       }
     },
     computed: {
-      places() { return this.$store.getters.selectedPlaces }
+      places() { return this.$store.getters.places }
     }
   }
 </script>
