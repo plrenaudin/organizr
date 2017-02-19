@@ -44,7 +44,7 @@ export default new Vuex.Store({
       state.event.places.splice(index, 1)
     },
     addChecklistItem(state, item) {
-      state.event.checklist.push(item)
+      state.event.checklist.push({name: item})
     },
     removeChecklistItem(state,index){
       state.event.checklist.splice(index, 1)
@@ -65,8 +65,15 @@ export default new Vuex.Store({
     removeChoice(state,{indexPoll, indexChoice}) {
       state.event.polls[indexPoll].choices.splice(indexChoice,1)
     },
-    updateParticipants(state, participants) {
-      state.event.participants = participants
+    addParticipants(state, participants) {
+      participants.forEach(toAdd => {
+        if(!state.event.participants.find(inIt => inIt === toAdd)) {
+          state.event.participants.push(toAdd)
+        }
+      })
+    },
+    removeParticipants(state, index) {
+      state.event.participants.splice(index, 1)
     }
   },
   getters: {

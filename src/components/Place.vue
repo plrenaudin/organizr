@@ -50,8 +50,9 @@
       },
       selectPlace(event) {
         let place = this.autocomplete.getPlace()
-        if(place) {
-          this.$store.commit('selectPlace', {name: place.formatted_address ? place.formatted_address : place.name, valid: place.formatted_address})
+        let placeName = place.formatted_address ? place.formatted_address : place.name
+        if(place && !this.places.find(item => item.name === placeName)) {
+          this.$store.commit('selectPlace', {name: placeName, valid: place.formatted_address})
         }
       },
       removePlace(index) {

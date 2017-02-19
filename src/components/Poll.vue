@@ -22,7 +22,7 @@
     methods: {
       addPoll(event) {
         const itemToAdd = event.target.value
-        if(itemToAdd) {
+        if(itemToAdd && !this.polls.find(item => item.question === itemToAdd)) {
           this.$store.commit('addPoll', itemToAdd)
           event.target.value = ''
         }

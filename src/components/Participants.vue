@@ -1,8 +1,11 @@
 <template>
   <div class="participants">
-    <textarea :placeholder="$t('app.participants.input')" @keyup.enter="updateList" @blur="updateList">{{this.$store.getters.participants.join('\n')}}</textarea>
+    <input type="text" :placeholder="$t('app.participants.input')" @keyup.enter="addParticipants" />
     <ul>
-      <li v-for="participant in participants">{{participant}}</li>
+     <li v-for="participant,index in participants">
+       <i class="fa fa-trash action" @click="removeParticipants(index)"></i>
+       {{participant}}
+      </li>
     </ul>
   </div>
 </template>
@@ -11,14 +14,16 @@
   export default {
     name: 'participants',
     methods: {
-      updateList(event) {
+      addParticipants(event) {
         let list = event.target.value
         if(list) {
           list = list.split(/,|\ |\n/).filter(item => item.trim())
-        } else {
-          list = []
         }
-        this.$store.commit('updateParticipants', list)
+        this.$store.commit('addParticipants', list)
+        event.target.value = ''
+      },
+      removeParticipants(index) {
+        this.$store.commit('removeParticipants', index)
       }
     },
     computed: {
