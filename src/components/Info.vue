@@ -1,14 +1,14 @@
 <template>
-  <div class="intro">
-    <input type="text" v-model="model.title" :placeholder="$t('app.intro.titleInput')" />
-    <textarea name="desc" v-model="model.description" :placeholder="$t('app.intro.descInput')" ></textarea>
+  <div class="info">
+    <input type="text" v-model="model.title" :placeholder="$t('app.info.titleInput')" />
+    <textarea name="desc" v-model="model.description" :placeholder="$t('app.info.descInput')" ></textarea>
   </div>
 </template>
 <script>
   let timeoutID = null
   let timeoutDuration = 1000 // Default timeout duration
   export default {
-    name: 'intro',
+    name: 'info',
 
     data() {
       return {
@@ -34,7 +34,7 @@
       }
     },
     mounted(){
-      const {title, description} = this.$store.getters.intro
+      const {title, description} = this.$store.getters.info
       this.model.title = title
       this.model.description = description
     }

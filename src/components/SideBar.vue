@@ -5,17 +5,25 @@
         <i class="fa fa-2x fa-user-o"></i>
       </figure>
       Pilou
+      <div class="tools">
+        <template v-if="view">
+          <router-link :to="'/edit/' + eventId"><i class="fa fa-pencil"></i> {{$t('app.sidebar.editEvent')}}</router-link>
+        </template>
+        <template v-else>
+          <router-link :to="'/' + eventId"><i class="fa fa-eye"></i> {{$t('app.sidebar.viewEvent')}}</router-link>
+        </template>
+      </div>
     </section>
     <section id="menuSection">
       <nav>
         <ul>
-          <li class="color0" @click="$emit('scrollto','intro')">
+          <li class="color0" @click="$emit('scrollto','info')">
             <div class="menu">
-              {{$t('app.menu.intro')}}<i class="fa fa-file-text-o"></i>
+              {{$t('app.menu.info')}}<i class="fa fa-file-text-o"></i>
             </div>
-            <ul class="peek" v-show="intro.title || intro.description">
-              <li v-show="intro.title">{{intro.title}}</li>
-              <li v-show="intro.description">{{intro.description}}</li>
+            <ul class="peek" v-show="info.title || info.description">
+              <li v-show="info.title">{{info.title}}</li>
+              <li v-show="info.description">{{info.description}}</li>
             </ul>
           </li>
           <li class="color1" @click="$emit('scrollto','calendar')">
@@ -72,8 +80,9 @@
   import Formatter from '../helpers/Formatter.js'
   export default {
     name: 'side-bar',
+    props: ['view', 'eventId'],
     computed: {
-      intro() { return this.$store.getters.intro },
+      info() { return this.$store.getters.info },
       dates() { return this.$store.getters.dates },
       places() { return this.$store.getters.places },
       checklist() { return this.$store.getters.checklist },

@@ -95,7 +95,7 @@ export default new Vuex.Store({
     participants: state => {
       return state.event.participants
     },
-    intro: state => {
+    info: state => {
       return state.event.info
     }
   },

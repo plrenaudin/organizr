@@ -30,10 +30,12 @@
       }
     },
     created() {
-      var el = document.createElement('script')
-      el.setAttribute('type', 'text/javascript')
-      el.setAttribute('src', SCRIPTURL)
-      document.getElementsByTagName('head')[0].appendChild(el)
+      if(!window.google) {
+        var el = document.createElement('script')
+        el.setAttribute('type', 'text/javascript')
+        el.setAttribute('src', SCRIPTURL)
+        document.getElementsByTagName('head')[0].appendChild(el)
+      }
     },
     mounted() {
       this.initPlace()

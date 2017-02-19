@@ -1,14 +1,18 @@
 {
   "app": {
     "menu": {
-      "intro": "The Intro",
+      "info": "The info",
       "datetime": "The Moment",
       "location": "The Place",
       "checklist": "The Checklist",
       "polls": "The Polls",
       "participants": "The Participants"
     },
-    "intro": {
+    "sidebar": {
+      "editEvent": "Edit Event",
+      "viewEvent": "View Event"
+    },
+    "info": {
       "titleInput": "Enter a title",
       "descInput": "Enter a description"
     },

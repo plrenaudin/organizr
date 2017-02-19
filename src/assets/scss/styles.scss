@@ -78,6 +78,16 @@ ul {
       figure {
         margin: 1em;
       }
+      .tools {
+        display: flex;
+        width: 100%;
+        padding: 0 1em;
+        justify-content: flex-end;
+        a {
+          color: $white;
+          text-decoration: none;
+        }
+      }
     }
     nav ul{
       font-weight: bold;
@@ -156,7 +166,7 @@ ul {
         margin-top: 0;
       }
     }
-    #intro {
+    #info {
       background-color: $white-color0;
       h2 { border-bottom: 2px solid $color0; }
     }
@@ -182,7 +192,7 @@ ul {
     }
   }
 }
-.intro {
+.info {
   display: flex;
   width: 100%;
   flex-direction: column;
