@@ -32,13 +32,13 @@
 </template>
 <script>
   import zenscroll from 'zenscroll'
-  import Calendar from './components/Calendar.vue'
   import SideBar from './components/SideBar.vue'
-  import Place from './components/Place.vue'
-  import Checklist from './components/Checklist.vue'
-  import info from './components/Info.vue'
-  import Poll from './components/Poll.vue'
-  import Participants from './components/Participants.vue'
+  import Calendar from './components/composer/Calendar.vue'
+  import Place from './components/composer/Place.vue'
+  import Checklist from './components/composer/Checklist.vue'
+  import info from './components/composer/Info.vue'
+  import Poll from './components/composer/Poll.vue'
+  import Participants from './components/composer/Participants.vue'
 
   export default {
     name: 'composer',

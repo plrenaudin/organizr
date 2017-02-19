@@ -43,8 +43,8 @@
 </template>
 <script>
 import moment from 'moment'
-import Formatter from '../helpers/Formatter.js'
-import Utils from '../helpers/Utils.js'
+import Formatter from '../../helpers/Formatter.js'
+import Utils from '../../helpers/Utils.js'
 
 export default {
   name: 'calendar',

@@ -23,12 +23,6 @@
   const SCRIPTURL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`
   export default {
     name:'place',
-    data() {
-      return {
-        autocomplete: '',
-        iframeUrl: `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=`
-      }
-    },
     created() {
       if(!window.google) {
         var el = document.createElement('script')
@@ -62,7 +56,8 @@
       }
     },
     computed: {
-      places() { return this.$store.getters.places }
+      places() { return this.$store.getters.places },
+      iframeUrl() { return `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=` }
     }
   }
 </script>
