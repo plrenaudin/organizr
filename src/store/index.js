@@ -15,7 +15,8 @@ export default new Vuex.Store({
       places: [],
       checklist: [],
       polls: [],
-      participants: []
+      guests: [],
+      participants:[]
   },
   mutations: {
     loadEvent(state, event) {
@@ -30,7 +31,7 @@ export default new Vuex.Store({
       }
     },
     addTime(state, {index, value}) {
-      state.dates[index].times.push({ time: value })
+      state.dates[index].times.push(value)
     },
     removeDate(state, dateIndex) {
       state.dates.splice(dateIndex, 1)
@@ -66,15 +67,15 @@ export default new Vuex.Store({
     removeChoice(state,{indexPoll, indexChoice}) {
       state.polls[indexPoll].choices.splice(indexChoice,1)
     },
-    addParticipants(state, participants) {
-      participants.forEach(toAdd => {
-        if(!state.participants.find(inIt => inIt === toAdd)) {
-          state.participants.push(toAdd)
+    addGuest(state, guests) {
+      guests.forEach(toAdd => {
+        if(!state.guests.find(inIt => inIt === toAdd)) {
+          state.guests.push(toAdd)
         }
       })
     },
-    removeParticipants(state, index) {
-      state.participants.splice(index, 1)
+    removeGuest(state, index) {
+      state.guests.splice(index, 1)
     }
   },
   getters: {
@@ -90,8 +91,11 @@ export default new Vuex.Store({
     polls: state => {
       return state.polls
     },
-    participants: state => {
-      return state.participants
+    guests: state => {
+      return state.guests
+    },
+    guests: state => {
+      return state.guests
     },
     info: state => {
       return state.info

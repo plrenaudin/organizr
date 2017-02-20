@@ -24,8 +24,8 @@
         <poll></poll>
       </section>
       <section id="participant">
-        <h2>{{$t('app.menu.participants')}}</h2>
-        <participants></participants>
+        <h2>{{$t('app.menu.guests')}}</h2>
+        <guests></guests>
       </section>
     </main>
   </div>
@@ -38,11 +38,11 @@
   import Checklist from './components/composer/Checklist.vue'
   import info from './components/composer/Info.vue'
   import Poll from './components/composer/Poll.vue'
-  import Participants from './components/composer/Participants.vue'
+  import Guests from './components/composer/Guests.vue'
 
   export default {
     name: 'composer',
-    components: {Calendar, Place, SideBar, Checklist, info, Poll, Participants},
+    components: {Calendar, Place, SideBar, Checklist, info, Poll, Guests},
     props: ['eventId'],
     methods: {
       scrollTo(element) {
@@ -50,7 +50,7 @@
       }
     },
     created() {
-      let event = {"info":{"title":"mon info","description":"monf cintenoo"},"dates":[{"date":"2017-02-21","times":[{"time":"15:00"}]},{"date":"2017-02-23","times":[{"time":"16:00"},{"time":"18:00"}]},{"date":"2017-02-22","times":[]}],"places":[{"name":"Paris, France","valid":"Paris, France"}],"checklist":[{"name":"item"},{"name":"itm2"}],"polls":[],"participants":["participant1","participant2"]};
+      let event = {"info":{"title":"info title","description":"info desc"},"dates":[{"date":"2017-02-21","times":["11:00","02:00","13:00"]},{"date":"2017-02-22","times":["15:00","19:00"]},{"date":"2017-02-23","times":[]},{"date":"2017-02-28","times":["15:00","04:59","23:00","05:59"]},{"date":"2017-02-27","times":[]}],"places":[{"name":"Paris, France","valid":"Paris, France"}],"checklist":[{"name":"itemun"},{"name":"item2"}],"polls":[],"guests":[],"participants":[]};
       this.$store.commit('loadEvent', event)
     }
   }

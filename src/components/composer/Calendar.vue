@@ -27,7 +27,7 @@
                 {{formatDate(current.date)}}
               </div>
               <div v-for="time,timeIndex in current.times">
-                <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time.time}}
+                <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time}}
               </div>
               <div class="timeInput">
                 <input type="text"

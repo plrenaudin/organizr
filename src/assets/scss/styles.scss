@@ -63,6 +63,16 @@ ul {
     padding:0;
 }
 
+.fa {
+  min-width: 1.5em;
+  text-align: center;
+}
+
+.action:hover {
+  color: $blue;
+  cursor: pointer;
+}
+
 #page {
   aside {
     width: $sidebar-width-percent;
@@ -305,14 +315,37 @@ ul {
   }
 }
 
-.fa {
-  min-width: 1.5em;
-  text-align: center;
-}
 
-.action:hover {
-  color: $blue;
-  cursor: pointer;
+.viewer {
+  .calendar {
+    overflow-x: auto;
+    table {
+      border-collapse: collapse;
+      thead {
+        th {
+          border-top: 1px solid $strong-grey;
+          border-left: 1px solid $strong-grey;
+          border-right: 1px solid $strong-grey;
+          &:first-child {
+            border:none;
+          }
+        }
+      }
+      tbody {
+        th, tr, td {
+          border: 1px solid $strong-grey;
+          min-width: 110px;
+        }
+        td.selectable {
+          background-color: $white-blue;
+          cursor: pointer;
+          &:hover {
+            background-color: $blue;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (min-width:1200px){

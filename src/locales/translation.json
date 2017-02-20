@@ -6,7 +6,7 @@
       "location": "The Place",
       "checklist": "The Checklist",
       "polls": "The Polls",
-      "participants": "The Participants"
+      "guests": "The Guests"
     },
     "sidebar": {
       "editEvent": "Edit Event",
@@ -27,8 +27,8 @@
       "addItem": "Add a new poll",
       "addChoice": "Add a new choice"
     },
-    "participants": {
-      "input": "List all participants"
+    "guests": {
+      "input": "List all guests"
     },
     "landingPage": {
       "createEvent": "Create an event",

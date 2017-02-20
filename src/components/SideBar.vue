@@ -63,12 +63,12 @@
               <li v-for="poll in polls">{{poll.question}} ({{poll.choices.length}})</li>
             </ul>
           </li>
-          <li class="color5" @click="$emit('scrollto','participant')" v-show="!view || participants.length > 0">
+          <li class="color5" @click="$emit('scrollto','participant')" v-show="!view || guests.length > 0">
             <div class="menu">
-              {{$t('app.menu.participants')}}<i class="fa fa-users"></i>
+              {{$t('app.menu.guests')}}<i class="fa fa-users"></i>
             </div>
-            <ul class="peek" v-show="participants.length > 0">
-              <li v-for="participant in participants">{{participant}}</li>
+            <ul class="peek" v-show="guests.length > 0">
+              <li v-for="participant in guests">{{participant}}</li>
             </ul>
           </li>
         </ul>
@@ -87,7 +87,7 @@
       places() { return this.$store.getters.places },
       checklist() { return this.$store.getters.checklist },
       polls() { return this.$store.getters.polls },
-      participants() { return this.$store.getters.participants },
+      guests() { return this.$store.getters.guests },
     },
     methods: {
       formatDate: Formatter.dateToReadableDate
