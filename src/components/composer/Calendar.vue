@@ -27,7 +27,7 @@
                 {{formatDate(current.date)}}
               </div>
               <div v-for="time,timeIndex in current.times">
-                <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time}}
+                <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time.time}}
               </div>
               <div class="timeInput">
                 <input type="text"
@@ -65,8 +65,7 @@ export default {
       let insertable = this.dayToDateString(day)
       this.$store.commit('addDate', insertable)
     },
-    addTime(event){
-      console.log(event)
+    addTime(event) {
       if(!event.target.value) return
       const value = Utils.parseTimeInput(event.target.value)
       const index = event.target.name.substring(8)
