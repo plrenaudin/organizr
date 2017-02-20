@@ -17,7 +17,7 @@
     <section id="menuSection">
       <nav>
         <ul>
-          <li class="color0" @click="$emit('scrollto','info')">
+          <li class="color0" @click="$emit('scrollto','info')" v-show="!view || (info.title || info.description)">
             <div class="menu">
               {{$t('app.menu.info')}}<i class="fa fa-file-text-o"></i>
             </div>
@@ -26,11 +26,11 @@
               <li v-show="info.description">{{info.description}}</li>
             </ul>
           </li>
-          <li class="color1" @click="$emit('scrollto','calendar')">
+          <li class="color1" @click="$emit('scrollto','calendar')" v-show="!view || dates.length > 0">
             <div class="menu">
               {{$t('app.menu.datetime')}}<i class="fa fa-calendar"></i>
             </div>
-            <ul class="peek">
+            <ul class="peek" v-show="dates.length > 0">
               <li v-for="seletedDate in dates">
                 {{formatDate(seletedDate.date)}}
                 <template v-if="seletedDate.times.length > 0">
@@ -39,7 +39,7 @@
               </li>
             </ul>
           </li>
-          <li class="color2" @click="$emit('scrollto','place')">
+          <li class="color2" @click="$emit('scrollto','place')" v-show="!view || places.length > 0">
             <div class="menu">
               {{$t('app.menu.location')}}<i class="fa fa-map-marker"></i>
             </div>
@@ -47,7 +47,7 @@
               <li v-for="place in places">{{place.name}}</li>
             </ul>
           </li>
-          <li class="color3" @click="$emit('scrollto','checklist')">
+          <li class="color3" @click="$emit('scrollto','checklist')" v-show="!view || checklist.length > 0">
             <div class="menu">
               {{$t('app.menu.checklist')}}<i class="fa fa-list"></i>
             </div>
@@ -55,7 +55,7 @@
               <li>{{checklist.length}} item{{checklist.length > 1 ? 's' : ''}}</li>
             </ul>
           </li>
-          <li class="color4" @click="$emit('scrollto','poll')">
+          <li class="color4" @click="$emit('scrollto','poll')" v-show="!view || polls.length > 0">
             <div class="menu">
               {{$t('app.menu.polls')}}<i class="fa fa-bullhorn"></i>
             </div>
@@ -63,7 +63,7 @@
               <li v-for="poll in polls">{{poll.question}} ({{poll.choices.length}})</li>
             </ul>
           </li>
-          <li class="color5" @click="$emit('scrollto','participant')">
+          <li class="color5" @click="$emit('scrollto','participant')" v-show="!view || participants.length > 0">
             <div class="menu">
               {{$t('app.menu.participants')}}<i class="fa fa-users"></i>
             </div>
