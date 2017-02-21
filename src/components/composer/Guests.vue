@@ -19,11 +19,11 @@
         if(list) {
           list = list.split(/,|\ |\n/).filter(item => item.trim())
         }
-        this.$store.commit('addGuests', list)
+        this.$store.commit('addGuest', list)
         event.target.value = ''
       },
       removeGuests(index) {
-        this.$store.commit('removeGuests', index)
+        this.$store.commit('removeGuest', index)
       }
     },
     computed: {

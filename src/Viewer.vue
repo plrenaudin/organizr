@@ -39,6 +39,7 @@
   import info from './components/viewer/InfoViewer.vue'
   import Poll from './components/viewer/PollViewer.vue'
   import Guests from './components/viewer/GuestsViewer.vue'
+  import Event from './APIClient/event.js'
 
   export default {
     name: 'viewer',
@@ -51,8 +52,9 @@
       }
     },
     created() {
-      let event = {"info":{"title":"info title","description":"info desc"},"dates":[{"date":"2017-02-21","times":["11:00","02:00","13:00"]},{"date":"2017-02-22","times":["15:00","19:00"]},{"date":"2017-02-23","times":[]},{"date":"2017-02-28","times":["15:00","04:59","23:00","05:59"]},{"date":"2017-02-27","times":[]}],"places":[{"name":"Paris, France","valid":"Paris, France"}],"checklist":[{"name":"itemun"},{"name":"item2"}],"polls":[],"guests":[],"participants":[]};
-      this.$store.commit('loadEvent', event)
+      Event.findById(this.eventId, response => {
+        this.$store.commit('loadEvent', response.data)
+      })
     },
     computed: {
       info() { return this.$store.getters.info },

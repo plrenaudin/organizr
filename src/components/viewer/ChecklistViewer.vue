@@ -1,7 +1,7 @@
 <template>
   <div class="checklist">
     <ul>
-      <li v-for="item, index in items">{{item.name}}</li>
+      <li v-for="item, index in items">{{item}}</li>
     </ul>
   </div>
 </template>

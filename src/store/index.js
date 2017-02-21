@@ -7,6 +7,7 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   state: {
+      admin:'',
       info:{
         title:'',
         description: ''
@@ -46,7 +47,7 @@ export default new Vuex.Store({
       state.places.splice(index, 1)
     },
     addChecklistItem(state, item) {
-      state.checklist.push({name: item})
+      state.checklist.push(item)
     },
     removeChecklistItem(state,index){
       state.checklist.splice(index, 1)
