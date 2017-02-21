@@ -1,7 +1,7 @@
 <template>
   <div class="info">
-    <input type="text" v-model="model.title" :placeholder="$t('app.info.titleInput')" />
-    <textarea name="desc" v-model="model.description" :placeholder="$t('app.info.descInput')" ></textarea>
+    <input type="text" @keyup="saveInfo" :value="info.title" :placeholder="$t('app.info.titleInput')" />
+    <textarea @keyup="saveInfo" :value="info.description" :placeholder="$t('app.info.descInput')" ></textarea>
   </div>
 </template>
 <script>
@@ -10,33 +10,17 @@
   export default {
     name: 'info',
 
-    data() {
-      return {
-        model: {
-          title: '',
-          description: ''
-        }
-      }
-    },
     methods: {
       saveInfo() {
         clearTimeout(timeoutID);
         let me = this;
         timeoutID = setTimeout(function() {
-          me.$store.commit('updateInfo', {title: me.model.title, description: me.model.description})
+          me.$store.commit('updateInfo', {title: me.$el.querySelector('input').value, description: me.$el.querySelector('textarea').value})
         }, timeoutDuration);
       }
     },
-    watch: {
-      model: {
-        handler (val) { this.saveInfo() },
-        deep: true
-      }
-    },
-    mounted(){
-      const {title, description} = this.$store.getters.info
-      this.model.title = title
-      this.model.description = description
+    computed: {
+      info() { return this.$store.getters.info }
     }
   }
 </script>

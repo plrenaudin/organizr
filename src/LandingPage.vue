@@ -26,7 +26,13 @@
         return text;
       },
       createEvent() {
-        Event.create(this.user, response => { this.$router.push('/edit/' + response.data._id) })
+        Event.create(this.user, (err,response) => {
+          if(!err) {
+            this.$router.push('/edit/' + response.data._id)
+          } else {
+            //TODO error handling
+          }
+        })
       }
     }
   }

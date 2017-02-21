@@ -3,14 +3,14 @@ const vm = new Vue();
 
 const create = (user, cb) => {
   vm.$http.post('/', {user})
-    .then(response => cb(response))
-    .catch (error => console.error(error))
+    .then(response => cb(null, response))
+    .catch (err => cb(err, null))
 }
 
 const findById = (id, cb) => {
-  vm.$http.get('/' + id)
-    .then(response => cb(response))
-    .catch(err => console.error(err))
+  vm.$http.get(`/${id}`)
+    .then(response => cb(null, response))
+    .catch(err => cb(err, null))
 }
 
 export default {
