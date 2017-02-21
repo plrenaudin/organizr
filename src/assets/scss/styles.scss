@@ -326,6 +326,10 @@ ul {
           border-top: 1px solid $strong-grey;
           border-left: 1px solid $strong-grey;
           border-right: 1px solid $strong-grey;
+          padding: 3px 6px;
+          &.noTime {
+            border-top: none;
+          }
           &:first-child {
             border:none;
           }
@@ -334,7 +338,6 @@ ul {
       tbody {
         th, tr, td {
           border: 1px solid $strong-grey;
-          min-width: 110px;
         }
         td.selectable {
           background-color: $white-blue;

@@ -11,7 +11,7 @@
           <tr v-if="hasTimes">
             <th>&nbsp;</th>
             <template v-for="date in dates">
-              <th v-if="date.times.length === 0">&nbsp;</th>
+              <th v-if="date.times.length === 0" class="noTime">&nbsp;</th>
               <th v-for="time in date.times">{{time}}</th>
             </template>
           </tr>
