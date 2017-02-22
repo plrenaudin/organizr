@@ -11,6 +11,12 @@ import Composer from './Composer.vue'
 import Viewer from './Viewer.vue'
 
 // Configure globals
+const bus = new Vue({})
+Object.defineProperty(Vue.prototype, '$bus', {
+    get() {
+        return bus
+    }
+})
 
 Object.defineProperty(Vue.prototype, '$t', {
     get() {
