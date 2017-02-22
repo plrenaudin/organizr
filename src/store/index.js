@@ -43,13 +43,18 @@ export default new Vuex.Store({
       state.dates[dateIndex].times.splice(timeIndex, 1)
     },
     selectPlace(state, place) {
-      state.places.push(place)
+      if(place && !state.places.find(i => i.name === place.name)) {
+        state.places.push(place)
+        Event.addPlace(state._id, place)
+      }
     },
     removePlace(state, index) {
+      let itemToRemove = state.places[index]
       state.places.splice(index, 1)
+      Event.removePlace(state._id, itemToRemove)
     },
     addChecklistItem(state, item) {
-      if(!state.checklist.find(i => i === item)) {
+      if(item && !state.checklist.find(i => i === item)) {
         state.checklist.push(item)
         Event.addChecklistItem(state._id, item)
       }
@@ -62,6 +67,7 @@ export default new Vuex.Store({
     updateInfo(state, info) {
       state.info.title = info.title
       state.info.description = info.description
+      Event.updateInfo(state._id, info)
     },
     addPoll(state, question) {
       state.polls.push({question, choices: []})

@@ -47,9 +47,7 @@
       selectPlace(event) {
         let place = this.autocomplete.getPlace()
         let placeName = place.formatted_address ? place.formatted_address : place.name
-        if(place && !this.places.find(item => item.name === placeName)) {
-          this.$store.commit('selectPlace', {name: placeName, valid: place.formatted_address})
-        }
+        this.$store.commit('selectPlace', {name: placeName, valid: place.formatted_address})
       },
       removePlace(index) {
         this.$store.commit('removePlace', index)

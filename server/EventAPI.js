@@ -2,7 +2,7 @@ const db = require('monk')('localhost/organiz')
 
 module.exports = {
   createNew(user, cb) {
-    db.get('events').insert({admin: user}).then(cb)
+    db.get('events').insert({ admin: user }).then(cb)
   },
 
   findById(id, cb) {
@@ -17,13 +17,35 @@ module.exports = {
     db.get('events').findOneAndUpdate(
       { _id: id },
       { $push: { checklist: payload.item } }
-      ).then(cb)
+    ).then(cb)
   },
+
   removeChecklistItem(id, payload, cb) {
     db.get('events').findOneAndUpdate(
       { _id: id },
       { $pull: { checklist: payload.item } }
-      ).then(cb)
-  }
+    ).then(cb)
+  },
+
+  updateInfo(id, payload, cb) {
+    db.get('events').findOneAndUpdate(
+      { _id: id },
+      { $set: { info: payload.info } }
+    ).then(cb)
+  },
+
+  addPlace(id, payload, cb) {
+    db.get('events').findOneAndUpdate(
+      { _id: id },
+      { $push: { places: payload.place } }
+    ).then(cb)
+  },
+
+  removePlace(id, payload, cb) {
+    db.get('events').findOneAndUpdate(
+      { _id: id },
+      { $pull: { places: payload.place } }
+    ).then(cb)
+  },
 
 }

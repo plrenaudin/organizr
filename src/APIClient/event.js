@@ -20,10 +20,16 @@ const findById = (id, cb) => {
 
 const addChecklistItem = (id, item) => { fireAndForget(vm.$http.put(`/${id}/addChecklistItem`, { item })) }
 const removeChecklistItem = (id, item) => { fireAndForget(vm.$http.put(`/${id}/removeChecklistItem`, { item })) }
+const updateInfo = (id, info) => { fireAndForget(vm.$http.put(`/${id}/updateInfo`, { info })) }
+const addPlace = (id, place) => { fireAndForget(vm.$http.put(`/${id}/addPlace`, { place })) }
+const removePlace = (id, place) => { fireAndForget(vm.$http.put(`/${id}/removePlace`, { place })) }
 
 export default {
   create,
   findById,
   addChecklistItem,
-  removeChecklistItem
+  removeChecklistItem,
+  updateInfo,
+  addPlace,
+  removePlace
 }
