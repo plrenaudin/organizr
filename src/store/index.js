@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Event from '../APIClient/event.js'
 
 Vue.use(Vuex)
 
@@ -7,6 +8,7 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   state: {
+      _id:'',
       admin:'',
       info:{
         title:'',
@@ -47,10 +49,15 @@ export default new Vuex.Store({
       state.places.splice(index, 1)
     },
     addChecklistItem(state, item) {
-      state.checklist.push(item)
+      if(!state.checklist.find(i => i === item)) {
+        state.checklist.push(item)
+        Event.addChecklistItem(state._id, item)
+      }
     },
-    removeChecklistItem(state,index){
+    removeChecklistItem(state, index){
+      let itemToRemove = state.checklist[index]
       state.checklist.splice(index, 1)
+      Event.removeChecklistItem(state._id, itemToRemove)
     },
     updateInfo(state, info) {
       state.info.title = info.title
