@@ -103,6 +103,20 @@ module.exports = {
         { _id: id, 'polls.question': payload.question },
         { $pull: { 'polls.$.choices': payload.choice } }
       ).then(cb)
+    },
+
+    addGuest(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $addToSet: { guests: { $each: payload.guest } } }
+      ).then(cb)
+    },
+
+    removeGuest(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $pull: { guests: payload.guest } }
+      ).then(cb)
     }
   }
 

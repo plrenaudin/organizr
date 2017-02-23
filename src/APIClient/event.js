@@ -31,6 +31,8 @@ const addPoll = (id, poll) => { fireAndForget(vm.$http.put(`/${id}/addPoll`, { p
 const removePoll = (id, poll) => { fireAndForget(vm.$http.put(`/${id}/removePoll`, { poll })) }
 const addPollQuestion = (id, choicePoll) => { fireAndForget(vm.$http.put(`/${id}/addPollQuestion`, choicePoll)) }
 const removePollQuestion = (id, choicePoll) => { fireAndForget(vm.$http.put(`/${id}/removePollQuestion`, choicePoll)) }
+const addGuest = (id, guest) => { fireAndForget(vm.$http.put(`/${id}/addGuest`, { guest })) }
+const removeGuest = (id, guest) => { fireAndForget(vm.$http.put(`/${id}/removeGuest`, { guest })) }
 
 export default {
   create,
@@ -47,5 +49,7 @@ export default {
   addPoll,
   addPollQuestion,
   removePoll,
-  removePollQuestion
+  removePollQuestion,
+  addGuest,
+  removeGuest
 }
