@@ -25,6 +25,8 @@ const addPlace = (id, place) => { fireAndForget(vm.$http.put(`/${id}/addPlace`, 
 const removePlace = (id, place) => { fireAndForget(vm.$http.put(`/${id}/removePlace`, { place })) }
 const addDate = (id, date) => { fireAndForget(vm.$http.put(`/${id}/addDate`, { date })) }
 const removeDate = (id, date) => { fireAndForget(vm.$http.put(`/${id}/removeDate`, { date })) }
+const addTime = (id, date) => { fireAndForget(vm.$http.put(`/${id}/addTime`, date)) }
+const removeTime = (id, dateTime) => { fireAndForget(vm.$http.put(`/${id}/removeTime`, dateTime)) }
 
 export default {
   create,
@@ -35,5 +37,7 @@ export default {
   addPlace,
   removePlace,
   addDate,
-  removeDate
+  removeDate,
+  addTime,
+  removeTime
 }

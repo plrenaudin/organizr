@@ -59,7 +59,21 @@ module.exports = {
     removeDate(id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id },
-        { $pull: { dates: payload } }
+        { $pull: { dates: payload.date } }
+      ).then(cb)
+    },
+
+    addTime(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'dates.date': payload.date },
+        { $addToSet: { 'dates.$.times': payload.time } }
+      ).then(cb)
+    },
+
+    removeTime(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'dates.date': payload.date },
+        { $pull: { 'dates.$.times': payload.time } }
       ).then(cb)
     }
   }

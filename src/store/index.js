@@ -8,22 +8,22 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   state: {
-      _id:'',
-      admin:'',
-      info:{
-        title:'',
-        description: ''
-      },
-      dates: [],
-      places: [],
-      checklist: [],
-      polls: [],
-      guests: [],
-      participants:[]
+    _id: '',
+    admin: '',
+    info: {
+      title: '',
+      description: ''
+    },
+    dates: [],
+    places: [],
+    checklist: [],
+    polls: [],
+    guests: [],
+    participants: []
   },
   mutations: {
     loadEvent(state, event) {
-      Object.assign(state,event)
+      Object.assign(state, event)
     },
     addDate(state, date) {
       let found = state.dates.find(item => item.date === date)
@@ -36,17 +36,26 @@ export default new Vuex.Store({
       }
     },
     addTime(state, {index, value}) {
-      state.dates[index].times.push(value)
+      let concernedDate = state.dates[index]
+      let found = concernedDate.times.find(item => item === value)
+      if (!found) {
+        concernedDate.times.push(value)
+        Event.addTime(state._id, { date: concernedDate.date, time: value })
+      }
     },
     removeDate(state, dateIndex) {
+      let dateToRemove = state.dates[dateIndex]
       state.dates.splice(dateIndex, 1)
-      Event.removeDate(state._id, state.dates[dateIndex])
+      Event.removeDate(state._id, dateToRemove)
     },
     removeTime(state, {dateIndex, timeIndex}) {
-      state.dates[dateIndex].times.splice(timeIndex, 1)
+      let concernedDate = state.dates[dateIndex]
+      let timeToRemove = concernedDate.times[timeIndex]
+      concernedDate.times.splice(timeIndex, 1)
+      Event.removeTime(state._id, { date: concernedDate.date, time: timeToRemove })
     },
     selectPlace(state, place) {
-      if(place && !state.places.find(i => i.name === place.name)) {
+      if (place && !state.places.find(i => i.name === place.name)) {
         state.places.push(place)
         Event.addPlace(state._id, place)
       }
@@ -57,12 +66,12 @@ export default new Vuex.Store({
       Event.removePlace(state._id, itemToRemove)
     },
     addChecklistItem(state, item) {
-      if(item && !state.checklist.find(i => i === item)) {
+      if (item && !state.checklist.find(i => i === item)) {
         state.checklist.push(item)
         Event.addChecklistItem(state._id, item)
       }
     },
-    removeChecklistItem(state, index){
+    removeChecklistItem(state, index) {
       let itemToRemove = state.checklist[index]
       state.checklist.splice(index, 1)
       Event.removeChecklistItem(state._id, itemToRemove)
@@ -73,20 +82,20 @@ export default new Vuex.Store({
       Event.updateInfo(state._id, info)
     },
     addPoll(state, question) {
-      state.polls.push({question, choices: []})
+      state.polls.push({ question, choices: [] })
     },
     removePoll(state, index) {
       state.polls.splice(index, 1)
     },
-    addChoice(state,{indexPoll, choice}) {
-      state.polls[indexPoll].choices.push({name:choice})
+    addChoice(state, {indexPoll, choice}) {
+      state.polls[indexPoll].choices.push({ name: choice })
     },
-    removeChoice(state,{indexPoll, indexChoice}) {
-      state.polls[indexPoll].choices.splice(indexChoice,1)
+    removeChoice(state, {indexPoll, indexChoice}) {
+      state.polls[indexPoll].choices.splice(indexChoice, 1)
     },
     addGuest(state, guests) {
       guests.forEach(toAdd => {
-        if(!state.guests.find(inIt => inIt === toAdd)) {
+        if (!state.guests.find(inIt => inIt === toAdd)) {
           state.guests.push(toAdd)
         }
       })
