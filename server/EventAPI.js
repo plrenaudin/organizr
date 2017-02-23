@@ -75,6 +75,34 @@ module.exports = {
         { _id: id, 'dates.date': payload.date },
         { $pull: { 'dates.$.times': payload.time } }
       ).then(cb)
+    },
+
+    addPoll(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $addToSet: { polls: payload.poll } }
+      ).then(cb)
+    },
+
+    removePoll(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $pull: { polls: payload.poll } }
+      ).then(cb)
+    },
+
+    addPollQuestion(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'polls.question': payload.question },
+        { $addToSet: { 'polls.$.choices': payload.choice } }
+      ).then(cb)
+    },
+
+    removePollQuestion(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'polls.question': payload.question },
+        { $pull: { 'polls.$.choices': payload.choice } }
+      ).then(cb)
     }
   }
 

@@ -7,7 +7,7 @@
         <ul>
           <li v-for="choice,indexChoice in poll.choices">
             <i class="fa fa-trash action" @click="removeChoice(indexPoll,indexChoice)"></i>
-            {{choice.name}}
+            {{choice}}
           </li>
         </ul>
         <input type="text" :placeholder="$t('app.poll.addChoice')" @keyup.enter="addChoice(indexPoll, arguments[0])" />

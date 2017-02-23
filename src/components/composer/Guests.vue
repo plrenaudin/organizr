@@ -18,9 +18,9 @@
         let list = event.target.value
         if(list) {
           list = list.split(/,|\ |\n/).filter(item => item.trim())
+          this.$store.commit('addGuest', list)
+          event.target.value = ''
         }
-        this.$store.commit('addGuest', list)
-        event.target.value = ''
       },
       removeGuests(index) {
         this.$store.commit('removeGuest', index)

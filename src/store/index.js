@@ -82,23 +82,37 @@ export default new Vuex.Store({
       Event.updateInfo(state._id, info)
     },
     addPoll(state, question) {
-      state.polls.push({ question, choices: [] })
+      if(question && !state.polls.find(item => item.question === question)) {
+        state.polls.push({ question, choices: [] })
+        Event.addPoll(state._id, { question, choices: [] })
+      }
     },
-    removePoll(state, index) {
-      state.polls.splice(index, 1)
+    removePoll(state, pollIndex) {
+      let pollToRemove = state.polls[pollIndex]
+      state.polls.splice(pollIndex, 1)
+      Event.removePoll(state._id, pollToRemove)
     },
     addChoice(state, {indexPoll, choice}) {
-      state.polls[indexPoll].choices.push({ name: choice })
+      if(choice && !state.polls[indexPoll].choices.find(item => item === choice)) {
+        let concernedPoll = state.polls[indexPoll]
+        concernedPoll.choices.push(choice)
+        Event.addPollQuestion(state._id, { question: concernedPoll.question, choice })
+      }
     },
     removeChoice(state, {indexPoll, indexChoice}) {
-      state.polls[indexPoll].choices.splice(indexChoice, 1)
+      let concernedPoll = state.polls[indexPoll]
+      let choiceToRemove = concernedPoll.choices[indexChoice]
+      concernedPoll.choices.splice(indexChoice, 1)
+      Event.removePollQuestion(state._id, { question: concernedPoll.question, choice: choiceToRemove })
     },
     addGuest(state, guests) {
-      guests.forEach(toAdd => {
-        if (!state.guests.find(inIt => inIt === toAdd)) {
-          state.guests.push(toAdd)
-        }
-      })
+      if(guests) {
+        guests.forEach(toAdd => {
+          if (!state.guests.find(inIt => inIt === toAdd)) {
+            state.guests.push(toAdd)
+          }
+        })
+      }
     },
     removeGuest(state, index) {
       state.guests.splice(index, 1)
