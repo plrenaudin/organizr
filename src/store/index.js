@@ -29,8 +29,10 @@ export default new Vuex.Store({
       let found = state.dates.find(item => item.date === date)
       if (found) {
         state.dates.splice(state.dates.indexOf(found), 1)
+        Event.removeDate(state._id, date)
       } else {
         state.dates.push({ date, times: [] })
+        Event.addDate(state._id, { date, times: [] })
       }
     },
     addTime(state, {index, value}) {
@@ -38,6 +40,7 @@ export default new Vuex.Store({
     },
     removeDate(state, dateIndex) {
       state.dates.splice(dateIndex, 1)
+      Event.removeDate(state._id, state.dates[dateIndex])
     },
     removeTime(state, {dateIndex, timeIndex}) {
       state.dates[dateIndex].times.splice(timeIndex, 1)

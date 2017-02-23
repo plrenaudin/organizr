@@ -10,42 +10,58 @@ module.exports = {
   },
 
   mutateEvent(id, action, payload, cb) {
-    this[action](id, payload, cb)
+    this.eventMutations[action](id, payload, cb)
   },
 
-  addChecklistItem(id, payload, cb) {
-    db.get('events').findOneAndUpdate(
-      { _id: id },
-      { $push: { checklist: payload.item } }
-    ).then(cb)
-  },
+  eventMutations: {
+    addChecklistItem(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $addToSet: { checklist: payload.item } }
+      ).then(cb)
+    },
 
-  removeChecklistItem(id, payload, cb) {
-    db.get('events').findOneAndUpdate(
-      { _id: id },
-      { $pull: { checklist: payload.item } }
-    ).then(cb)
-  },
+    removeChecklistItem(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $pull: { checklist: payload.item } }
+      ).then(cb)
+    },
 
-  updateInfo(id, payload, cb) {
-    db.get('events').findOneAndUpdate(
-      { _id: id },
-      { $set: { info: payload.info } }
-    ).then(cb)
-  },
+    updateInfo(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $set: { info: payload.info } }
+      ).then(cb)
+    },
 
-  addPlace(id, payload, cb) {
-    db.get('events').findOneAndUpdate(
-      { _id: id },
-      { $push: { places: payload.place } }
-    ).then(cb)
-  },
+    addPlace(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $addToSet: { places: payload.place } }
+      ).then(cb)
+    },
 
-  removePlace(id, payload, cb) {
-    db.get('events').findOneAndUpdate(
-      { _id: id },
-      { $pull: { places: payload.place } }
-    ).then(cb)
-  },
+    removePlace(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $pull: { places: payload.place } }
+      ).then(cb)
+    },
+
+    addDate(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $addToSet: { dates: payload.date } }
+      ).then(cb)
+    },
+
+    removeDate(id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id },
+        { $pull: { dates: payload } }
+      ).then(cb)
+    }
+  }
 
 }

@@ -23,6 +23,8 @@ const removeChecklistItem = (id, item) => { fireAndForget(vm.$http.put(`/${id}/r
 const updateInfo = (id, info) => { fireAndForget(vm.$http.put(`/${id}/updateInfo`, { info })) }
 const addPlace = (id, place) => { fireAndForget(vm.$http.put(`/${id}/addPlace`, { place })) }
 const removePlace = (id, place) => { fireAndForget(vm.$http.put(`/${id}/removePlace`, { place })) }
+const addDate = (id, date) => { fireAndForget(vm.$http.put(`/${id}/addDate`, { date })) }
+const removeDate = (id, date) => { fireAndForget(vm.$http.put(`/${id}/removeDate`, { date })) }
 
 export default {
   create,
@@ -31,5 +33,7 @@ export default {
   removeChecklistItem,
   updateInfo,
   addPlace,
-  removePlace
+  removePlace,
+  addDate,
+  removeDate
 }
