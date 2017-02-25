@@ -24,5 +24,5 @@ const mutateEvent = (req, res, next) => {
 module.exports = function (app) {
   app.post('/', createEvent)
   app.get('/:eventId', getEventById)
-  app.put('/:eventId/:action', mutateEvent)
+  app.patch('/:eventId/:action', mutateEvent)
 }
