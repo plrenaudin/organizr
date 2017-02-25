@@ -5,10 +5,13 @@ import store from './store'
 import 'font-awesome/css/font-awesome.css'
 import t from './helpers/Translate.js'
 import axios from 'axios'
+import Auth from './helpers/Auth.js'
 
 import LandingPage from './LandingPage.vue'
+import ProfilePage from './ProfilePage.vue'
 import Composer from './Composer.vue'
 import Viewer from './Viewer.vue'
+import Login from './components/Login.vue'
 
 // Configure globals
 const bus = new Vue({})
@@ -35,12 +38,30 @@ Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: LandingPage },
-  { path: '/edit/:eventId', component: Composer, props: true },
-  { path: '/:eventId', component: Viewer, props: true }
+  { path: '/login', component: Login },
+  { path: '/profile', component: ProfilePage, meta: { requiresAuth: true } },
+  { path: '/edit/:eventId([a-z0-9]{24})', component: Composer, props: true, meta: { requiresAuth: true } },
+  { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
     routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!Auth.isAuthenticated()) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 new Vue({

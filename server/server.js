@@ -2,6 +2,8 @@ const restify = require('restify')
 
 const server = restify.createServer()
 
+restify.CORS.ALLOW_HEADERS.push('authorization');
+
 server.pre(restify.CORS())
 server.use(restify.jsonp())
 server.use(restify.gzipResponse())

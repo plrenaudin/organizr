@@ -16,6 +16,7 @@
     "vue": "^2.1.0"
   },
   "devDependencies": {
+    "auth0-lock": "^10.11.0",
     "axios": "^0.15.3",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",

@@ -1,19 +1,14 @@
 <template>
-  <div class="landingPage">
-    <h1>This is the landing page</h1>
-    <login></login>
+  <div class="profile">
+    this is the profile
+    <div class="createEvent" @click="createEvent">createEvent in DB</div>
   </div>
 </template>
 <script>
-  import Login from './components/Login.vue'
+  import Event from './APIClient/event.js'
+  import Auth from './helpers/Auth.js'
   export default {
-    name: 'landing-page',
-    components: { Login },
-    data() {
-      return {
-        user: 'admin'
-      }
-    },
+    name: 'profile-page',
     methods: {
       createEvent() {
         Event.create(this.user, (err, response) => {
