@@ -123,27 +123,14 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    dates: state => {
-      return state.dates
-    },
-    places: state => {
-      return state.places
-    },
-    checklist: state => {
-      return state.checklist
-    },
-    polls: state => {
-      return state.polls
-    },
-    guests: state => {
-      return state.guests
-    },
-    guests: state => {
-      return state.guests
-    },
-    info: state => {
-      return state.info
-    }
+    dates: state => state.dates,
+    places: state => state.places,
+    checklist: state => state.checklist,
+    polls: state => state.polls,
+    guests: state => state.guests,
+    guests: state => state.guests,
+    info: state => state.info,
+    admin: state => state.admin
   },
   strict: debug
 })

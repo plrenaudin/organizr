@@ -1,7 +1,7 @@
 <template>
   <div class="myEvents">
     <ul>
-      <li v-for="event in events">{{event._id}}</li>
+      <li v-for="event in events" @click="$router.push('/'+event._id)">{{event._id}}</li>
     </ul>
   </div>
 </template>

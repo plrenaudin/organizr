@@ -4,13 +4,15 @@
       <figure class="userPicture">
         <i class="fa fa-2x fa-user-o"></i>
       </figure>
-      Pilou
+      {{user}}
       <div class="tools">
-        <template v-if="view">
-          <router-link :to="'/edit/' + eventId"><i class="fa fa-pencil"></i> {{$t('app.sidebar.editEvent')}}</router-link>
-        </template>
-        <template v-else>
-          <router-link :to="'/' + eventId"><i class="fa fa-eye"></i> {{$t('app.sidebar.viewEvent')}}</router-link>
+        <template v-if="isOwner">
+          <template v-if="view">
+            <router-link :to="'/edit/' + eventId"><i class="fa fa-pencil"></i> {{$t('app.sidebar.editEvent')}}</router-link>
+          </template>
+          <template v-else>
+            <router-link :to="'/' + eventId"><i class="fa fa-eye"></i> {{$t('app.sidebar.viewEvent')}}</router-link>
+          </template>
         </template>
       </div>
     </section>
@@ -78,9 +80,16 @@
 </template>
 <script>
   import Formatter from '../helpers/Formatter.js'
+  import Auth from '../helpers/Auth.js'
+
   export default {
     name: 'side-bar',
     props: ['view', 'eventId'],
+    data() {
+      return {
+        user: Formatter.getName(localStorage.getItem('profile'))
+      }
+    },
     computed: {
       info() { return this.$store.getters.info },
       dates() { return this.$store.getters.dates },
@@ -88,6 +97,7 @@
       checklist() { return this.$store.getters.checklist },
       polls() { return this.$store.getters.polls },
       guests() { return this.$store.getters.guests },
+      isOwner() { return this.$store.getters.admin === Auth.user() }
     },
     methods: {
       formatDate: Formatter.dateToReadableDate

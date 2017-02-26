@@ -24,16 +24,17 @@ const listUserEvents = (req, res, next) => {
 }
 
 const mutateEvent = (req, res, next) => {
-  eventAPI.mutateEvent(req.params[0], req.params.action, req.body, (data) => {
+  eventAPI.mutateEvent(req.user.email, req.params.idEvent, req.params.action, req.body, (data) => {
     res.json(data)
     next()
   })
 }
-const eventIdRegex = /[a-z0-9]{24}/
-const mutationRegex = /[a-z0-9]{24}\/[a-zA-Z]*/
+
+const eventIdRegex = /([a-z0-9]{24})/
+
 module.exports = function (app) {
   app.post('/', createEvent)
   app.get('/listMyEvents', listUserEvents)
   app.get(eventIdRegex, getEventById)
-  app.patch(mutationRegex, mutateEvent)
+  app.post('/:idEvent/:action', mutateEvent)
 }
