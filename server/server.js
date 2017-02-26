@@ -1,4 +1,6 @@
 const restify = require('restify')
+const jwt = require('restify-jwt')
+const secret = require('./.secrets')
 
 const server = restify.createServer()
 
@@ -10,6 +12,8 @@ server.use(restify.gzipResponse())
 server.use(restify.fullResponse())
 server.use(restify.queryParser())
 server.use(restify.bodyParser())
+
+server.use(jwt({ secret: secret.pk }))
 
 require('./routes.js')(server)
 

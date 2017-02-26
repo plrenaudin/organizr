@@ -16,14 +16,20 @@ const fireAndForget = (promise) => {
     .catch(err => vm.$bus.$emit('server.error', err))
 }
 
-const create = (user, cb) => {
-  vm.$http.post('/', { user }, headers())
+const create = (cb) => {
+  vm.$http.post('/', headers())
     .then(response => cb(null, response))
     .catch(err => cb(err, null))
 }
 
 const findById = (id, cb) => {
   vm.$http.get(`/${id}`, headers())
+    .then(response => cb(null, response))
+    .catch(err => cb(err, null))
+}
+
+const listMyEvents = (cb) => {
+  vm.$http.get(`/listMyEvents`, headers())
     .then(response => cb(null, response))
     .catch(err => cb(err, null))
 }
@@ -61,5 +67,6 @@ export default {
   removePoll,
   removePollQuestion,
   addGuest,
-  removeGuest
+  removeGuest,
+  listMyEvents
 }

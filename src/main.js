@@ -13,6 +13,36 @@ import Composer from './Composer.vue'
 import Viewer from './Viewer.vue'
 import Login from './components/Login.vue'
 
+Vue.use(VueRouter)
+
+const routes = [
+  { path: '/', component: LandingPage },
+  { path: '/login', component: Login },
+  { path: '/profile', component: ProfilePage, meta: { requiresAuth: true } },
+  { path: '/edit/:eventId([a-z0-9]{24})', component: Composer, props: true, meta: { requiresAuth: true } },
+  { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } }
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!Auth.isAuthenticated()) {
+      next({
+        path: '/',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
 // Configure globals
 const bus = new Vue({})
 Object.defineProperty(Vue.prototype, '$bus', {
@@ -28,40 +58,19 @@ Object.defineProperty(Vue.prototype, '$t', {
 })
 
 axios.defaults.baseURL = `http://localhost:3003`
+axios.interceptors.response.use((response) => {
+    return response
+  }, function (error) {
+    if(error.response && error.response.status === 401) {
+      router.push('/')
+    } else {
+      return Promise.reject(error)
+    }
+  })
 Object.defineProperty(Vue.prototype, '$http', {
     get() {
         return axios;
     }
-})
-
-Vue.use(VueRouter)
-
-const routes = [
-  { path: '/', component: LandingPage },
-  { path: '/login', component: Login },
-  { path: '/profile', component: ProfilePage, meta: { requiresAuth: true } },
-  { path: '/edit/:eventId([a-z0-9]{24})', component: Composer, props: true, meta: { requiresAuth: true } },
-  { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } }
-]
-
-const router = new VueRouter({
-  mode: 'history',
-    routes
-})
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!Auth.isAuthenticated()) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
 })
 
 new Vue({

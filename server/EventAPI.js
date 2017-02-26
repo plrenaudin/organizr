@@ -9,6 +9,10 @@ module.exports = {
     db.get('events').findOne({ _id: id }).then(cb)
   },
 
+  findByAdmin(email, cb) {
+    db.get('events').find({ admin: email }).then(cb)
+  },
+
   mutateEvent(id, action, payload, cb) {
     this.eventMutations[action](id, payload, cb)
   },
