@@ -26,9 +26,9 @@ server.use(function(req, res, next) {
 require('./routes.js')(server)
 
 server.pre(function(req, res, next) {
-  req.headers.accept = 'application/json';  // screw you client!
-  return next();
-});
+  req.headers.accept = 'application/json'  // screw you client!
+  return next()
+})
 
 server.on( "MethodNotAllowed", function(req, res) {
   if(req.method.toUpperCase() === "OPTIONS" ) {
@@ -39,12 +39,12 @@ server.on( "MethodNotAllowed", function(req, res) {
   else {
     res.send(new restify.MethodNotAllowedError())
   }
-});
+})
 
 server.on('uncaughtException', function (req, res, route, err) {
     console.log('uncaughtException', err.stack)
     res.send(500)
-});
+})
 
 server.listen(3003, () => {
   console.log('%s listening at %s', server.name, server.url)

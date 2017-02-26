@@ -53,7 +53,7 @@ Object.defineProperty(Vue.prototype, '$bus', {
 
 Object.defineProperty(Vue.prototype, '$t', {
     get() {
-        return t;
+        return t
     }
 })
 
@@ -69,7 +69,7 @@ axios.interceptors.response.use((response) => {
   })
 Object.defineProperty(Vue.prototype, '$http', {
     get() {
-        return axios;
+        return axios
     }
 })
 

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-const vm = new Vue();
+const vm = new Vue()
 
 const headers = () => {
   let conf = { headers: {}}

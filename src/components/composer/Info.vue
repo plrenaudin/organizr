@@ -12,11 +12,11 @@
 
     methods: {
       saveInfo() {
-        clearTimeout(timeoutID);
-        let me = this;
+        clearTimeout(timeoutID)
+        let me = this
         timeoutID = setTimeout(function() {
           me.$store.commit('updateInfo', {title: me.$el.querySelector('input').value, description: me.$el.querySelector('textarea').value})
-        }, timeoutDuration);
+        }, timeoutDuration)
       }
     },
     computed: {

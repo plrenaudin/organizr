@@ -27,7 +27,7 @@
       )
       this.lock.on('authenticated', (authResult) => {
 
-        localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('id_token', authResult.idToken)
         this.lock.getProfile(authResult.idToken, (error, profile) => {
 
           if (error) {
