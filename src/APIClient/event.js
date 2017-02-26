@@ -17,7 +17,7 @@ const fireAndForget = (promise) => {
 }
 
 const create = (cb) => {
-  vm.$http.post('/', headers())
+  vm.$http.post('/', {}, headers())
     .then(response => cb(null, response))
     .catch(err => cb(err, null))
 }

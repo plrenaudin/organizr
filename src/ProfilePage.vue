@@ -13,7 +13,7 @@
     components: {MyEvents},
     methods: {
       createEvent() {
-        Event.create(this.user, (err, response) => {
+        Event.create((err, response) => {
           if(!err) {
             this.$router.push('/edit/' + response.data._id)
           } else {
