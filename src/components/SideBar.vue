@@ -1,10 +1,12 @@
 <template>
   <aside>
     <section id="user">
-      <figure class="userPicture">
-        <i class="fa fa-2x fa-user-o"></i>
-      </figure>
-      {{user}}
+      <div class="profile" @click="$router.push('/profile')">
+        <figure class="userPicture">
+          <i class="fa fa-2x fa-user-o"></i>
+        </figure>
+        {{user}}
+      </div>
       <div class="tools">
         <template v-if="isOwner">
           <template v-if="view">
@@ -80,6 +82,7 @@
 </template>
 <script>
   import Formatter from '../helpers/Formatter.js'
+  import Utils from '../helpers/Utils.js'
   import Auth from '../helpers/Auth.js'
 
   export default {
@@ -87,7 +90,7 @@
     props: ['view', 'eventId'],
     data() {
       return {
-        user: Formatter.getName(localStorage.getItem('profile'))
+        user: Utils.getUserName(localStorage.getItem('profile'))
       }
     },
     computed: {

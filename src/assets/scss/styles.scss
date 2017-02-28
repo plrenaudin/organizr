@@ -75,99 +75,103 @@ ul {
   cursor: pointer;
 }
 
-#application {
-  aside {
-    width: $sidebar-width-percent;
-    height: 100%;
-    position: fixed;
-    background-color: $strong-grey;
-    color: $white;
-    box-shadow: 2px 0 10px 0 $grey;
-    section#user {
+aside {
+  width: $sidebar-width-percent;
+  height: 100%;
+  position: fixed;
+  background-color: $strong-grey;
+  color: $white;
+  box-shadow: 2px 0 10px 0 $grey;
+  section#user {
+    display: flex;
+    align-content: center;
+    align-items: baseline;
+    figure {
+      margin: 1em;
+    }
+    .profile {
+      cursor: pointer;
+    }
+    .tools {
       display: flex;
-      align-content: center;
-      align-items: baseline;
-      figure {
-        margin: 1em;
-      }
-      .tools {
-        display: flex;
-        width: 100%;
-        padding: 0 1em;
-        justify-content: flex-end;
-        a {
-          color: $white;
-          text-decoration: none;
-        }
+      width: 100%;
+      padding: 0 1em;
+      justify-content: flex-end;
+      a {
+        color: $white;
+        text-decoration: none;
       }
     }
-    nav ul{
-      font-weight: bold;
-      margin: 0;
-      text-align: right;
-      text-shadow: 0 0 2px $strong-grey;
-      li{
-        padding:1em;
-        cursor: pointer;
-        i {
-          width: 2em;
-          text-align: center;
+  }
+  nav ul{
+    font-weight: bold;
+    margin: 0;
+    text-align: right;
+    text-shadow: 0 0 2px $strong-grey;
+    li{
+      padding:1em;
+      cursor: pointer;
+      i {
+        width: 2em;
+        text-align: center;
+      }
+      .peek {
+        margin: 2px 0;
+        max-height: 55px;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        li {
+          border: 1px solid $white;
+          padding:2px .75em;
+          margin: 2px;
+          font-size: .75em;
+          border-radius: .75em;
+          background-color: $strong-grey;
         }
-        .peek {
-          margin: 2px 0;
-          max-height: 55px;
-          overflow: hidden;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: flex-end;
-          li {
-            border: 1px solid $white;
-            padding:2px .75em;
-            margin: 2px;
-            font-size: .75em;
-            border-radius: .75em;
-            background-color: $strong-grey;
-          }
+      }
+      &.color0 {
+        background-color: $color0;
+        &:hover {
+          background-color: darken($color0,10%);
         }
-        &.color0 {
-          background-color: $color0;
-          &:hover {
-            background-color: darken($color0,10%);
-          }
+      }
+      &.color1 {
+        background-color: $color1;
+        &:hover {
+          background-color: darken($color1,10%);
         }
-        &.color1 {
-          background-color: $color1;
-          &:hover {
-            background-color: darken($color1,10%);
-          }
+      }
+      &.color2 {
+        background-color: $color2;
+        &:hover {
+          background-color: darken($color2,10%);
         }
-        &.color2 {
-          background-color: $color2;
-          &:hover {
-            background-color: darken($color2,10%);
-          }
+      }
+      &.color3 {
+        background-color: $color3;
+        &:hover {
+          background-color: darken($color3,10%);
         }
-        &.color3 {
-          background-color: $color3;
-          &:hover {
-            background-color: darken($color3,10%);
-          }
+      }
+      &.color4 {
+        background-color: $color4;
+        &:hover {
+          background-color: darken($color4,10%);
         }
-        &.color4 {
-          background-color: $color4;
-          &:hover {
-            background-color: darken($color4,10%);
-          }
-        }
-        &.color5 {
-          background-color: $color5;
-          &:hover {
-            background-color: darken($color5,10%);
-          }
+      }
+      &.color5 {
+        background-color: $color5;
+        &:hover {
+          background-color: darken($color5,10%);
         }
       }
     }
   }
+}
+
+#application {
   main {
     flex: 1;
     margin-left: $sidebar-width-percent;
@@ -361,6 +365,19 @@ ul {
     #description  {
       text-align: justify;
       flex: 1;
+    }
+  }
+}
+
+.myEvents {
+  li {
+    padding: 1em .5em;
+    margin: .5em;
+    border: 1px solid $grey;
+    background-color: $white-green;
+    cursor: pointer;
+    &:hover {
+      background-color: $white;
     }
   }
 }

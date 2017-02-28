@@ -5,9 +5,8 @@ import Event from '../APIClient/event.js'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
-
-export default new Vuex.Store({
-  state: {
+const defaultState = () => {
+  return {
     _id: '',
     admin: '',
     info: {
@@ -20,10 +19,14 @@ export default new Vuex.Store({
     polls: [],
     guests: [],
     participants: []
-  },
+  }
+}
+
+export default new Vuex.Store({
+  state: defaultState(),
   mutations: {
     loadEvent(state, event) {
-      Object.assign(state, event)
+      Object.assign(state, defaultState(), event)
     },
     addDate(state, date) {
       let found = state.dates.find(item => item.date === date)

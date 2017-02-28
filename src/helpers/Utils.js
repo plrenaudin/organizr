@@ -1,5 +1,9 @@
 import Formatter from './Formatter.js'
-
+const getUserName = (profile) => {
+  if(!profile) { return 'unknown' }
+  const parsed = JSON.parse(profile)
+  return parsed.email.substr(0, parsed.email.indexOf('@'))
+}
 const parseTimeInput = (input) => {
   const data = input.replace(/[^0-9]/g, '')
   let hours = '00'
@@ -20,5 +24,6 @@ const parseTimeInput = (input) => {
   return hours + ':' + minutes
 }
 export default {
+  getUserName,
   parseTimeInput
 }

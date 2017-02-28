@@ -33,10 +33,14 @@
     "landingPage": {
       "title": "Welcome to Organiz!",
       "description": "Organiz helps you organizing events in a collaborative way!",
-      "createEvent": "Create an event",
-      "viewEvent": "View an event",
       "getStarted": "Get Started"
     },
-    "logout": "Logout"
+    "profilePage": {
+      "createEvent": "Create an event",
+      "eventList": "List of my events",
+      "title": "Profile of"
+    },
+    "logout": "Logout",
+    "defaultEventName": "(Event without title)"
   }
 }

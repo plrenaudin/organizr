@@ -1,15 +1,24 @@
 <template>
-  <div class="profile">
-    <h1>Profile</h1>
-    <my-events></my-events>
-    <div class="createEvent" @click="createEvent">createEvent in DB</div>
+  <div class="profilePage">
+    <h1>{{$t('app.profilePage.title')}} {{userName}}</h1>
+    <section id="eventList">
+      <h2>{{$t('app.profilePage.eventList')}}</h2>
+      <my-events></my-events>
+    </section>
+    <a class="createEvent button" @click="createEvent"><i class="fa fa-plus"></i> {{$t('app.profilePage.createEvent')}}</a>
   </div>
 </template>
 <script>
   import Event from './APIClient/event.js'
+  import Utils from './helpers/Utils.js'
   import MyEvents from './components/MyEvents.vue'
   export default {
     name: 'profile-page',
+    data() {
+      return {
+        userName: Utils.getUserName(localStorage.getItem('profile'))
+      }
+    },
     components: {MyEvents},
     methods: {
       createEvent() {
