@@ -1,5 +1,5 @@
 <template>
-  <div class="composer">
+  <div id="application" class="composer">
     <template v-if="invalid">
       Not a valid event
     </template>

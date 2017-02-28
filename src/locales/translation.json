@@ -31,8 +31,12 @@
       "input": "List all guests"
     },
     "landingPage": {
+      "title": "Welcome to Organiz!",
+      "description": "Organiz helps you organizing events in a collaborative way!",
       "createEvent": "Create an event",
-      "viewEvent": "View an event"
-    }
+      "viewEvent": "View an event",
+      "getStarted": "Get Started"
+    },
+    "logout": "Logout"
   }
 }

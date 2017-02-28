@@ -1,6 +1,6 @@
 <template>
-  <div class="login" @click="show">
-    Login
+  <div class="login button" @click="show">
+    {{label}}
   </div>
 </template>
 <script>
@@ -10,6 +10,7 @@
 
   export default {
     name:'login',
+    props: ['label'],
     data() {
       return {
         lock: {}

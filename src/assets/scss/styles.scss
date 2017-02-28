@@ -16,6 +16,7 @@ $light-blue:    lighten($blue, 20);
 $white-blue:    lighten($blue, 45);
 $light-grey:    #fafafa;
 $grey:          #ddd;
+$mid-grey:      #aaa;
 $strong-grey:   #4C4C4C;
 $white:         white;
 $color0:        #795548;
@@ -51,6 +52,7 @@ html,body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: $light-grey;
   scroll-behavior: smooth;
 }
 
@@ -73,7 +75,7 @@ ul {
   cursor: pointer;
 }
 
-#page {
+#application {
   aside {
     width: $sidebar-width-percent;
     height: 100%;
@@ -177,31 +179,27 @@ ul {
       }
     }
     #info {
-      background-color: $white-color0;
       h2 { border-bottom: 2px solid $color0; }
     }
     #calendar {
-      background-color: $white-color1;
       h2 { border-bottom: 2px solid $color1; }
     }
     #place {
-      background-color: $white-color2;
       h2 { border-bottom: 2px solid $color2; }
     }
     #checklist {
-      background-color: $white-color3;
       h2 { border-bottom: 2px solid $color3; }
     }
     #poll {
-      background-color: $white-color4;
       h2 { border-bottom: 2px solid $color4; }
     }
     #participant {
-      background-color: $white-color5;
       h2 { border-bottom: 2px solid $color5; }
     }
   }
+
 }
+
 .info {
   display: flex;
   width: 100%;
@@ -315,7 +313,6 @@ ul {
   }
 }
 
-
 .viewer {
   .calendar {
     overflow-x: auto;
@@ -351,8 +348,48 @@ ul {
   }
 }
 
+.landingPage {
+  font-size: 1.2em;
+  .intro {
+    display: flex;
+    align-content: space-between;
+    align-items: center;
+    #title {
+      text-align: center;
+      flex: 1;
+    }
+    #description  {
+      text-align: justify;
+      flex: 1;
+    }
+  }
+}
+
+.button {
+  display: inline-block;
+  padding: .4em 1.4em;
+  background: $green;
+  color: $white;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+    box-shadow: 0 0 4px 1px $mid-grey;
+  margin: 0 .5em;
+  border-radius: .2em;
+  &:hover {
+  box-shadow: 0 0 4px 1px $grey;
+  }
+  &:active {
+    box-shadow: none;
+    background: lighten($green, 10%)
+  }
+  .fa {
+    min-width:0;
+  }
+}
+
 @media only screen and (min-width:1200px){
-  #page {
+  #page #application {
     aside {
       width: $sidebar-width-px
     }

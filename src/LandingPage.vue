@@ -1,11 +1,20 @@
 <template>
-  <div class="landingPage">
-    <h1>This is the landing page</h1>
-    <login v-show="!authenticated"></login>
-    <div v-show="authenticated">
-      <div class="button" @click="logout()">Logout</div>
+  <main class="landingPage">
+    <div class="intro">
+      <section id="title">
+        <h1>{{$t('app.landingPage.title')}}</h1>
+      </section>
+      <section id="description">
+        <p v-html="$t('app.landingPage.description')"></p>
+        <login v-show="!authenticated" label="$t('app.landingPage.getStarted')"></login>
+        <div v-show="authenticated">
+          <router-link to="/profile" class="button"><i class="fa fa-arrow-right"></i> {{$t('app.landingPage.getStarted')}}</router-link>
+          <div class="button" @click="logout()"><i class="fa fa-sign-out"></i>{{$t('app.logout')}}</div>
+        </div>
+      </section>
     </div>
-  </div>
+
+  </main>
 </template>
 <script>
   import Login from './components/Login.vue'

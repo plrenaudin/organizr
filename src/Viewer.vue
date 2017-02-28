@@ -1,5 +1,5 @@
 <template>
-  <div class="viewer">
+  <div id="application" class="viewer">
     <template v-if="invalid">
       Not a valid event
     </template>
