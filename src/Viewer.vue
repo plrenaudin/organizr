@@ -6,7 +6,6 @@
     <template v-else>
       <side-bar @scrollto="scrollTo" :view="true" :eventId="eventId"></side-bar>
       <main>
-        {{user}}
         <section id="info" v-if="info.title || info.description">
           <h2>{{$t('app.menu.info')}}</h2>
           <info></info>
@@ -33,7 +32,6 @@
         </section>
       </main>
     </template>
-
   </div>
 </template>
 <script>
@@ -80,6 +78,7 @@
       checklist() { return this.$store.getters.checklist },
       polls() { return this.$store.getters.polls },
       guests() { return this.$store.getters.guests },
+      attendees() { return this.$store.getters.attendees },
       user() { return Auth.user() }
     }
   }

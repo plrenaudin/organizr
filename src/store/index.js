@@ -18,8 +18,7 @@ const defaultState = () => {
     checklist: [],
     polls: [],
     guests: [],
-    participants: [],
-    participations: []
+    attendees: []
   }
 }
 
@@ -135,7 +134,7 @@ export default new Vuex.Store({
     guests: state => state.guests,
     info: state => state.info,
     admin: state => state.admin,
-    participations: state => state.participations
+    attendees: state => state.attendees
   },
   strict: debug
 })

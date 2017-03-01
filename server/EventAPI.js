@@ -9,6 +9,20 @@ module.exports = {
     db.get('events').findOne({ _id: id }).then(cb)
   },
 
+  participate(id, user, cb) {
+    this.findById(id, data => {
+      if(data.attendees && data.attendees.some(item => item.email === user)) {
+        cb(data)
+      } else {
+        db.get('events').findOneAndUpdate(
+          { _id: id },
+          { $addToSet: { attendees: { email: user } } },
+          { returnNewDocument: true }
+        ).then(cb)
+      }
+    })
+  },
+
   findByAdmin(email, cb) {
     db.get('events').find({ admin: email }).then(cb)
   },
@@ -63,7 +77,7 @@ module.exports = {
     removeDate(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { dates: payload.date } }
+        { $pull: { dates: { date: payload.date } } }
       ).then(cb)
     },
 

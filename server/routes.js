@@ -9,8 +9,8 @@ const createEvent = (req, res, next) => {
   })
 }
 
-const getEventById = (req, res, next) => {
-  eventAPI.findById(req.params[0], (data) => {
+const participate = (req, res, next) => {
+  eventAPI.participate(req.params[0], req.user.email, (data) => {
     res.json(data)
     next()
   })
@@ -35,6 +35,6 @@ const eventIdRegex = /([a-z0-9]{24})/
 module.exports = function (app) {
   app.post('/', createEvent)
   app.get('/listMyEvents', listUserEvents)
-  app.get(eventIdRegex, getEventById)
+  app.get(eventIdRegex, participate)
   app.post('/:idEvent/:action', mutateEvent)
 }
