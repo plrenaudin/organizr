@@ -1,6 +1,6 @@
 <template>
   <div class="profilePage">
-    <h1>{{$t('app.profilePage.title')}} {{userName}}</h1>
+    <h1>{{$t('app.profilePage.title')}} {{username}}</h1>
     <section id="eventList">
       <h2>{{$t('app.profilePage.eventList')}}</h2>
       <my-events></my-events>
@@ -10,15 +10,11 @@
 </template>
 <script>
   import Event from './APIClient/event.js'
-  import Utils from './helpers/Utils.js'
+  import Auth from './helpers/Auth.js'
   import MyEvents from './components/MyEvents.vue'
   export default {
     name: 'profile-page',
-    data() {
-      return {
-        userName: Utils.getUserName(localStorage.getItem('profile'))
-      }
-    },
+
     components: {MyEvents},
     methods: {
       createEvent() {
@@ -31,6 +27,9 @@
           }
         })
       }
+    },
+    computed: {
+      username() { return Auth.username() }
     }
   }
 </script>

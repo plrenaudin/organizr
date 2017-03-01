@@ -6,6 +6,7 @@
     <template v-else>
       <side-bar @scrollto="scrollTo" :view="true" :eventId="eventId"></side-bar>
       <main>
+        {{user}}
         <section id="info" v-if="info.title || info.description">
           <h2>{{$t('app.menu.info')}}</h2>
           <info></info>
@@ -37,6 +38,7 @@
 </template>
 <script>
   import zenscroll from 'zenscroll'
+  import Auth from './helpers/Auth.js'
   import SideBar from './components/SideBar.vue'
   import Calendar from './components/viewer/CalendarViewer.vue'
   import Place from './components/viewer/PlaceViewer.vue'
@@ -78,6 +80,7 @@
       checklist() { return this.$store.getters.checklist },
       polls() { return this.$store.getters.polls },
       guests() { return this.$store.getters.guests },
+      user() { return Auth.user() }
     }
   }
 </script>

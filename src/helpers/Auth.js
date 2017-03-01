@@ -5,6 +5,10 @@ export default {
   user() {
     return this.isAuthenticated() && JSON.parse(localStorage.getItem('profile')).email
   },
+  username() {
+    const user = this.user()
+    return user ? user.substr(0, user.indexOf('@')) : ''
+  },
   logout() {
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')

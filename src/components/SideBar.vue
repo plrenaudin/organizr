@@ -82,17 +82,11 @@
 </template>
 <script>
   import Formatter from '../helpers/Formatter.js'
-  import Utils from '../helpers/Utils.js'
   import Auth from '../helpers/Auth.js'
 
   export default {
     name: 'side-bar',
     props: ['view', 'eventId'],
-    data() {
-      return {
-        user: Utils.getUserName(localStorage.getItem('profile'))
-      }
-    },
     computed: {
       info() { return this.$store.getters.info },
       dates() { return this.$store.getters.dates },
@@ -100,7 +94,8 @@
       checklist() { return this.$store.getters.checklist },
       polls() { return this.$store.getters.polls },
       guests() { return this.$store.getters.guests },
-      isOwner() { return this.$store.getters.admin === Auth.user() }
+      isOwner() { return this.$store.getters.admin === Auth.user() },
+      user() { return Auth.username() }
     },
     methods: {
       formatDate: Formatter.dateToReadableDate
