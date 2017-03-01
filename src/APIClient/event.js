@@ -50,6 +50,9 @@ const removePollQuestion = (id, choicePoll) => { fireAndForget(vm.$http.post(`/$
 const addGuest = (id, guest) => { fireAndForget(vm.$http.post(`/${id}/addGuest`, { guest }, headers())) }
 const removeGuest = (id, guest) => { fireAndForget(vm.$http.post(`/${id}/removeGuest`, { guest }, headers())) }
 
+const checkChecklistItem = (id, item) => { fireAndForget(vm.$http.post(`/${id}/checkChecklistItem`, { item }, headers())) }
+const uncheckChecklistItem = (id, item) => { fireAndForget(vm.$http.post(`/${id}/uncheckChecklistItem`, { item }, headers())) }
+
 export default {
   create,
   findById,
@@ -68,5 +71,7 @@ export default {
   removePollQuestion,
   addGuest,
   removeGuest,
-  listMyEvents
+  listMyEvents,
+  checkChecklistItem,
+  uncheckChecklistItem
 }

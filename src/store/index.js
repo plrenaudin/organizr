@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Event from '../APIClient/event.js'
+import Auth from '../helpers/Auth.js'
 
 Vue.use(Vuex)
 
@@ -78,6 +79,27 @@ export default new Vuex.Store({
       let itemToRemove = state.checklist[index]
       state.checklist.splice(index, 1)
       Event.removeChecklistItem(state._id, itemToRemove)
+    },
+    toggleChecklistItem(state,item) {
+      if(item) {
+        const user = Auth.user()
+        //TODO FIXME
+        for (const attendee of state.attendees) {
+          if(attendee.email === user) {
+            attendee.checklist = attendee.checklist || []
+            let index = attendee.checklist.indexOf(item)
+            if(index > -1) {
+              attendee.checklist.splice(index, 1)
+              Event.uncheckChecklistItem(state._id,item)
+            }
+            else {
+              attendee.checklist.push(item)
+              Event.checkChecklistItem(state._id, item)
+            }
+            break;
+          }
+        }
+      }
     },
     updateInfo(state, info) {
       state.info.title = info.title

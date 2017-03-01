@@ -1,3 +1,4 @@
+import Formatter from './Formatter.js'
 export default {
   isAuthenticated() {
     return !!localStorage.getItem('profile')
@@ -7,7 +8,7 @@ export default {
   },
   username() {
     const user = this.user()
-    return user ? user.substr(0, user.indexOf('@')) : ''
+    return user ? Formatter.formatNameByEmail(user) : ''
   },
   logout() {
     localStorage.removeItem('id_token')

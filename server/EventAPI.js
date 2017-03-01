@@ -135,7 +135,22 @@ module.exports = {
         { _id: id, admin: user },
         { $pull: { guests: payload.guest } }
       ).then(cb)
-    }
+    },
+
+    checkChecklistItem(user, id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'attendees.email': user },
+        { $push: { 'attendees.$.checklist': payload.item } }
+      ).then(cb)
+    },
+
+    uncheckChecklistItem(user, id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'attendees.email': user },
+        { $pull: { 'attendees.$.checklist': payload.item } }
+      ).then(cb)
+    },
+
   }
 
 }

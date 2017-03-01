@@ -21,7 +21,10 @@
       "hideTimeOptions": "Hide time options"
     },
     "checklist": {
-      "addItem": "Add an item"
+      "addItem": "Add an item",
+      "checkItem": "I volunteer for this!",
+      "uncheckItem": "I volunteered",
+      "volunteers": "Volunteers"
     },
     "poll": {
       "addItem": "Add a new poll",

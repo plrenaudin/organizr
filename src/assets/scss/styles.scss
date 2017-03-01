@@ -4,7 +4,7 @@ $white-color-percentage: 40%;
 $sidebar-width-percent: 40%;
 $sidebar-width-px: 550px;
 
-$red:           #ff0000;
+$red:           #F44336;
 $green:         #4CAF50;
 $light-green:   lighten($green, 20);
 $white-green:   lighten($green, 45);
@@ -16,7 +16,7 @@ $light-blue:    lighten($blue, 20);
 $white-blue:    lighten($blue, 45);
 $light-grey:    #fafafa;
 $grey:          #ddd;
-$mid-grey:      #aaa;
+$mid-grey:      #999;
 $strong-grey:   #4C4C4C;
 $white:         white;
 $color0:        #795548;
@@ -74,7 +74,16 @@ ul {
   color: $blue;
   cursor: pointer;
 }
-
+.spaced {
+  margin: 0 0.2em;
+}
+.italic {
+  font-style: italic;
+}
+.small-text {
+  font-size: .75em;
+  color: $mid-grey;
+}
 aside {
   width: $sidebar-width-percent;
   height: 100%;
@@ -390,7 +399,7 @@ aside {
   cursor: pointer;
   text-decoration: none;
   font-weight: bold;
-    box-shadow: 0 0 4px 1px $mid-grey;
+  box-shadow: 0 0 4px 1px $mid-grey;
   margin: 0 .5em;
   border-radius: .2em;
   &:hover {
@@ -400,8 +409,19 @@ aside {
     box-shadow: none;
     background: lighten($green, 10%)
   }
+  &.red {
+    background: $red;
+  }
   .fa {
     min-width:0;
+  }
+}
+
+.checklist {
+  li {
+    padding: .5em;
+    display: flex;
+    align-items: baseline;
   }
 }
 
