@@ -22,9 +22,9 @@
     },
     "checklist": {
       "addItem": "Add an item",
-      "checkItem": "I volunteer for this!",
-      "uncheckItem": "I volunteered",
-      "volunteers": "Volunteers"
+      "checkItem": "Assign this to me!",
+      "uncheckItem": "Cancel",
+      "volunteers": "Assignee(s)"
     },
     "poll": {
       "addItem": "Add a new poll",

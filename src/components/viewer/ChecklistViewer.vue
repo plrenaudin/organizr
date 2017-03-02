@@ -23,16 +23,16 @@
       checkItem(item) {
         this.$store.commit('toggleChecklistItem', item)
       },
-      attendeesCheckedList(item) {
+      attendeesChecklist(item) {
         return this.attendees.filter(attendee => {
           return attendee.checklist && attendee.checklist.indexOf(item) > -1
         }) || []
       },
       attendeesChecked(item) {
-        return this.attendeesCheckedList(item).map(a => Formatter.formatNameByEmail(a.email)).join(',')
+        return this.attendeesChecklist(item).map(a => Formatter.formatNameByEmail(a.email)).join(',')
       },
       isChecked(item) {
-        return this.attendeesCheckedList(item).some(a => a.email === Auth.user())
+        return this.attendeesChecklist(item).some(a => a.email === Auth.user())
       }
     }
   }
