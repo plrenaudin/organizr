@@ -3,8 +3,8 @@
     <ul class="placeList">
       <li v-for="place in places">
         <div class="placeItem">
-          <div class="button" @click="checkPlace(place)" v-show="!isChecked(place)">{{$t('app.place.yes')}}</div>
-          <div class="button red" @click="checkPlace(place)" v-show="isChecked(place)">{{$t('app.place.no')}}</div>
+          <div class="button" @click="checkPlace(place.name)" v-show="!isChecked(place.name)">{{$t('app.place.yes')}}</div>
+          <div class="button red" @click="checkPlace(place.name)" v-show="isChecked(place.name)">{{$t('app.place.no')}}</div>
           <div class="location">
             <div class="name">{{place.name}}</div>
             <div class="map" v-if="place.valid" @click="gotoMap(place.name)">
@@ -15,7 +15,7 @@
             </div>
           </div>
           <em>
-            {{checkCount(place)}}
+            {{checkCount(place.name)}}
           </em>
         </div>
       </li>

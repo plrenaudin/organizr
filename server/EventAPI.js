@@ -173,6 +173,20 @@ module.exports = {
       ).then(cb).catch(err => console.error(err))
     },
 
+    selectPlace(user, id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'attendees.email': user },
+        { $addToSet: { 'attendees.$.places': payload.place } }
+      ).then(cb).catch(err => console.error(err))
+    },
+
+    unselectPlace(user, id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'attendees.email': user },
+        { $pull: { 'attendees.$.places': payload.place } }
+      ).then(cb).catch(err => console.error(err))
+    }
+
   }
 
 }

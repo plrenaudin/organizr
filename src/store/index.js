@@ -79,11 +79,11 @@ export default new Vuex.Store({
             let index = attendee.places.indexOf(item)
             if(index > -1) {
               attendee.places.splice(index, 1)
-              //Event.uncheckChecklistItem(state._id,item)
+              Event.unselectPlace(state._id,item)
             }
             else {
               attendee.places.push(item)
-              //Event.checkChecklistItem(state._id, item)
+              Event.selectPlace(state._id, item)
             }
             break;
           }
