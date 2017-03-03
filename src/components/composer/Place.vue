@@ -13,6 +13,9 @@
               :src="iframeUrl + place.name"
               allowfullscreen></iframe>
           </div>
+          <div class="placePlaceholder" v-else>
+            ?
+          </div>
         </div>
       </li>
     </ul>
@@ -41,13 +44,13 @@
           setTimeout(me.initPlace,200)
         } else {
           me.autocomplete = new google.maps.places.Autocomplete(me.$el.querySelector('#autocomplete'))
-          me.autocomplete.addListener('place_changed',  me.selectPlace)
+          me.autocomplete.addListener('place_changed',  me.addPlace)
         }
       },
-      selectPlace(event) {
+      addPlace(event) {
         let place = this.autocomplete.getPlace()
         let placeName = place.formatted_address ? place.formatted_address : place.name
-        this.$store.commit('selectPlace', {name: placeName, valid: place.formatted_address})
+        this.$store.commit('addPlace', {name: placeName, valid: place.formatted_address})
       },
       removePlace(index) {
         this.$store.commit('removePlace', index)

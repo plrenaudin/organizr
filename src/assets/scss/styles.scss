@@ -298,6 +298,18 @@ aside {
 }
 
 .place {
+  .placePlaceholder {
+    width: 400px;
+    height: 170px;
+    background-color: $mid-grey;
+    font-size: 5em;
+    font-weight: bold;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0 6px $strong-grey;
+  }
   .placeInput {
     display: flex;
     justify-content: center;
@@ -315,7 +327,6 @@ aside {
         .map {
           position: relative;
           height: 170px;
-          width: 100%;
           overflow: hidden;
           iframe {
             width: 100%;
@@ -371,6 +382,13 @@ aside {
           cursor:pointer
         }
       }
+    }
+  }
+  .place {
+    .placeItem {
+      display: flex;
+      align-content: center;
+      align-items: center;
     }
   }
 }

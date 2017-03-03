@@ -58,7 +58,7 @@ export default new Vuex.Store({
       concernedDate.times.splice(timeIndex, 1)
       Event.removeTime(state._id, { date: concernedDate.date, time: timeToRemove })
     },
-    selectPlace(state, place) {
+    addPlace(state, place) {
       if (place && !state.places.find(i => i.name === place.name)) {
         state.places.push(place)
         Event.addPlace(state._id, place)
@@ -68,6 +68,27 @@ export default new Vuex.Store({
       let itemToRemove = state.places[index]
       state.places.splice(index, 1)
       Event.removePlace(state._id, itemToRemove)
+    },
+    togglePlace(state, item) {
+      if(item) {
+        const user = Auth.user()
+        //TODO FIXME
+        for (const attendee of state.attendees) {
+          if(attendee.email === user) {
+            Vue.set(attendee, 'places', attendee.places || [])
+            let index = attendee.places.indexOf(item)
+            if(index > -1) {
+              attendee.places.splice(index, 1)
+              //Event.uncheckChecklistItem(state._id,item)
+            }
+            else {
+              attendee.places.push(item)
+              //Event.checkChecklistItem(state._id, item)
+            }
+            break;
+          }
+        }
+      }
     },
     addChecklistItem(state, item) {
       if (item && !state.checklist.find(i => i === item)) {
@@ -176,6 +197,7 @@ export default new Vuex.Store({
     attendees: state => state.attendees,
 
     attendeesWhoVoted: state => state.attendees.filter(a => a.polls && a.polls.length > 0),
+    attendeesWhoSelectedPlace: state => state.attendees.filter(a => a.places && a.places.length > 0),
     attendeesWhoCheckedList: state => state.attendees.filter(a => a.checklist && a.checklist.length > 0)
 
   },
