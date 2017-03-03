@@ -28,7 +28,8 @@
     },
     "poll": {
       "addItem": "Add a new poll",
-      "addChoice": "Add a new choice"
+      "addChoice": "Add a new choice",
+      "vote": "Vote"
     },
     "guests": {
       "input": "List all guests"

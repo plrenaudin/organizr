@@ -15,18 +15,13 @@
   import Auth from '../../helpers/Auth.js'
   export default {
     name: 'checklist-viewer',
-    computed: {
-      items() { return this.$store.getters.checklist },
-      attendees() { return this.$store.getters.attendees },
-    },
+
     methods: {
       checkItem(item) {
         this.$store.commit('toggleChecklistItem', item)
       },
       attendeesChecklist(item) {
-        return this.attendees.filter(attendee => {
-          return attendee.checklist && attendee.checklist.indexOf(item) > -1
-        }) || []
+        return this.attendeesWhoCheckedList.filter(attendee => attendee.checklist.indexOf(item) > -1) || []
       },
       attendeesChecked(item) {
         return this.attendeesChecklist(item).map(a => Formatter.formatNameByEmail(a.email)).join(',')
@@ -34,6 +29,11 @@
       isChecked(item) {
         return this.attendeesChecklist(item).some(a => a.email === Auth.user())
       }
-    }
+    },
+
+    computed: {
+      items() { return this.$store.getters.checklist },
+      attendeesWhoCheckedList() { return this.$store.getters.attendeesWhoCheckedList }
+    },
   }
 </script>

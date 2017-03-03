@@ -86,7 +86,7 @@ export default new Vuex.Store({
         //TODO FIXME
         for (const attendee of state.attendees) {
           if(attendee.email === user) {
-            attendee.checklist = attendee.checklist || []
+            Vue.set(attendee, 'checklist', attendee.checklist || [])
             let index = attendee.checklist.indexOf(item)
             if(index > -1) {
               attendee.checklist.splice(index, 1)
@@ -130,6 +130,23 @@ export default new Vuex.Store({
       concernedPoll.choices.splice(indexChoice, 1)
       Event.removePollQuestion(state._id, { question: concernedPoll.question, choice: choiceToRemove })
     },
+
+    vote(state, {question, choice}) {
+      const user = Auth.user()
+      //TODO FIXME
+      for (const attendee of state.attendees) {
+        if(attendee.email === user) {
+          Vue.set(attendee, 'polls', attendee.polls || [])
+          let found = attendee.polls.find(item => item.question === question)
+          if(!found) {
+            attendee.polls.push({question, choice})
+            Event.vote(state._id, {question, choice})
+          }
+          break;
+        }
+      }
+    },
+
     addGuest(state, guests) {
       if (guests) {
         let parsed = guests.map(i => i.toLowerCase())
@@ -156,7 +173,11 @@ export default new Vuex.Store({
     guests: state => state.guests,
     info: state => state.info,
     admin: state => state.admin,
-    attendees: state => state.attendees
+    attendees: state => state.attendees,
+
+    attendeesWhoVoted: state => state.attendees.filter(a => a.polls && a.polls.length > 0),
+    attendeesWhoCheckedList: state => state.attendees.filter(a => a.checklist && a.checklist.length > 0)
+
   },
   strict: debug
 })

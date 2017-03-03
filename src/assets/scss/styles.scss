@@ -359,6 +359,20 @@ aside {
       }
     }
   }
+  .poll {
+    ul.question {
+      display: flex;
+      justify-content: space-around;
+      ul li {
+        display: flex;
+        padding: 0.4em;
+        align-items: center;
+        label {
+          cursor:pointer
+        }
+      }
+    }
+  }
 }
 
 .landingPage {
