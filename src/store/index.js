@@ -30,13 +30,13 @@ export default new Vuex.Store({
       Object.assign(state, defaultState(), event)
     },
     addDate(state, date) {
-      let found = state.dates.find(item => item.date === date)
+      let found = state.dates.find(item => item.day === date)
       if (found) {
         state.dates.splice(state.dates.indexOf(found), 1)
         Event.removeDate(state._id, date)
       } else {
-        state.dates.push({ date, times: [] })
-        Event.addDate(state._id, { date, times: [] })
+        state.dates.push({ day: date, times: [] })
+        Event.addDate(state._id, { day: date, times: [] })
       }
     },
     addTime(state, {index, value}) {
@@ -44,7 +44,7 @@ export default new Vuex.Store({
       let found = concernedDate.times.find(item => item === value)
       if (!found) {
         concernedDate.times.push(value)
-        Event.addTime(state._id, { date: concernedDate.date, time: value })
+        Event.addTime(state._id, { date: concernedDate.day, time: value })
       }
     },
     removeDate(state, dateIndex) {
@@ -56,7 +56,30 @@ export default new Vuex.Store({
       let concernedDate = state.dates[dateIndex]
       let timeToRemove = concernedDate.times[timeIndex]
       concernedDate.times.splice(timeIndex, 1)
-      Event.removeTime(state._id, { date: concernedDate.date, time: timeToRemove })
+      Event.removeTime(state._id, { date: concernedDate.day, time: timeToRemove })
+    },
+    selectDatetime(state, item) {
+      if (item) {
+        const user = Auth.user()
+        //TODO FIXME
+        for (const attendee of state.attendees) {
+          if (attendee.email === user) {
+            if (!attendee.dates) {
+              Vue.set(attendee, 'dates', [])
+            }
+            let index = attendee.dates.indexOf(item)
+            if (index > -1) {
+              attendee.dates.splice(index, 1)
+              Event.unselectDatetime(state._id, item)
+            }
+            else {
+              attendee.dates.push(item)
+              Event.selectDatetime(state._id, item)
+            }
+            break;
+          }
+        }
+      }
     },
     addPlace(state, place) {
       if (place && !state.places.find(i => i.name === place.name)) {
@@ -70,16 +93,18 @@ export default new Vuex.Store({
       Event.removePlace(state._id, itemToRemove)
     },
     togglePlace(state, item) {
-      if(item) {
+      if (item) {
         const user = Auth.user()
         //TODO FIXME
         for (const attendee of state.attendees) {
-          if(attendee.email === user) {
-            Vue.set(attendee, 'places', attendee.places || [])
+          if (attendee.email === user) {
+            if (!attendee.places) {
+              Vue.set(attendee, 'places', [])
+            }
             let index = attendee.places.indexOf(item)
-            if(index > -1) {
+            if (index > -1) {
               attendee.places.splice(index, 1)
-              Event.unselectPlace(state._id,item)
+              Event.unselectPlace(state._id, item)
             }
             else {
               attendee.places.push(item)
@@ -101,17 +126,19 @@ export default new Vuex.Store({
       state.checklist.splice(index, 1)
       Event.removeChecklistItem(state._id, itemToRemove)
     },
-    toggleChecklistItem(state,item) {
-      if(item) {
+    toggleChecklistItem(state, item) {
+      if (item) {
         const user = Auth.user()
         //TODO FIXME
         for (const attendee of state.attendees) {
-          if(attendee.email === user) {
-            Vue.set(attendee, 'checklist', attendee.checklist || [])
+          if (attendee.email === user) {
+            if (!attendee.checklist) {
+              Vue.set(attendee, 'checklist', [])
+            }
             let index = attendee.checklist.indexOf(item)
-            if(index > -1) {
+            if (index > -1) {
               attendee.checklist.splice(index, 1)
-              Event.uncheckChecklistItem(state._id,item)
+              Event.uncheckChecklistItem(state._id, item)
             }
             else {
               attendee.checklist.push(item)
@@ -156,12 +183,14 @@ export default new Vuex.Store({
       const user = Auth.user()
       //TODO FIXME
       for (const attendee of state.attendees) {
-        if(attendee.email === user) {
-          Vue.set(attendee, 'polls', attendee.polls || [])
+        if (attendee.email === user) {
+          if (!attendee.polls) {
+            Vue.set(attendee, 'polls', [])
+          }
           let found = attendee.polls.find(item => item.question === question)
-          if(!found) {
-            attendee.polls.push({question, choice})
-            Event.vote(state._id, {question, choice})
+          if (!found) {
+            attendee.polls.push({ question, choice })
+            Event.vote(state._id, { question, choice })
           }
           break;
         }
@@ -191,13 +220,13 @@ export default new Vuex.Store({
     checklist: state => state.checklist,
     polls: state => state.polls,
     guests: state => state.guests,
-    guests: state => state.guests,
     info: state => state.info,
     admin: state => state.admin,
     attendees: state => state.attendees,
 
     attendeesWhoVoted: state => state.attendees.filter(a => a.polls && a.polls.length > 0),
     attendeesWhoSelectedPlace: state => state.attendees.filter(a => a.places && a.places.length > 0),
+    attendeesWhoSelectedDate: state => state.attendees.filter(a => a.dates && a.dates.length > 0),
     attendeesWhoCheckedList: state => state.attendees.filter(a => a.checklist && a.checklist.length > 0)
 
   },

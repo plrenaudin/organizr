@@ -36,7 +36,7 @@
             </div>
             <ul class="peek" v-show="dates.length > 0">
               <li v-for="seletedDate in dates">
-                {{formatDate(seletedDate.date)}}
+                {{formatDate(seletedDate.day)}}
                 <template v-if="seletedDate.times.length > 0">
                   <span> ({{seletedDate.times.length}}) </span>
                 </template>

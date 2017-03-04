@@ -78,20 +78,20 @@ module.exports = {
     removeDate(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { dates: { date: payload.date } } }
+        { $pull: { dates: { day: payload.date } } }
       ).then(cb).catch(err => console.error(err))
     },
 
     addTime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
-        { _id: id, admin: user, 'dates.date': payload.date },
+        { _id: id, admin: user, 'dates.day': payload.date },
         { $addToSet: { 'dates.$.times': payload.time } }
       ).then(cb).catch(err => console.error(err))
     },
 
     removeTime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
-        { _id: id, admin: user, 'dates.date': payload.date },
+        { _id: id, admin: user, 'dates.day': payload.date },
         { $pull: { 'dates.$.times': payload.time } }
       ).then(cb).catch(err => console.error(err))
     },
@@ -185,7 +185,20 @@ module.exports = {
         { _id: id, 'attendees.email': user },
         { $pull: { 'attendees.$.places': payload.place } }
       ).then(cb).catch(err => console.error(err))
-    }
+    },
+    selectDatetime(user, id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'attendees.email': user },
+        { $addToSet: { 'attendees.$.dates': payload.datetime } }
+      ).then(cb).catch(err => console.error(err))
+    },
+
+    unselectDatetime(user, id, payload, cb) {
+      db.get('events').findOneAndUpdate(
+        { _id: id, 'attendees.email': user },
+        { $pull: { 'attendees.$.dates': payload.datetime } }
+      ).then(cb).catch(err => console.error(err))
+    },
 
   }
 

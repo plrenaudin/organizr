@@ -56,5 +56,7 @@ export default {
   uncheckChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/uncheckChecklistItem`, { item }, headers())) },
   vote: (id, {question, choice}) => { fireAndForget(vm.$http.post(`/${id}/vote`, { question, choice }, headers())) },
   selectPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/selectPlace`, { place }, headers())) },
-  unselectPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/unselectPlace`, { place }, headers())) }
+  unselectPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/unselectPlace`, { place }, headers())) },
+  selectDatetime: (id, datetime) => { fireAndForget(vm.$http.post(`/${id}/selectDatetime`, { datetime }, headers())) },
+  unselectDatetime: (id, datetime) => { fireAndForget(vm.$http.post(`/${id}/unselectDatetime`, { datetime }, headers())) }
 }

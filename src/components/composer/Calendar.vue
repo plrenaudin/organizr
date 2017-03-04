@@ -24,7 +24,7 @@
             <li v-for="current,dateIndex in selected">
               <i class="fa fa-trash action" @click="removeDate(dateIndex)"></i>
               <div class="formattedDate">
-                {{formatDate(current.date)}}
+                {{formatDate(current.day)}}
               </div>
               <div v-for="time,timeIndex in current.times">
                 <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time}}
@@ -60,7 +60,7 @@ export default {
     addMonth() { this.dateContext = moment(this.dateContext).add(1, 'month')},
     subtractMonth() { this.dateContext = moment(this.dateContext).subtract(1, 'month')},
     dayToDateString(day) { return this.dateContext.format("YYYY-MM-") + Formatter.leftPad(""+day, 2, '0')},
-    isSelected(date) { return this.selected.find(item => item.date === date) },
+    isSelected(date) { return this.selected.find(item => item.day === date) },
     select(day) {
       let insertable = this.dayToDateString(day)
       this.$store.commit('addDate', insertable)
