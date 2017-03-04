@@ -1,6 +1,6 @@
 @import './normalize.scss';
 
-$white-color-percentage: 40%;
+$white-color-percentage: 35%;
 $sidebar-width-percent: 40%;
 $sidebar-width-px: 550px;
 
@@ -16,7 +16,7 @@ $light-blue:    lighten($blue, 20);
 $white-blue:    lighten($blue, 45);
 $grey:          #ddd;
 $light-grey:    #fafafa;
-$mid-grey:      #999;
+$mid-grey:      #777;
 $strong-grey:   #4C4C4C;
 $white:         white;
 $color0:        #9C27B0;
@@ -112,6 +112,16 @@ input[type="checkbox"] {
     z-index: 0;
   }
 }
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid $grey;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 
 .fa {
   min-width: 1.5em;
@@ -302,6 +312,9 @@ aside {
     #participant {
       h2 { border-bottom: 2px solid $color5; }
     }
+    .fa{
+      color: $mid-grey;
+    }
   }
 
 }
@@ -317,7 +330,7 @@ aside {
     margin: 1em;
   }
   textarea {
-    height: 200px;
+    height: 100px;
   }
 }
 
@@ -377,18 +390,28 @@ aside {
     ul.selected {
       li {
         display: flex;
+        flex-wrap: wrap;
         align-items: baseline;
         padding: .5em 0;
         margin: .5em 0;
         .formattedDate {
-          width: 110px;
+          width: 150px;
+          text-align: center;
         }
       }
+    }
+    .dateContainer {
+      padding: 12px;
+      margin: .5em;
+      background-color: $white-color1;
+      border: 1px solid $grey;
+      border-radius: 4px;
+      box-sizing: border-box;
     }
     .timeInput input {
       text-align: center;
       margin: 0 1em;
-      width: 3em;
+      width: 5em;
     }
   }
   .place {

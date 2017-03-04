@@ -23,10 +23,10 @@
           <ul class="selected">
             <li v-for="current,dateIndex in selected">
               <i class="fa fa-trash action" @click="removeDate(dateIndex)"></i>
-              <div class="formattedDate">
+              <div class="formattedDate dateContainer">
                 {{formatDate(current.day)}}
               </div>
-              <div v-for="time,timeIndex in current.times">
+              <div v-for="time,timeIndex in current.times" class="dateContainer">
                 <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time}}
               </div>
               <div class="timeInput">
