@@ -185,6 +185,14 @@ input[type=text], select, textarea {
   text-shadow: 0 0 6px $strong-grey;
 }
 
+.map {
+  position: relative;
+  height: 170px;
+  width: 400px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
 // =================================== Sidebar
 aside {
   width: $sidebar-width-percent;
@@ -429,14 +437,6 @@ aside {
         display: flex;
         .placeItem {
           width: 100%;
-          .map {
-            position: relative;
-            height: 170px;
-            overflow: hidden;
-            iframe {
-              width: 100%;
-            }
-          }
         }
       }
     }

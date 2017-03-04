@@ -8,10 +8,8 @@
         <i class="fa fa-trash action" @click="removePlace(index)"></i>
         <div class="placeItem">
           <div class="name">{{place.name}}</div>
-          <div class="map" v-if="place.valid">
-            <iframe frameborder="0" style="border:0"
-              :src="iframeUrl + place.name"
-              allowfullscreen></iframe>
+          <div class="map" v-if="place.valid" @click="gotoMap(place.name)">
+            <img :src="imageUrl + place.name +'&markers='+place.name" />
           </div>
           <div class="placePlaceholder" v-else>
             ?
@@ -47,6 +45,9 @@
           me.autocomplete.addListener('place_changed',  me.addPlace)
         }
       },
+      gotoMap(name) {
+        window.open(this.mapUrl + name)
+      },
       addPlace(event) {
         let place = this.autocomplete.getPlace()
         let placeName = place.formatted_address ? place.formatted_address : place.name
@@ -58,7 +59,8 @@
     },
     computed: {
       places() { return this.$store.getters.places },
-      iframeUrl() { return `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=` }
+      imageUrl() { return `https://maps.googleapis.com/maps/api/staticmap?key=${API_KEY}&size=400x170&center=` },
+      mapUrl() { return `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=` }
     }
   }
 </script>
