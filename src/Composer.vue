@@ -26,10 +26,6 @@
           <h2>{{$t('app.menu.polls')}}</h2>
           <poll></poll>
         </section>
-        <section id="participant">
-          <h2>{{$t('app.menu.guests')}}</h2>
-          <guests></guests>
-        </section>
       </main>
     </template>
   </div>
@@ -42,12 +38,11 @@
   import Checklist from './components/composer/Checklist.vue'
   import info from './components/composer/Info.vue'
   import Poll from './components/composer/Poll.vue'
-  import Guests from './components/composer/Guests.vue'
   import Event from './APIClient/event.js'
 
   export default {
     name: 'composer',
-    components: {Calendar, Place, SideBar, Checklist, info, Poll, Guests},
+    components: {Calendar, Place, SideBar, Checklist, info, Poll},
     props: ['eventId'],
     data() {
       return {

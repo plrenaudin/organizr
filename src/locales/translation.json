@@ -1,12 +1,11 @@
 {
   "app": {
     "menu": {
-      "info": "The info",
+      "info": "The Intro",
       "datetime": "The Moment",
       "location": "The Place",
       "checklist": "The Checklist",
-      "polls": "The Polls",
-      "guests": "The Guests"
+      "polls": "The Polls"
     },
     "sidebar": {
       "editEvent": "Edit Event",
@@ -16,10 +15,6 @@
       "titleInput": "Enter a title",
       "descInput": "Enter a description"
     },
-    "moment": {
-      "displayTimeOptions": "Display time options",
-      "hideTimeOptions": "Hide time options"
-    },
     "checklist": {
       "addItem": "Add an item",
       "volunteers": "Assignee(s)"
@@ -28,9 +23,6 @@
       "addItem": "Add a new poll",
       "addChoice": "Add a new choice",
       "vote": "Vote"
-    },
-    "guests": {
-      "input": "List all guests"
     },
     "landingPage": {
       "title": "Welcome to Organiz!",

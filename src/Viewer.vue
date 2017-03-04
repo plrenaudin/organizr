@@ -26,10 +26,6 @@
           <h2>{{$t('app.menu.polls')}}</h2>
           <poll></poll>
         </section>
-        <section id="participant" v-if="guests.length > 0">
-          <h2>{{$t('app.menu.guests')}}</h2>
-          <guests></guests>
-        </section>
       </main>
     </template>
   </div>
@@ -43,13 +39,12 @@
   import Checklist from './components/viewer/ChecklistViewer.vue'
   import info from './components/viewer/InfoViewer.vue'
   import Poll from './components/viewer/PollViewer.vue'
-  import Guests from './components/viewer/GuestsViewer.vue'
   import Event from './APIClient/event.js'
 
   export default {
     name: 'viewer',
     props: ['eventId'],
-    components: {Calendar, Place, SideBar, Checklist, info, Poll, Guests},
+    components: {Calendar, Place, SideBar, Checklist, info, Poll},
 
     data() {
       return {
@@ -77,7 +72,6 @@
       places() { return this.$store.getters.places },
       checklist() { return this.$store.getters.checklist },
       polls() { return this.$store.getters.polls },
-      guests() { return this.$store.getters.guests },
       attendees() { return this.$store.getters.attendees },
       user() { return Auth.user() }
     }

@@ -18,7 +18,6 @@ const defaultState = () => {
     places: [],
     checklist: [],
     polls: [],
-    guests: [],
     attendees: []
   }
 }
@@ -195,23 +194,6 @@ export default new Vuex.Store({
           break;
         }
       }
-    },
-
-    addGuest(state, guests) {
-      if (guests) {
-        let parsed = guests.map(i => i.toLowerCase())
-        parsed.forEach(toAdd => {
-          if (!state.guests.find(inIt => inIt === toAdd)) {
-            state.guests.push(toAdd)
-          }
-        })
-        Event.addGuest(state._id, parsed)
-      }
-    },
-    removeGuest(state, index) {
-      let itemToRemove = state.guests[index]
-      state.guests.splice(index, 1)
-      Event.removeGuest(state._id, itemToRemove)
     }
   },
   getters: {
@@ -219,7 +201,6 @@ export default new Vuex.Store({
     places: state => state.places,
     checklist: state => state.checklist,
     polls: state => state.polls,
-    guests: state => state.guests,
     info: state => state.info,
     admin: state => state.admin,
     attendees: state => state.attendees,

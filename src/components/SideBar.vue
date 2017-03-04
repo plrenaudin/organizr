@@ -67,14 +67,6 @@
               <li v-for="poll in polls">{{poll.question}} ({{poll.choices.length}})</li>
             </ul>
           </li>
-          <li class="color5" @click="$emit('scrollto','participant')" v-show="!view || guests.length > 0">
-            <div class="menu">
-              {{$t('app.menu.guests')}}<i class="fa fa-users"></i>
-            </div>
-            <ul class="peek" v-show="guests.length > 0">
-              <li v-for="participant in guests">{{participant}}</li>
-            </ul>
-          </li>
         </ul>
       </nav>
     </section>
@@ -93,7 +85,6 @@
       places() { return this.$store.getters.places },
       checklist() { return this.$store.getters.checklist },
       polls() { return this.$store.getters.polls },
-      guests() { return this.$store.getters.guests },
       isOwner() { return this.$store.getters.admin === Auth.user() },
       user() { return Auth.username() }
     },

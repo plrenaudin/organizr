@@ -124,20 +124,6 @@ module.exports = {
       ).then(cb).catch(err => console.error(err))
     },
 
-    addGuest(user, id, payload, cb) {
-      db.get('events').findOneAndUpdate(
-        { _id: id, admin: user },
-        { $addToSet: { guests: { $each: payload.guest } } }
-      ).then(cb).catch(err => console.error(err))
-    },
-
-    removeGuest(user, id, payload, cb) {
-      db.get('events').findOneAndUpdate(
-        { _id: id, admin: user },
-        { $pull: { guests: payload.guest } }
-      ).then(cb).catch(err => console.error(err))
-    },
-
     checkChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
