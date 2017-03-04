@@ -3,8 +3,7 @@
     <ul class="placeList">
       <li v-for="place in places">
         <div class="placeItem">
-          <div class="button" @click="checkPlace(place.name)" v-show="!isChecked(place.name)">{{$t('app.place.yes')}}</div>
-          <div class="button red" @click="checkPlace(place.name)" v-show="isChecked(place.name)">{{$t('app.place.no')}}</div>
+          <input type="checkbox" @click="checkPlace(place.name)" :checked="isChecked(place.name)" />
           <div class="location">
             <div class="name">{{place.name}}</div>
             <div class="map" v-if="place.valid" @click="gotoMap(place.name)">

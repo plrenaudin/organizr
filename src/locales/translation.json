@@ -20,14 +20,8 @@
       "displayTimeOptions": "Display time options",
       "hideTimeOptions": "Hide time options"
     },
-    "place": {
-      "yes": "I can come here",
-      "no": "Finally, I can't"
-    },
     "checklist": {
       "addItem": "Add an item",
-      "checkItem": "Assign this to me!",
-      "uncheckItem": "Cancel",
       "volunteers": "Assignee(s)"
     },
     "poll": {

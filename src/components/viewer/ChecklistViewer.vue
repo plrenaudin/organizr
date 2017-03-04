@@ -2,9 +2,9 @@
   <div class="checklist">
     <ul>
       <li v-for="item, index in items">
-        <div class="button" @click="checkItem(item)" v-show="!isChecked(item)">{{$t('app.checklist.checkItem')}}</div>
-        <div class="button red" @click="checkItem(item)" v-show="isChecked(item)">{{$t('app.checklist.uncheckItem')}}</div>
+        <input type="checkbox" @click="checkItem(item)" :checked="isChecked(item)" />
         <span>{{item}}</span>
+
         <span class="small-text volunteers italic spaced" v-show="attendeesChecked(item)">{{'(' +$t('app.checklist.volunteers') + ': ' + attendeesChecked(item) +')'}}</span>
       </li>
     </ul>

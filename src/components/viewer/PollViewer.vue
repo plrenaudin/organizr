@@ -12,8 +12,9 @@
               :id="indexPoll + '-' + indexChoice"
               class="spaced"
               v-show="!hasVoted(poll.question)"/>
+            <input type="checkbox" checked="true" disabled="true" v-show="hasVotedFor(poll.question, choice)" />
             <label :for="indexPoll + '-' + indexChoice">{{choice}}</label>
-            <em v-show="hasVoted(poll.question)">{{(whoVotedFor(poll.question,choice))}}</em>
+            <em v-show="hasVoted(poll.question)">{{whoVotedFor(poll.question,choice).length}}</em>
           </li>
           <li v-show="!hasVoted(poll.question)"><div class="button" @click="vote(indexPoll)">{{$t('app.poll.vote')}}</div></li>
         </ul>
@@ -41,7 +42,10 @@
       },
 
       whoVotedFor(question, choice) {
-        return this.attendeesWhoVoted.filter(a => a.polls.find(p => p.question === question && p.choice === choice)).length
+        return this.attendeesWhoVoted.filter(a => a.polls.find(p => p.question === question && p.choice === choice))
+      },
+      hasVotedFor(question,choice) {
+        return this.whoVotedFor(question, choice).some(i => i.email === Auth.user())
       }
     },
     computed: {

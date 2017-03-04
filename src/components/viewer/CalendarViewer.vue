@@ -29,7 +29,6 @@ export default {
       return this.attendeesWhoSelectedDate.filter(a => a.dates.includes(this.datetimeToString(date, time)))
     },
     isSelected(date, time) {
-      console.log(this.attendeesByDate(date, time).some(a => a.email === Auth.user()), this.datetimeToString(date, time))
       return this.attendeesByDate(date, time).some(a => a.email === Auth.user())
     }
   },
