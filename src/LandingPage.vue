@@ -6,7 +6,7 @@
       </section>
       <section id="description">
         <p v-html="$t('app.landingPage.description')"></p>
-        <login v-show="!authenticated" label="$t('app.landingPage.getStarted')"></login>
+        <login v-show="!authenticated" :label="$t('app.landingPage.getStarted')"></login>
         <div v-show="authenticated">
           <router-link to="/profile" class="button"><i class="fa fa-arrow-right"></i> {{$t('app.landingPage.getStarted')}}</router-link>
           <div class="button" @click="logout()"><i class="fa fa-sign-out"></i>{{$t('app.logout')}}</div>
