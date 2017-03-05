@@ -1,11 +1,26 @@
 var path = require('path')
 var webpack = require('webpack')
 
+var apiHost;
+var setupAPI = function() {
+  switch(process.env.NODE_ENV) {
+    case 'production':
+      apiHost = "'https://organizr.io:3003/";
+      break;
+    case 'staging':
+      apiHost = "'https://dev.plrenaudin.com:3003/";
+      break;
+    default:
+      apiHost = "http://localhost:3003/"
+      break;
+  }
+}
+
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: './dist/',
+    publicPath: '/dist/',
     filename: 'build.js'
   },
   module: {
@@ -25,7 +40,12 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      __API__: apiHost
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {

@@ -57,7 +57,7 @@ Object.defineProperty(Vue.prototype, '$t', {
     }
 })
 
-axios.defaults.baseURL = `http://localhost:3003`
+axios.defaults.baseURL = __API__
 axios.interceptors.response.use((response) => {
     return response
   }, function (error) {
