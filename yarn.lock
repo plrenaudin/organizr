@@ -835,6 +835,15 @@ bunyan@^1.4.0:
     mv "~2"
     safe-json-stringify "~1"
 
+bunyan@^1.8.8:
+  version "1.8.8"
+  resolved "https://registry.yarnpkg.com/bunyan/-/bunyan-1.8.8.tgz#6549ed6db088e4d82b7be3bcc6d0697159f6e209"
+  optionalDependencies:
+    dtrace-provider "~0.8"
+    moment "^2.10.6"
+    mv "~2"
+    safe-json-stringify "~1"
+
 bytes@2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.3.0.tgz#d5b680a165b6201739acb611542aabc2d8ceb070"

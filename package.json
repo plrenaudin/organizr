@@ -11,6 +11,7 @@
     "start": "node server/server.js"
   },
   "dependencies": {
+    "bunyan": "^1.8.8",
     "jsonwebtoken": "^7.3.0",
     "mongodb": "^2.2.24",
     "monk": "^4.0.0",

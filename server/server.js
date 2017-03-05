@@ -1,9 +1,24 @@
 const restify = require('restify')
 const jwt = require('restify-jwt')
 const secret = require('./.secrets')
+const Logger = require('bunyan')
 
-const server = restify.createServer()
-
+// const server = restify.createServer()
+const log = new Logger.createLogger({
+  name: 'organiz',
+  serializers: {
+    req: Logger.stdSerializers.req
+  }
+})
+const server = restify.createServer({
+  name: 'organiz',
+  log: log
+})
+server.use(restify.requestLogger());
+server.pre(function (request, response, next) {
+    request.log.info({ req: request }, 'REQUEST');
+    next();
+});
 restify.CORS.ALLOW_HEADERS.push('authorization')
 
 server.pre(restify.CORS())
@@ -15,8 +30,8 @@ server.use(restify.bodyParser())
 
 server.use(jwt({ secret: secret.pk }))
 
-server.use(function(req, res, next) {
-  if(!!req.user) {
+server.use(function (req, res, next) {
+  if (!!req.user) {
     next()
   } else {
     res.send(401)
@@ -25,15 +40,15 @@ server.use(function(req, res, next) {
 
 require('./routes.js')(server)
 
-server.pre(function(req, res, next) {
+server.pre(function (req, res, next) {
   req.headers.accept = 'application/json'  // screw you client!
   return next()
 })
 
-server.on( "MethodNotAllowed", function(req, res) {
-  if(req.method.toUpperCase() === "OPTIONS" ) {
+server.on("MethodNotAllowed", function (req, res) {
+  if (req.method.toUpperCase() === "OPTIONS") {
     // Send the CORS headers
-    res.header("Access-Control-Allow-Headers", restify.CORS.ALLOW_HEADERS.join( ", " ))
+    res.header("Access-Control-Allow-Headers", restify.CORS.ALLOW_HEADERS.join(", "))
     res.send(204)
   }
   else {
@@ -42,8 +57,8 @@ server.on( "MethodNotAllowed", function(req, res) {
 })
 
 server.on('uncaughtException', function (req, res, route, err) {
-    console.log('uncaughtException', err.stack)
-    res.send(500)
+  console.log('uncaughtException', err.stack)
+  res.send(500)
 })
 
 server.listen(3003, () => {
