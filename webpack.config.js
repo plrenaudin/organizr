@@ -5,17 +5,17 @@ var apiHost;
 var setupAPI = function() {
   switch(process.env.NODE_ENV) {
     case 'production':
-      apiHost = "'https://organizr.io:3003/";
+      apiHost = "'https://organizr.io:3003/'";
       break;
     case 'staging':
-      apiHost = "'https://dev.plrenaudin.com:3003/";
+      apiHost = "'https://dev.plrenaudin.com/api'";
       break;
     default:
-      apiHost = "http://localhost:3003/"
+      apiHost = "'http://localhost:3003/'"
       break;
   }
 }
-
+setupAPI()
 module.exports = {
   entry: './src/main.js',
   output: {
