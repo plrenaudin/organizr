@@ -11,8 +11,8 @@
               :value="choice"
               :id="indexPoll + '-' + indexChoice"
               class="spaced"
-              v-show="!hasVoted(poll.question)"/>
-            <input type="checkbox" checked="true" disabled="true" v-show="hasVotedFor(poll.question, choice)" />
+              v-if="!hasVoted(poll.question)"/>
+            <checkbox :id="indexPoll + '-' + indexChoice" :value="true" :disabled="true" v-if="hasVotedFor(poll.question, choice)"></checkbox>
             <label :for="indexPoll + '-' + indexChoice">{{choice}}</label>
             <em v-show="hasVoted(poll.question)">{{whoVotedFor(poll.question,choice).length}}</em>
           </li>
@@ -24,9 +24,11 @@
 </template>
 <script>
   import Auth from '../../helpers/Auth.js'
+  import Checkbox from '../Checkbox.vue'
 
   export default {
     name: 'poll-viewer',
+    components: {Checkbox},
     data() {
       return {
         selected:{}

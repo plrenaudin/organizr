@@ -2,9 +2,13 @@
     <div class="calendar">
       <ul class="dates">
         <li v-for="date in dates">
-          <span>{{formatDate(date.day)}}</span><input type="checkbox" :checked="isSelected(date.day)" v-if="!hasTimes(date)" @click="toggleParticipation(date.day)" />
+          <span><i class="fa fa-calendar"></i> {{formatDate(date.day)}}</span>
+          <label><checkbox @click.native.prevent="toggleParticipation(date.day)" :id="date.day" :value="isSelected(date.day)" v-if="!hasTimes(date)" /></label>
           <ul class="times">
-            <li v-for="time in date.times"><span>{{time}}</span><input type="checkbox" :checked="isSelected(date.day, time)" @click="toggleParticipation(date.day, time)" /></li>
+            <li v-for="time in date.times">
+              <span><i class="fa fa-clock-o"></i> {{time}}</span>
+              <label><checkbox @click.native.prevent="toggleParticipation(date.day, time)" :id="date.day+time" :value="isSelected(date.day, time)" /></label>
+            </li>
           </ul>
         </li>
       </ul>
@@ -15,9 +19,12 @@ import moment from 'moment'
 import Formatter from '../../helpers/Formatter.js'
 import Utils from '../../helpers/Utils.js'
 import Auth from '../../helpers/Auth.js'
+import Checkbox from '../Checkbox.vue'
 
 export default {
   name: 'calendar-viewer',
+  components: {Checkbox},
+
   methods: {
     formatDate: Formatter.dateToReadableDate,
     datetimeToString: (date, time) => (date + ' ' + (time || '')).trim(),

@@ -59,59 +59,67 @@ ul {
     list-style-type: none;
     padding:0;
 }
+.checkbox {
+  display: inline-block;
+  input[type=checkbox] {
+    display: none;
 
-input[type="checkbox"] {
-  position: relative;
-  margin: 0.5em 1em;
-  &:focus
-  {
-    outline-color: $white;
-  }
-  &[disabled]:before {
-    cursor: inherit;
-  }
-  &:before
-  {
-    border: 2px solid $mid-grey;
-    content: "";
-    cursor: pointer;
-    display: block;
-    height: 15px;
-    position: absolute;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    width: 15px;
-    z-index: 1;
-  }
+    &:disabled + label:before {
+      pointer-events: none;
+      background: $grey;
+      border-color: $grey;
+    }
 
+    &:disabled:checked + label:before {
+      background: transparent;
+      border-bottom-color: $grey;
+      border-right-color: $grey;
+    }
 
-  &:checked:before
-  {
-    border-top-style: none;
-    border-right-style: none;
-    border-color: $green;
-    height: 10px;
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-  }
+    & + label {
+      padding-left: 35px;
+      cursor: pointer;
+      position: relative;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      height: 20px;
+    }
 
-  &:after
-  {
-    background: $white;
-    content: "";
-    display: block;
-    height: 15px;
-    position: absolute;
-    top: 0;
-    width: 15px;
-    z-index: 0;
+    & + label:after {
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+    }
+
+    & + label:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      z-index: 2;
+      transition: 0.5s;
+      border: 2px solid $mid-grey;
+      transform-origin: 100% 100%;
+    }
+
+    &:checked + label:before {
+      border-bottom-color: $green;
+      border-left-color: transparent;
+      border-right-color: $green;
+      border-top-color: transparent;
+      transform: rotate(50deg);
+      width: 8px;
+      top: -2px;
+      left: 0;
+    }
   }
 }
+
 input[type=text], select, textarea {
     width: 100%;
     padding: 12px;
@@ -462,11 +470,11 @@ aside {
         }
       }
       ul.times {
-        margin-left: 1em;
+        margin-left: 2em;
         li {
-          padding:0.2em 0;
+          padding:0.5em 0;
           span {
-            width: 9em;
+            width: 8em;
           }
         }
       }
@@ -491,6 +499,13 @@ aside {
       display: flex;
       align-content: center;
       align-items: center;
+    }
+  }
+  .checklist {
+    li {
+      padding: .5em;
+      display: flex;
+      align-items: baseline;
     }
   }
 }

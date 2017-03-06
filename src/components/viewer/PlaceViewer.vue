@@ -1,9 +1,9 @@
 <template>
   <div class="place">
     <ul class="placeList">
-      <li v-for="place in places">
+      <li v-for="place,index in places">
         <div class="placeItem">
-          <input type="checkbox" @click="checkPlace(place.name)" :checked="isChecked(place.name)" />
+          <checkbox @click.native.prevent="checkPlace(place.name)" :id="'place' +index" :value="isChecked(place.name)"></checkbox>
           <div class="location">
             <div class="name">{{place.name}}</div>
             <div class="map" v-if="place.valid" @click="gotoMap(place.name)">
@@ -23,12 +23,12 @@
 </template>
 <script>
   import Auth from '../../helpers/Auth.js'
-
+  import Checkbox from '../Checkbox.vue'
   const API_KEY = "AIzaSyDlSpeVFymuJjOUrrIrLkBh1Xh3Mop1VrY"
   const SCRIPTURL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`
   export default {
     name:'place-viewer',
-
+    components: {Checkbox},
     methods: {
       gotoMap(name) {
         window.open(this.mapUrl + name)

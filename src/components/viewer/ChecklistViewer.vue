@@ -2,10 +2,11 @@
   <div class="checklist">
     <ul>
       <li v-for="item, index in items">
-        <input type="checkbox" @click="checkItem(item)" :checked="isChecked(item)" />
+        <checkbox @click.native.prevent="checkItem(item)" :id="'checklist' +index" :value="isChecked(item)"></checkbox>
         <span>{{item}}</span>
-
-        <span class="small-text volunteers italic spaced" v-show="attendeesChecked(item)">{{'(' +$t('app.checklist.volunteers') + ': ' + attendeesChecked(item) +')'}}</span>
+        <span class="small-text volunteers italic spaced" v-show="attendeesChecked(item)">
+          {{'(' +$t('app.checklist.volunteers') + ': ' + attendeesChecked(item) +')'}}
+        </span>
       </li>
     </ul>
   </div>
@@ -13,9 +14,10 @@
 <script>
   import Formatter from '../../helpers/Formatter.js'
   import Auth from '../../helpers/Auth.js'
+  import Checkbox from '../Checkbox.vue'
   export default {
     name: 'checklist-viewer',
-
+    components: {Checkbox},
     methods: {
       checkItem(item) {
         this.$store.commit('toggleChecklistItem', item)
