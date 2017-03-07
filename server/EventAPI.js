@@ -1,12 +1,14 @@
 const db = require('monk')('localhost/organiz')
-
+const ACL = require('./ACL.js')
 module.exports = {
   createNew(user, cb) {
     db.get('events').insert({ admin: user }).then(cb).catch(err => console.error(err))
   },
 
   findById(id, cb) {
-    db.get('events').findOne({ _id: id }).then(cb).catch(err => console.error(err))
+    db.get('events').findOne({ _id: id }).then(data => {
+      cb(ACL.tidyEvent(data))
+    }).catch(err => console.error(err))
   },
 
   participate(id, user, cb) {

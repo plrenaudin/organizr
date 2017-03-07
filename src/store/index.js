@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Event from '../APIClient/event.js'
 import Auth from '../helpers/Auth.js'
+import Utils from '../helpers/Utils.js'
 
 Vue.use(Vuex)
 
@@ -35,6 +36,7 @@ export default new Vuex.Store({
         Event.removeDate(state._id, date)
       } else {
         state.dates.push({ day: date, times: [] })
+        state.dates.sort(Utils.compareDayAsc)
         Event.addDate(state._id, { day: date, times: [] })
       }
     },
@@ -43,6 +45,7 @@ export default new Vuex.Store({
       let found = concernedDate.times.find(item => item === value)
       if (!found) {
         concernedDate.times.push(value)
+        concernedDate.times.sort()
         Event.addTime(state._id, { day: concernedDate.day, time: value })
       }
     },
