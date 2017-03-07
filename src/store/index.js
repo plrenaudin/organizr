@@ -43,7 +43,7 @@ export default new Vuex.Store({
       let found = concernedDate.times.find(item => item === value)
       if (!found) {
         concernedDate.times.push(value)
-        Event.addTime(state._id, { date: concernedDate.day, time: value })
+        Event.addTime(state._id, { day: concernedDate.day, time: value })
       }
     },
     removeDate(state, dateIndex) {
@@ -55,7 +55,7 @@ export default new Vuex.Store({
       let concernedDate = state.dates[dateIndex]
       let timeToRemove = concernedDate.times[timeIndex]
       concernedDate.times.splice(timeIndex, 1)
-      Event.removeTime(state._id, { date: concernedDate.day, time: timeToRemove })
+      Event.removeTime(state._id, { day: concernedDate.day, time: timeToRemove })
     },
     selectDatetime(state, item) {
       if (item) {
