@@ -21,18 +21,18 @@
         </ul>
         <div class="chosenDates" v-show="selected.length > 0">
           <ul class="selected">
-            <li v-for="current,dateIndex in selected">
-              <i class="fa fa-trash action" @click="removeDate(dateIndex)"></i>
+            <li v-for="current in selected">
+              <i class="fa fa-trash action" @click="removeDate(current.day)"></i>
               <div class="formattedDate dateContainer">
                 {{formatDate(current.day)}}
               </div>
-              <div v-for="time,timeIndex in current.times" class="dateContainer">
-                <i class="fa fa-times action" @click="removeTime(dateIndex, timeIndex)"></i> {{time}}
+              <div v-for="time in current.times" class="dateContainer">
+                <i class="fa fa-times action" @click="removeTime(current.day, time)"></i> {{time}}
               </div>
               <div class="timeInput">
                 <input type="text"
                   placeholder="00:00"
-                  :name="'addTime-' +dateIndex"
+                  :name="'addTime-' + current.day"
                   @keyup.enter="addTime"
                   @blur="addTime">
               </div>
@@ -68,18 +68,18 @@ export default {
     addTime(event) {
       if(!event.target.value) return
       const value = Utils.parseTimeInput(event.target.value)
-      const index = event.target.name.substring(8)
-      this.$store.commit('addTime', {index, value})
+      const day = event.target.name.substring(8)
+      this.$store.commit('addTime', {day, value})
       event.target.value = ''
       if(event.type !== "blur") {
         event.target.focus()
       }
     },
-    removeDate(dateIndex) {
-      this.$store.commit('removeDate', dateIndex)
+    removeDate(date) {
+      this.$store.commit('removeDate', date)
     },
-    removeTime(dateIndex, timeIndex) {
-      this.$store.commit('removeTime', {dateIndex, timeIndex})
+    removeTime(date, time) {
+      this.$store.commit('removeTime', {day: date, time})
     }
   },
   computed: {

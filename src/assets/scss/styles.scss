@@ -205,11 +205,19 @@ input[type=text], select, textarea {
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
+  &.full-width {
+    padding-top:0;
+    padding-left:0;
+    padding-right:0;
+  }
 }
 ul.card-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  li {
+    padding: .5em;
+  }
 }
 
 // =================================== Sidebar
@@ -220,6 +228,9 @@ aside {
   background-color: $strong-grey;
   color: $white;
   box-shadow: 2px 0 10px 0 $grey;
+  section {
+    padding:0;
+  }
   section#user {
     display: flex;
     align-content: center;
@@ -314,12 +325,7 @@ aside {
   main {
     flex: 1;
     margin-left: $sidebar-width-percent;
-    section {
-      padding: 1em;
-      &>h2 {
-        margin-top: 0;
-      }
-    }
+
     #info {
       h2 { border-bottom: 2px solid $color0; }
     }
@@ -342,7 +348,12 @@ aside {
       color: $mid-grey;
     }
   }
-
+}
+section {
+  padding: 1em;
+  &>h2 {
+    margin-top: 0;
+  }
 }
 
 // =================================== Components
@@ -357,6 +368,12 @@ aside {
   }
   textarea {
     height: 100px;
+  }
+}
+
+.location {
+  .name {
+    padding: .2em;
   }
 }
 
@@ -473,7 +490,6 @@ aside {
     ul.dates {
       margin-left: 1em;
       li {
-        padding: .5em;
         span {
           display: inline-block;
           width: 10em;

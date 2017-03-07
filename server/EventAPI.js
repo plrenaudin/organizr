@@ -1,14 +1,11 @@
 const db = require('monk')('localhost/organiz')
-const ACL = require('./ACL.js')
 module.exports = {
   createNew(user, cb) {
     db.get('events').insert({ admin: user }).then(cb).catch(err => console.error(err))
   },
 
   findById(id, cb) {
-    db.get('events').findOne({ _id: id }).then(data => {
-      cb(ACL.tidyEvent(data))
-    }).catch(err => console.error(err))
+    db.get('events').findOne({ _id: id }).then(cb).catch(err => console.error(err))
   },
 
   participate(id, user, cb) {
@@ -80,7 +77,7 @@ module.exports = {
     removeDate(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { dates: { day: payload.day } } }
+        { $pull: { dates: { day: payload } } }
       ).then(cb).catch(err => console.error(err))
     },
 

@@ -7,23 +7,19 @@
       <li v-for="place,index in places">
         <i class="fa fa-trash action" @click="removePlace(index)"></i>
         <div class="placeItem">
-          <div class="name">{{place.name}}</div>
-          <div class="map" v-if="place.valid" @click="gotoMap(place.name)">
-            <img :src="imageUrl + place.name +'&markers='+place.name" />
-          </div>
-          <div class="placePlaceholder" v-else>
-            ?
-          </div>
+          <location :place="place"></location>
         </div>
       </li>
     </ul>
   </div>
 </template>
 <script>
+  import Location from '../Location.vue'
   const API_KEY = "AIzaSyDlSpeVFymuJjOUrrIrLkBh1Xh3Mop1VrY"
   const SCRIPTURL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`
   export default {
     name:'place',
+    components: {Location},
     created() {
       if(!window.google) {
         var el = document.createElement('script')

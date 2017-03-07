@@ -7,6 +7,7 @@ import Utils from '../helpers/Utils.js'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
+
 const defaultState = () => {
   return {
     _id: '',
@@ -21,6 +22,12 @@ const defaultState = () => {
     polls: [],
     attendees: []
   }
+}
+
+const compareDayAsc = (a, b) => {
+  if (a.day < b.day) return -1
+  if (a.day > b.day) return 1
+  return 0
 }
 
 export default new Vuex.Store({
@@ -40,8 +47,8 @@ export default new Vuex.Store({
         Event.addDate(state._id, { day: date, times: [] })
       }
     },
-    addTime(state, {index, value}) {
-      let concernedDate = state.dates[index]
+    addTime(state, {day, value}) {
+      let concernedDate = state.dates.find(item => item.day === day)
       let found = concernedDate.times.find(item => item === value)
       if (!found) {
         concernedDate.times.push(value)
@@ -49,16 +56,16 @@ export default new Vuex.Store({
         Event.addTime(state._id, { day: concernedDate.day, time: value })
       }
     },
-    removeDate(state, dateIndex) {
-      let dateToRemove = state.dates[dateIndex]
-      state.dates.splice(dateIndex, 1)
-      Event.removeDate(state._id, dateToRemove)
+    removeDate(state, day) {
+      let dateToRemove = state.dates.findIndex(item => item.day === day)
+      state.dates.splice(dateToRemove, 1)
+      Event.removeDate(state._id, day)
     },
-    removeTime(state, {dateIndex, timeIndex}) {
-      let concernedDate = state.dates[dateIndex]
-      let timeToRemove = concernedDate.times[timeIndex]
+    removeTime(state, {day, time}) {
+      let concernedDate = state.dates.find(item => item.day === day)
+      let timeIndex = concernedDate.times.indexOf(time)
       concernedDate.times.splice(timeIndex, 1)
-      Event.removeTime(state._id, { day: concernedDate.day, time: timeToRemove })
+      Event.removeTime(state._id, { day: concernedDate.day, time })
     },
     selectDatetime(state, item) {
       if (item) {
@@ -200,7 +207,10 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    dates: state => state.dates,
+    dates: state => {
+      let result = JSON.parse(JSON.stringify(state.dates))
+      return result.sort(compareDayAsc).map( item => item.times.sort() && item);
+    },
     places: state => state.places,
     checklist: state => state.checklist,
     polls: state => state.polls,
