@@ -1,15 +1,19 @@
 <template>
     <div class="calendar">
-      <ul class="dates">
+      <ul class="dates card-group">
         <li v-for="date in dates">
-          <span><i class="fa fa-calendar"></i> {{formatDate(date.day)}}</span>
-          <label><checkbox @click.native.prevent="toggleParticipation(date.day)" :id="date.day" :value="isSelected(date.day)" v-if="!hasTimes(date)" /></label>
-          <ul class="times">
-            <li v-for="time in date.times">
-              <span><i class="fa fa-clock-o"></i> {{time}}</span>
-              <label><checkbox @click.native.prevent="toggleParticipation(date.day, time)" :id="date.day+time" :value="isSelected(date.day, time)" /></label>
-            </li>
-          </ul>
+          <section class="card">
+            <div class="day">
+              <span><i class="fa fa-calendar"></i> {{formatDate(date.day)}}</span>
+              <label><checkbox @click.native.prevent="toggleParticipation(date.day)" :id="date.day" :value="isSelected(date.day)" v-if="!hasTimes(date)" /></label>
+            </div>
+            <ul class="times">
+              <li v-for="time in date.times">
+                <span><i class="fa fa-clock-o"></i> {{time}}</span>
+                <label><checkbox @click.native.prevent="toggleParticipation(date.day, time)" :id="date.day+time" :value="isSelected(date.day, time)" /></label>
+              </li>
+            </ul>
+          </section>
         </li>
       </ul>
     </div>
