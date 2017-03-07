@@ -1,23 +1,24 @@
 <template>
   <div class="poll">
-    <ul class="question">
+    <ul class="question card-group">
       <li v-for="poll, indexPoll in polls">
-        <strong>{{poll.question}}</strong>
-        <ul>
-          <li v-for="choice, indexChoice in poll.choices">
-            <input type="radio"
-              v-model="selected[indexPoll]"
-              :name="indexPoll"
-              :value="choice"
-              :id="indexPoll + '-' + indexChoice"
-              class="spaced"
-              v-if="!hasVoted(poll.question)"/>
-            <checkbox :id="indexPoll + '-' + indexChoice" :value="true" :disabled="true" v-if="hasVotedFor(poll.question, choice)"></checkbox>
-            <label :for="indexPoll + '-' + indexChoice">{{choice}}</label>
-            <em v-show="hasVoted(poll.question)">{{whoVotedFor(poll.question,choice).length}}</em>
-          </li>
-          <li v-show="!hasVoted(poll.question)"><div class="button" @click="vote(indexPoll)">{{$t('app.poll.vote')}}</div></li>
-        </ul>
+        <section class="card">
+          <strong>{{poll.question}}</strong>
+          <ul>
+            <li v-for="choice, indexChoice in poll.choices">
+              <input type="radio"
+                v-model="selected[indexPoll]"
+                :name="indexPoll"
+                :value="choice"
+                :id="indexPoll + '-' + indexChoice"
+                class="spaced"
+                v-if="!hasVoted(poll.question)"/>
+              <checkbox :id="indexPoll + '-' + indexChoice" :value="true" :disabled="true" v-if="hasVotedFor(poll.question, choice)"></checkbox>
+              <label :for="indexPoll + '-' + indexChoice">{{choice}}</label>
+            </li>
+            <li v-show="!hasVoted(poll.question)"><div class="button" @click="vote(indexPoll)">{{$t('app.poll.vote')}}</div></li>
+          </ul>
+        </section>
       </li>
     </ul>
   </div>

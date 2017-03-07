@@ -7,13 +7,13 @@ $sidebar-width-px: 550px;
 $red:           #F44336;
 $green:         #4CAF50;
 $light-green:   lighten($green, 20);
-$white-green:   lighten($green, 45);
+$white-green:   lighten($green, $white-color-percentage);
 $orange:        #FFC107;
 $light-orange:  lighten($orange, 20);
-$white-orange:  lighten($orange, 45);
+$white-orange:  lighten($orange, $white-color-percentage);
 $blue:          #2196f3;
 $light-blue:    lighten($blue, 20);
-$white-blue:    lighten($blue, 45);
+$white-blue:    lighten($blue, $white-color-percentage);
 $grey:          #ddd;
 $light-grey:    #fafafa;
 $mid-grey:      #777;
@@ -78,6 +78,7 @@ ul {
 
     & + label {
       padding-left: 35px;
+      padding-top:.2em;
       cursor: pointer;
       position: relative;
       top: 0;
@@ -194,8 +195,6 @@ input[type=text], select, textarea {
 
 .map {
   position: relative;
-  height: 170px;
-  width: 400px;
   cursor: pointer;
   overflow: hidden;
 }
@@ -325,7 +324,9 @@ aside {
   main {
     flex: 1;
     margin-left: $sidebar-width-percent;
-
+    &>section:last-child {
+      min-height: 100vh;
+    }
     #info {
       h2 { border-bottom: 2px solid $color0; }
     }
@@ -446,7 +447,7 @@ section {
     .dateContainer {
       padding: 12px;
       margin: .5em;
-      background-color: $white-color1;
+      background-color: $light-blue;
       border: 1px solid $grey;
       border-radius: 4px;
       box-sizing: border-box;
@@ -490,6 +491,10 @@ section {
     ul.dates {
       margin-left: 1em;
       li {
+        .day {
+          display: flex;
+          align-items: center;
+        }
         span {
           display: inline-block;
           width: 10em;
@@ -499,6 +504,8 @@ section {
         margin-left: 1em;
         li {
           padding:0.5em;
+          display: flex;
+          align-items: center;
           span {
             width: 8em;
           }
@@ -508,8 +515,6 @@ section {
   }
   .poll {
     ul.question {
-      display: flex;
-      justify-content: space-around;
       ul li {
         display: flex;
         padding: 0.4em;
@@ -525,6 +530,9 @@ section {
       display: flex;
       align-content: center;
       align-items: center;
+    }
+    .checkbox {
+      margin: .5em 1em;
     }
   }
   .checklist {

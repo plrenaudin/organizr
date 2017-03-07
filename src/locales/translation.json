@@ -19,6 +19,9 @@
       "addItem": "Add an item",
       "volunteers": "Assignee(s)"
     },
+    "place": {
+      "select":"Can come here"
+    },
     "poll": {
       "addItem": "Add a new poll",
       "addChoice": "Add a new choice",

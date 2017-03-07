@@ -1,14 +1,15 @@
 <template>
   <div class="checklist">
-    <ul>
-      <li v-for="item, index in items">
-        <checkbox @click.native.prevent="checkItem(item)" :id="'checklist' +index" :value="isChecked(item)"></checkbox>
-        <span>{{item}}</span>
-        <span class="small-text volunteers italic spaced" v-show="attendeesChecked(item)">
-          {{'(' +$t('app.checklist.volunteers') + ': ' + attendeesChecked(item) +')'}}
-        </span>
-      </li>
-    </ul>
+    <section class="card">
+      <ul>
+        <li v-for="item, index in items">
+          <checkbox @click.native.prevent="checkItem(item)" :id="'checklist' +index" :value="isChecked(item)" :label="item"></checkbox>
+          <span class="small-text volunteers italic spaced" v-show="attendeesChecked(item)">
+            {{'(' +$t('app.checklist.volunteers') + ': ' + attendeesChecked(item) +')'}}
+          </span>
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
 <script>

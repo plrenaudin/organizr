@@ -4,10 +4,7 @@
       <li v-for="place,index in places">
         <section class="card full-width">
             <location :place="place"></location>
-            <checkbox @click.native.prevent="checkPlace(place.name)" :id="'place' +index" :value="isChecked(place.name)"></checkbox>
-            <em>
-              {{checkCount(place.name)}}
-            </em>
+            <checkbox @click.native.prevent="checkPlace(place.name)" :id="'place' +index" :value="isChecked(place.name)" :label="$t('app.place.select')"></checkbox>
         </section>
       </li>
     </ul>
