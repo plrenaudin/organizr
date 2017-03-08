@@ -591,6 +591,17 @@ section {
   }
 }
 
+/* ======================== Animations ====================== */
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+
+/* ======================== Responsive ====================== */
 
 @media only screen and (min-width:1200px){
   #page #application {
