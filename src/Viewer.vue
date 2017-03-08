@@ -1,7 +1,7 @@
 <template>
   <div id="application" class="viewer">
     <template v-if="invalid">
-      Not a valid event
+      <event-not-found></event-not-found>
     </template>
     <template v-else>
       <side-bar @scrollto="scrollTo" :view="true" :eventId="eventId"></side-bar>
@@ -33,6 +33,7 @@
 <script>
   import zenscroll from 'zenscroll'
   import Auth from './helpers/Auth.js'
+  import EventNotFound from './components/EventNotFound.vue'
   import SideBar from './components/SideBar.vue'
   import Calendar from './components/viewer/CalendarViewer.vue'
   import Place from './components/viewer/PlaceViewer.vue'
@@ -44,7 +45,7 @@
   export default {
     name: 'viewer',
     props: ['eventId'],
-    components: {Calendar, Place, SideBar, Checklist, info, Poll},
+    components: {EventNotFound, Calendar, Place, SideBar, Checklist, info, Poll},
 
     data() {
       return {

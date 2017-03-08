@@ -1,7 +1,7 @@
 <template>
   <div id="application" class="composer">
     <template v-if="invalid">
-      Not a valid event
+      <event-not-found></event-not-found>
     </template>
     <template v-else>
       <side-bar @scrollto="scrollTo" :eventId="eventId"></side-bar>
@@ -33,6 +33,7 @@
 <script>
   import zenscroll from 'zenscroll'
   import SideBar from './components/SideBar.vue'
+  import EventNotFound from './components/EventNotFound.vue'
   import Calendar from './components/composer/Calendar.vue'
   import Place from './components/composer/Place.vue'
   import Checklist from './components/composer/Checklist.vue'
@@ -42,7 +43,7 @@
 
   export default {
     name: 'composer',
-    components: {Calendar, Place, SideBar, Checklist, info, Poll},
+    components: {EventNotFound, Calendar, Place, SideBar, Checklist, info, Poll},
     props: ['eventId'],
     data() {
       return {
