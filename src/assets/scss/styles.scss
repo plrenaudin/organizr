@@ -398,6 +398,11 @@ section {
 
 .composer {
   .calendar {
+    .card {
+      display: inherit;
+      max-width: 450px;
+      margin: 0 auto;
+    }
     .calendar-header{
       display: flex;
       align-items: baseline;
@@ -428,24 +433,23 @@ section {
     }
     ul.dates {
       li {
-        &.current-day {
+        &.selectable span {
+          display: inline-block;
+          width: 3em;
+          border-radius: 2em;
+          text-align: center;
+        }
+        &.current-day span {
           background-color: $green;
-          &.selected {
-            background: repeating-linear-gradient(
-              -45deg,
-              $green,
-              $green 10px,
-              $blue 10px,
-              $blue 20px
-            );
-          }
         }
         &.selectable:hover {
-          background-color: $light-blue;
+          span {
+            background-color: $light-blue;
+          }
           cursor: pointer;
         }
-        &.selected {
-          background-color: $blue;
+        &.selected span{
+          background-color: $light-blue;
         }
       }
     }
@@ -457,7 +461,7 @@ section {
         padding: .5em 0;
         margin: .5em 0;
         .formattedDate {
-          width: 150px;
+          width: 180px;
           text-align: center;
         }
       }

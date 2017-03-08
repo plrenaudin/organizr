@@ -1,44 +1,47 @@
 <template>
     <div class="calendar">
+      <section class="card">
         <div class="calendar-header">
-            <i class="fa fa-fw fa-chevron-left action" @click="subtractMonth"></i>
-            <h3> {{month + ' ' + year}}</h3>
-            <i class="fa fa-fw fa-chevron-right action" @click="addMonth"></i>
+          <i class="fa fa-fw fa-chevron-left action" @click="subtractMonth"></i>
+          <h3><i class="fa fa-calendar"></i> {{month + ' ' + year}}</h3>
+          <i class="fa fa-fw fa-chevron-right action" @click="addMonth"></i>
         </div>
         <ul class="weekdays">
-            <li v-for="day in days">{{day}}</li>
+          <li v-for="day in days">{{day}}</li>
         </ul>
         <ul class="dates">
-            <li v-for="blank in firstDayOfMonth">&nbsp;</li>
-            <li v-for="date in daysInMonth"
-        		:class="[
-              {'current-day': date == initialDate && month == initialMonth && year == initialYear},
-              'selectable',
-              {'selected':isSelected(dayToDateString(date))}
-              ]" @click="select(date)">
-                <span>{{date}}</span>
-            </li>
+          <li v-for="blank in firstDayOfMonth">&nbsp;</li>
+          <li v-for="date in daysInMonth"
+          :class="[
+            {'current-day': date == initialDate && month == initialMonth && year == initialYear},
+            'selectable',
+            {'selected':isSelected(dayToDateString(date))}
+            ]" @click="select(date)">
+            <span>{{date}}</span>
+          </li>
         </ul>
-        <div class="chosenDates" v-show="selected.length > 0">
-          <ul class="selected">
-            <li v-for="current in selected">
-              <i class="fa fa-trash action" @click="removeDate(current.day)"></i>
-              <div class="formattedDate dateContainer">
-                {{formatDate(current.day)}}
-              </div>
-              <div v-for="time in current.times" class="dateContainer">
-                <i class="fa fa-times action" @click="removeTime(current.day, time)"></i> {{time}}
-              </div>
-              <div class="timeInput">
-                <input type="text"
-                  placeholder="00:00"
-                  :name="'addTime-' + current.day"
-                  @keyup.enter="addTime"
-                  @blur="addTime">
-              </div>
-            </li>
-          </ul>
-        </div>
+      </section>
+      <div class="chosenDates" v-show="selected.length > 0">
+        <ul class="selected">
+          <li v-for="current in selected">
+            <i class="fa fa-trash action" @click="removeDate(current.day)"></i>
+            <div class="formattedDate dateContainer">
+              <i class="fa fa-calendar"></i>
+              {{formatDate(current.day)}}
+            </div>
+            <div v-for="time in current.times" class="dateContainer">
+              <i class="fa fa-times action" @click="removeTime(current.day, time)"></i> {{time}}
+            </div>
+            <div class="timeInput">
+              <input type="text"
+                placeholder="00:00"
+                :name="'addTime-' + current.day"
+                @keyup.enter="addTime"
+                @blur="addTime">
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 </template>
 <script>
