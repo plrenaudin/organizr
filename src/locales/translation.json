@@ -28,8 +28,8 @@
       "vote": "Vote"
     },
     "landingPage": {
-      "title": "Welcome to Organiz!",
-      "description": "Organiz helps you organizing events in a collaborative way!",
+      "title": "Welcome to Organizr.io!",
+      "description": "Organizr.io helps you organizing events your way.",
       "getStarted": "Get Started"
     },
     "profilePage": {
@@ -38,6 +38,7 @@
       "title": "Profile of"
     },
     "logout": "Logout",
-    "defaultEventName": "(Event without title)"
+    "defaultEventName": "(Event without title)",
+    "remove": "Remove"
   }
 }

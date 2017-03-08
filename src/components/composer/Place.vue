@@ -3,12 +3,17 @@
     <div class="placeInput">
       <input type="text" id="autocomplete"/>
     </div>
-    <ul class="placeList">
+    <ul class="placeList card-group">
       <li v-for="place,index in places">
-        <i class="fa fa-trash action" @click="removePlace(index)"></i>
-        <div class="placeItem">
-          <location :place="place"></location>
-        </div>
+        <section class="card full-width">
+          <div class="placeItem">
+            <location :place="place"></location>
+          </div>
+          <div class="button red" @click="removePlace(index)">
+            <i class="fa fa-trash fa-fw"></i>
+            {{$t('app.remove')}}
+          </div>
+        </section>
       </li>
     </ul>
   </div>
@@ -48,6 +53,12 @@
         let place = this.autocomplete.getPlace()
         let placeName = place.formatted_address ? place.formatted_address : place.name
         this.$store.commit('addPlace', {name: placeName, valid: place.formatted_address})
+        let inputAc = this.$el.querySelector('#autocomplete')
+        inputAc.blur();
+        setTimeout(() => {
+          inputAc.value = ''
+          inputAc.focus()
+        },10);
       },
       removePlace(index) {
         this.$store.commit('removePlace', index)

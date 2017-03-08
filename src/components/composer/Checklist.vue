@@ -1,9 +1,11 @@
 <template>
   <div class="checklist">
-    <ul>
-      <li v-for="item, index in items"><i class="fa fa-trash action" @click="removeItem(index)"></i> {{item}}</li>
-    </ul>
-    <input type="text" :placeholder="$t('app.checklist.addItem')" @keyup.enter="addItem" />
+    <section class="card">
+      <ul>
+        <li v-for="item, index in items"><i class="fa fa-trash action" @click="removeItem(index)"></i> {{item}}</li>
+      </ul>
+      <input type="text" :placeholder="$t('app.checklist.addItem')" @keyup.enter="addItem" />
+    </section>
   </div>
 </template>
 <script>

@@ -134,6 +134,7 @@ input[type=text], select, textarea {
 .fa {
   min-width: 1.5em;
   text-align: center;
+  color: $mid-grey;
 }
 
 .action:hover {
@@ -177,6 +178,7 @@ input[type=text], select, textarea {
   }
   .fa {
     min-width:0;
+    color: $white;
   }
 }
 
@@ -195,6 +197,7 @@ input[type=text], select, textarea {
 
 .map {
   position: relative;
+  display: inline-block;
   cursor: pointer;
   overflow: hidden;
 }
@@ -214,6 +217,10 @@ ul.card-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  &.vertical {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
   li {
     padding: .5em;
   }
@@ -229,6 +236,9 @@ aside {
   box-shadow: 2px 0 10px 0 $grey;
   section {
     padding:0;
+  }
+  .fa {
+    color: $white;
   }
   section#user {
     display: flex;
@@ -324,8 +334,11 @@ aside {
   main {
     flex: 1;
     margin-left: $sidebar-width-percent;
-    &>section:last-child {
-      min-height: 100vh;
+    &>section{
+      min-height: 40vh;
+      &:last-child {
+        min-height: 100vh;
+      }
     }
     #info {
       h2 { border-bottom: 2px solid $color0; }
@@ -344,9 +357,6 @@ aside {
     }
     #participant {
       h2 { border-bottom: 2px solid $color5; }
-    }
-    .fa{
-      color: $mid-grey;
     }
   }
 }
@@ -468,12 +478,8 @@ section {
     }
     ul.placeList {
       margin: 0;
-      li {
-        padding: .5em 0;
-        display: flex;
-        .placeItem {
-          width: 100%;
-        }
+      .button {
+        align-self: flex-end;
       }
     }
   }

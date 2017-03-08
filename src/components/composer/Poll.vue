@@ -1,16 +1,20 @@
 <template>
   <div class="poll">
-    <ul>
+    <ul class="card-group vertical">
       <li v-for="poll, indexPoll in polls">
-        <i class="fa fa-trash action" @click="removePoll(indexPoll)"></i>
-        {{poll.question}}
-        <ul>
-          <li v-for="choice,indexChoice in poll.choices">
-            <i class="fa fa-trash action" @click="removeChoice(indexPoll,indexChoice)"></i>
-            {{choice}}
-          </li>
-        </ul>
-        <input type="text" :placeholder="$t('app.poll.addChoice')" @keyup.enter="addChoice(indexPoll, arguments[0])" />
+        <section class="card">
+          <span>
+            <i class="fa fa-trash action" @click="removePoll(indexPoll)"></i>
+            <strong>{{poll.question}}</strong>
+          </span>
+          <ul>
+            <li v-for="choice,indexChoice in poll.choices">
+              <i class="fa fa-trash action" @click="removeChoice(indexPoll,indexChoice)"></i>
+              {{choice}}
+            </li>
+          </ul>
+          <input type="text" :placeholder="$t('app.poll.addChoice')" @keyup.enter="addChoice(indexPoll, arguments[0])" />
+        </section>
       </li>
     </ul>
     <input type="text" :placeholder="$t('app.poll.addItem')" @keyup.enter="addPoll" />
