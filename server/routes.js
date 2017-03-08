@@ -3,28 +3,40 @@ const jwt = require('jsonwebtoken')
 const secrets = require('./.secrets')
 
 const createEvent = (req, res, next) => {
-  eventAPI.createNew(req.user.email, (data) => {
+  eventAPI.createNew(req.user.email, (err, data) => {
+    if(err) {
+      return next(err)
+    }
     res.json(data)
     next()
   })
 }
 
 const participate = (req, res, next) => {
-  eventAPI.participate(req.params[0], req.user.email, (data) => {
+  eventAPI.participate(req.params[0], req.user.email, (err, data) => {
+    if(err) {
+      return next(err)
+    }
     res.json(data)
     next()
   })
 }
 
 const listUserEvents = (req, res, next) => {
-  eventAPI.findByAdmin(req.user.email, (data) => {
+  eventAPI.findByAdmin(req.user.email, (err, data) => {
+    if(err) {
+      return next(err)
+    }
     res.json(data)
     next()
   })
 }
 
 const mutateEvent = (req, res, next) => {
-  eventAPI.mutateEvent(req.user.email, req.params.idEvent, req.params.action, req.body, (data) => {
+  eventAPI.mutateEvent(req.user.email, req.params.idEvent, req.params.action, req.body, (err, data) => {
+    if(err) {
+      return next(err)
+    }
     res.json(data)
     next()
   })

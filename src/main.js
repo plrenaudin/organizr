@@ -20,7 +20,8 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/profile', component: ProfilePage, meta: { requiresAuth: true } },
   { path: '/edit/:eventId([a-z0-9]{24})', component: Composer, props: true, meta: { requiresAuth: true } },
-  { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } }
+  { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } },
+  { path: '*',  component: LandingPage }
 ]
 
 const router = new VueRouter({

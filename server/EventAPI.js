@@ -1,30 +1,34 @@
 const db = require('monk')('localhost/organiz')
 module.exports = {
   createNew(user, cb) {
-    db.get('events').insert({ admin: user }).then(cb).catch(err => console.error(err))
+    db.get('events').insert({ admin: user }, cb)
   },
 
   findById(id, cb) {
-    db.get('events').findOne({ _id: id }).then(cb).catch(err => console.error(err))
+    db.get('events').findOne({ _id: id }, cb)
   },
 
   participate(id, user, cb) {
-    this.findById(id, data => {
-      if(!data) { throw new Error('Event not found: ' + id)}
-      if(data.attendees && data.attendees.some(item => item.email === user)) {
-        cb(data)
+    this.findById(id, (err, data) => {
+      if (err || !data) {
+        err && console.error(err)
+        return cb(new Error('Event not found: ' + id))
+      }
+      if (data.attendees && data.attendees.some(item => item.email === user)) {
+        cb(null, data)
       } else {
         db.get('events').findOneAndUpdate(
           { _id: id },
           { $addToSet: { attendees: { email: user } } },
-          { returnNewDocument: true }
-        ).then(cb).catch(err => console.error(err))
+          { returnNewDocument: true },
+          cb
+        )
       }
     })
   },
 
   findByAdmin(email, cb) {
-    db.get('events').find({ admin: email }).then(cb).catch(err => console.error(err))
+    db.get('events').find({ admin: email }, cb)
   },
 
   mutateEvent(user, id, action, payload, cb) {
@@ -35,106 +39,121 @@ module.exports = {
     addChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $addToSet: { checklist: payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { checklist: payload } },
+        cb
+      )
     },
 
     removeChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { checklist: payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { checklist: payload } },
+        cb
+      )
     },
 
     updateInfo(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $set: { info: payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $set: { info: payload } },
+        cb
+      )
     },
 
     addPlace(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $addToSet: { places: payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { places: payload } },
+        cb
+      )
     },
 
     removePlace(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { places: payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { places: payload } },
+        cb
+      )
     },
 
     addDate(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $addToSet: { dates: payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { dates: payload } },
+        cb
+      )
     },
 
     removeDate(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { dates: { day: payload } } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { dates: { day: payload } } },
+        cb
+      )
     },
 
     addTime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user, 'dates.day': payload.day },
-        { $addToSet: { 'dates.$.times': payload.time } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { 'dates.$.times': payload.time } },
+        cb
+      )
     },
 
     removeTime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user, 'dates.day': payload.day },
-        { $pull: { 'dates.$.times': payload.time } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { 'dates.$.times': payload.time } },
+        cb
+      )
     },
 
     addPoll(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $addToSet: { polls: payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { polls: payload } },
+        cb
+      )
     },
 
     removePoll(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { polls: payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { polls: payload } },
+        cb
+      )
     },
 
     addPollQuestion(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user, 'polls.question': payload.question },
-        { $addToSet: { 'polls.$.choices': payload.choice } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { 'polls.$.choices': payload.choice } },
+        cb
+      )
     },
 
     removePollQuestion(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user, 'polls.question': payload.question },
-        { $pull: { 'polls.$.choices': payload.choice } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { 'polls.$.choices': payload.choice } },
+        cb
+      )
     },
 
     checkChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $addToSet: { 'attendees.$.checklist': payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { 'attendees.$.checklist': payload } },
+        cb
+      )
     },
 
     uncheckChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $pull: { 'attendees.$.checklist': payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { 'attendees.$.checklist': payload } },
+        cb
+      )
     },
 
     vote(user, id, payload, cb) {
@@ -142,47 +161,52 @@ module.exports = {
         {
           _id: id,
           attendees: {
-                $elemMatch: {
-                    email: user,
-                    polls: {
-                        $not: {
-                            $elemMatch: {
-                               'question': payload.question
-                            }
-                        }
-                    }
+            $elemMatch: {
+              email: user,
+              polls: {
+                $not: {
+                  $elemMatch: {
+                    'question': payload.question
+                  }
                 }
+              }
             }
+          }
         },
-        { $addToSet: { 'attendees.$.polls': {question: payload.question, choice: payload.choice} } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { 'attendees.$.polls': { question: payload.question, choice: payload.choice } } },
+        cb
+      )
     },
 
     selectPlace(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $addToSet: { 'attendees.$.places': payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { 'attendees.$.places': payload } },
+        cb
+      )
     },
 
     unselectPlace(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $pull: { 'attendees.$.places': payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { 'attendees.$.places': payload } },
+        cb
+      )
     },
     selectDatetime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $addToSet: { 'attendees.$.dates': payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $addToSet: { 'attendees.$.dates': payload } },
+        cb
+      )
     },
 
     unselectDatetime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $pull: { 'attendees.$.dates': payload } }
-      ).then(cb).catch(err => console.error(err))
+        { $pull: { 'attendees.$.dates': payload } },
+        cb
+      )
     },
 
   }
