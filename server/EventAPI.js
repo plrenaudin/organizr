@@ -28,7 +28,10 @@ module.exports = {
   },
 
   findByAdmin(email, cb) {
-    db.get('events').find({ admin: email }, cb)
+    db.get('events').find(
+      { admin: email },
+      'info dates attendees',
+      cb)
   },
 
   mutateEvent(user, id, action, payload, cb) {

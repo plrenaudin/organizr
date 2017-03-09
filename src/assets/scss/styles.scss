@@ -598,14 +598,20 @@ section {
 }
 
 .myEvents {
+  width: 650px;
   li {
     padding: 1em .5em;
     margin: .5em;
     border: 1px solid $grey;
-    background-color: $white-green;
+    background-color: $white;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    .name{
+      width: 30%;
+    }
     &:hover {
-      background-color: $white;
+      background-color: $white-blue;
     }
   }
 }
@@ -620,6 +626,11 @@ section {
     background-color: $white;
     right: 0;
     z-index: 10;
+    li {
+      padding: .5em;
+      margin: 0;
+      border: none;
+    }
   }
   .hoverme {
     cursor:default;

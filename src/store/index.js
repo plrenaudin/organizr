@@ -24,12 +24,6 @@ const defaultState = () => {
   }
 }
 
-const compareDayAsc = (a, b) => {
-  if (a.day < b.day) return -1
-  if (a.day > b.day) return 1
-  return 0
-}
-
 export default new Vuex.Store({
   state: defaultState(),
   mutations: {
@@ -212,7 +206,7 @@ export default new Vuex.Store({
   getters: {
     dates: state => {
       let result = JSON.parse(JSON.stringify(state.dates))
-      return result.sort(compareDayAsc).map( item => item.times.sort() && item);
+      return result.sort(Utils.compareDayAsc).map( item => item.times.sort() && item);
     },
     places: state => state.places,
     checklist: state => state.checklist,
