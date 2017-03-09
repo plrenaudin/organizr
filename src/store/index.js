@@ -36,6 +36,9 @@ export default new Vuex.Store({
     loadEvent(state, event) {
       Object.assign(state, defaultState(), event)
     },
+    clear(state) {
+      Object.assign(state, defaultState())
+    },
     addDate(state, date) {
       let found = state.dates.find(item => item.day === date)
       if (found) {

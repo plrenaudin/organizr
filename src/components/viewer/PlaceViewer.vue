@@ -4,7 +4,10 @@
       <li v-for="place,index in places">
         <section class="card full-width">
             <location :place="place"></location>
-            <checkbox @click.native.prevent="checkPlace(place.name)" :id="'place' +index" :value="isChecked(place.name)" :label="$t('app.place.select')"></checkbox>
+            <div class="flex center space-between">
+              <checkbox @click.native.prevent="checkPlace(place.name)" :id="'place' +index" :value="isChecked(place.name)" :label="$t('app.place.select')"></checkbox>
+              <attendees :list="attendeesByPlace(place.name)"></attendees>
+            </div>
         </section>
       </li>
     </ul>
@@ -14,11 +17,13 @@
   import Auth from '../../helpers/Auth.js'
   import Checkbox from '../Checkbox.vue'
   import Location from '../Location.vue'
+  import Attendees from '../Attendees.vue'
+
   const API_KEY = "AIzaSyDlSpeVFymuJjOUrrIrLkBh1Xh3Mop1VrY"
   const SCRIPTURL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`
   export default {
     name:'place-viewer',
-    components: {Checkbox, Location},
+    components: {Checkbox, Attendees, Location},
     methods: {
       attendeesByPlace(place) {
         return this.attendeesWhoSelectedPlace.filter(attendee => attendee.places.indexOf(place) > -1) || []

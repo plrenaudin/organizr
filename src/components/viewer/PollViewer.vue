@@ -4,17 +4,20 @@
       <li v-for="poll, indexPoll in polls">
         <section class="card">
           <strong>{{poll.question}}</strong>
-          <ul>
+          <ul class="choice">
             <li v-for="choice, indexChoice in poll.choices">
-              <input type="radio"
-                v-model="selected[indexPoll]"
-                :name="indexPoll"
-                :value="choice"
-                :id="indexPoll + '-' + indexChoice"
-                class="spaced"
-                v-if="!hasVoted(poll.question)"/>
-              <checkbox :id="indexPoll + '-' + indexChoice" :value="true" :disabled="true" v-if="hasVotedFor(poll.question, choice)"></checkbox>
-              <label :for="indexPoll + '-' + indexChoice">{{choice}}</label>
+              <div>
+                <input type="radio"
+                  v-model="selected[indexPoll]"
+                  :name="indexPoll"
+                  :value="choice"
+                  :id="indexPoll + '-' + indexChoice"
+                  class="spaced"
+                  v-if="!hasVoted(poll.question)"/>
+                <checkbox :id="indexPoll + '-' + indexChoice" :value="hasVotedFor(poll.question, choice)" :disabled="true" v-if="hasVoted(poll.question)"></checkbox>
+                <label :for="indexPoll + '-' + indexChoice">{{choice}}</label>
+              </div>
+              <attendees :list="whoVotedFor(poll.question, choice)" v-if="hasVoted(poll.question)"></attendees>
             </li>
             <li v-show="!hasVoted(poll.question)"><div class="button" @click="vote(indexPoll)">{{$t('app.poll.vote')}}</div></li>
           </ul>
@@ -26,10 +29,11 @@
 <script>
   import Auth from '../../helpers/Auth.js'
   import Checkbox from '../Checkbox.vue'
+  import Attendees from '../Attendees.vue'
 
   export default {
     name: 'poll-viewer',
-    components: {Checkbox},
+    components: {Checkbox, Attendees},
     data() {
       return {
         selected:{}
@@ -39,11 +43,9 @@
       vote(indexPoll) {
         this.$store.commit('vote', {question: this.polls[indexPoll].question, choice: this.selected[indexPoll]})
       },
-
       hasVoted(question) {
         return this.attendeesWhoVoted.filter(a => a.email === Auth.user() && a.polls.find(p => p.question === question)).length > 0
       },
-
       whoVotedFor(question, choice) {
         return this.attendeesWhoVoted.filter(a => a.polls.find(p => p.question === question && p.choice === choice))
       },
