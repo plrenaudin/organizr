@@ -4,35 +4,39 @@
       <event-not-found></event-not-found>
     </template>
     <template v-else>
-      <side-bar @scrollto="scrollTo" :eventId="eventId"></side-bar>
-      <main>
-        <section id="info">
-          <h2>{{$t('app.menu.info')}}</h2>
-          <info></info>
-        </section>
-        <section id="calendar">
-          <h2>{{$t('app.menu.datetime')}}</h2>
-          <calendar></calendar>
-        </section>
-        <section id="place">
-          <h2>{{$t('app.menu.location')}}</h2>
-          <place></place>
-        </section>
-        <section id="checklist">
-          <h2>{{$t('app.menu.checklist')}}</h2>
-          <checklist></checklist>
-        </section>
-        <section id="poll">
-          <h2>{{$t('app.menu.polls')}}</h2>
-          <poll></poll>
-        </section>
-      </main>
+      <loading v-show="!loaded"></loading>
+      <template v-show="loaded">
+        <side-bar @scrollto="scrollTo" :eventId="eventId"></side-bar>
+        <main>
+          <section id="info">
+            <h2>{{$t('app.menu.info')}}</h2>
+            <info></info>
+          </section>
+          <section id="calendar">
+            <h2>{{$t('app.menu.datetime')}}</h2>
+            <calendar></calendar>
+          </section>
+          <section id="place">
+            <h2>{{$t('app.menu.location')}}</h2>
+            <place></place>
+          </section>
+          <section id="checklist">
+            <h2>{{$t('app.menu.checklist')}}</h2>
+            <checklist></checklist>
+          </section>
+          <section id="poll">
+            <h2>{{$t('app.menu.polls')}}</h2>
+            <poll></poll>
+          </section>
+        </main>
+      </template>
     </template>
   </div>
 </template>
 <script>
   import zenscroll from 'zenscroll'
   import SideBar from './components/SideBar.vue'
+  import Loading from './components/Loading.vue'
   import EventNotFound from './components/EventNotFound.vue'
   import Calendar from './components/composer/Calendar.vue'
   import Place from './components/composer/Place.vue'
@@ -43,11 +47,12 @@
 
   export default {
     name: 'composer',
-    components: {EventNotFound, Calendar, Place, SideBar, Checklist, info, Poll},
+    components: {EventNotFound, Loading, Calendar, Place, SideBar, Checklist, info, Poll},
     props: ['eventId'],
     data() {
       return {
-        invalid: false
+        invalid: false,
+        loaded: false
       }
     },
     methods: {
@@ -59,6 +64,7 @@
       Event.findById(this.eventId, (err, response) => {
         if(!err) {
           this.$store.commit('loadEvent', response.data)
+          this.loaded = true
         } else {
           this.invalid = true
         }

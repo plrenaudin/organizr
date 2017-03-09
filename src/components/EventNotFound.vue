@@ -4,3 +4,8 @@
     <div class="button" @click="$router.push('/profile')"><i class="fa fa-plus spaced"></i>{{$t('app.notfound.create')}}</div>
   </div>
 </template>
+<script>
+  export default {
+    name: 'event-not-found'
+  }
+</script>

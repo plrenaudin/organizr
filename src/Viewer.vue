@@ -4,29 +4,32 @@
       <event-not-found></event-not-found>
     </template>
     <template v-else>
-      <side-bar @scrollto="scrollTo" :view="true" :eventId="eventId"></side-bar>
-      <main>
-        <section id="info" v-if="info.title || info.description">
-          <h2>{{$t('app.menu.info')}}</h2>
-          <info></info>
-        </section>
-        <section id="calendar" v-if="dates.length > 0">
-          <h2>{{$t('app.menu.datetime')}}</h2>
-          <calendar></calendar>
-        </section>
-        <section id="place" v-if="places.length > 0">
-          <h2>{{$t('app.menu.location')}}</h2>
-          <place></place>
-        </section>
-        <section id="checklist" v-if="checklist.length > 0">
-          <h2>{{$t('app.menu.checklist')}}</h2>
-          <checklist></checklist>
-        </section>
-        <section id="poll" v-if="polls.length > 0">
-          <h2>{{$t('app.menu.polls')}}</h2>
-          <poll></poll>
-        </section>
-      </main>
+        <loading v-show="!loaded"></loading>
+        <template v-show="loaded">
+          <side-bar @scrollto="scrollTo" :view="true" :eventId="eventId"></side-bar>
+          <main>
+            <section id="info" v-if="info.title || info.description">
+              <h2>{{$t('app.menu.info')}}</h2>
+              <info></info>
+            </section>
+            <section id="calendar" v-if="dates.length > 0">
+              <h2>{{$t('app.menu.datetime')}}</h2>
+              <calendar></calendar>
+            </section>
+            <section id="place" v-if="places.length > 0">
+              <h2>{{$t('app.menu.location')}}</h2>
+              <place></place>
+            </section>
+            <section id="checklist" v-if="checklist.length > 0">
+              <h2>{{$t('app.menu.checklist')}}</h2>
+              <checklist></checklist>
+            </section>
+            <section id="poll" v-if="polls.length > 0">
+              <h2>{{$t('app.menu.polls')}}</h2>
+              <poll></poll>
+            </section>
+          </main>
+        </template>
     </template>
   </div>
 </template>
@@ -34,6 +37,7 @@
   import zenscroll from 'zenscroll'
   import Auth from './helpers/Auth.js'
   import EventNotFound from './components/EventNotFound.vue'
+  import Loading from './components/Loading.vue'
   import SideBar from './components/SideBar.vue'
   import Calendar from './components/viewer/CalendarViewer.vue'
   import Place from './components/viewer/PlaceViewer.vue'
@@ -45,11 +49,12 @@
   export default {
     name: 'viewer',
     props: ['eventId'],
-    components: {EventNotFound, Calendar, Place, SideBar, Checklist, info, Poll},
+    components: {EventNotFound, Loading, Calendar, Place, SideBar, Checklist, info, Poll},
 
     data() {
       return {
-        invalid: false
+        invalid: false,
+        loaded: false
       }
     },
 
@@ -62,6 +67,7 @@
       Event.findById(this.eventId, (err, response) => {
         if(!err) {
           this.$store.commit('loadEvent', response.data)
+          this.loaded = true
         } else {
           this.invalid = true
         }
