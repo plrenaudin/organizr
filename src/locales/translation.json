@@ -42,7 +42,8 @@
     "remove": "Remove",
     "notfound": {
       "title": "The event you are looking for does not exist",
-      "create": "Create one!"
+      "create": "Create one!",
+      "home": "Go back home"
     }
   }
 }

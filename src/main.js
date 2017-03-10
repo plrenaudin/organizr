@@ -11,6 +11,7 @@ import LandingPage from './LandingPage.vue'
 import ProfilePage from './ProfilePage.vue'
 import Composer from './Composer.vue'
 import Viewer from './Viewer.vue'
+import PageNotFound from './PageNotFound.vue'
 import Login from './components/Login.vue'
 
 Vue.use(VueRouter)
@@ -21,7 +22,7 @@ const routes = [
   { path: '/profile', component: ProfilePage, meta: { requiresAuth: true } },
   { path: '/edit/:eventId([a-z0-9]{24})', component: Composer, props: true, meta: { requiresAuth: true } },
   { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } },
-  { path: '*',  component: LandingPage }
+  { path: '*',  component: PageNotFound }
 ]
 
 const router = new VueRouter({
