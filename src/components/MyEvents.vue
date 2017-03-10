@@ -7,6 +7,7 @@
         </div>
         <div class="dates">
           <i class="fa fa-calendar"></i> {{getEventDates(event)}}
+          <i class="fa fa-pencil" v-if="isAdmin(event)"></i>
         </div>
         <attendees :list="event.attendees"></attendees>
       </li>
@@ -18,6 +19,7 @@ import Event from '../APIClient/event.js'
 import Formatter from '../helpers/Formatter.js'
 import Utils from '../helpers/Utils.js'
 import Attendees from './Attendees.vue'
+import Auth from '../helpers/Auth.js'
 
 export default {
   name:'my-events',
@@ -38,6 +40,9 @@ export default {
   },
   methods: {
     formatEventName: Formatter.formatEventName,
+    isAdmin(event) {
+      return event.admin === Auth.user()
+    },
     getEventDates(event) {
       if(event && event.dates && event.dates.length > 0) {
         const result = event.dates.slice().sort(Utils.compareDayAsc)

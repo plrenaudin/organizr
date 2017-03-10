@@ -23,7 +23,7 @@ const participate = (req, res, next) => {
 }
 
 const listUserEvents = (req, res, next) => {
-  eventAPI.findByAdmin(req.user.email, (err, data) => {
+  eventAPI.findByUser(req.user.email, (err, data) => {
     if(err) {
       return next(err)
     }

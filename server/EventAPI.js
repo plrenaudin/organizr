@@ -27,10 +27,13 @@ module.exports = {
     })
   },
 
-  findByAdmin(email, cb) {
+  findByUser(email, cb) {
     db.get('events').find(
-      { admin: email },
-      'info dates attendees',
+      { $or:[
+        { admin: email },
+        { 'attendees.email': email }
+      ]},
+      'admin info dates attendees',
       cb)
   },
 
