@@ -1,8 +1,8 @@
 @import './normalize.scss';
 
 $white-color-percentage: 35%;
-$sidebar-width-percent: 40%;
-$sidebar-width-px: 550px;
+$sidebar-width-percent: 30%;
+$sidebar-width-px: 400px;
 $card-min-width: 400px;
 
 $red:           #F44336;
@@ -239,6 +239,7 @@ ul.card-group {
 // =================================== Sidebar
 aside {
   width: $sidebar-width-percent;
+  right: 0;
   height: 100%;
   position: fixed;
   background-color: $strong-grey;
@@ -255,16 +256,18 @@ aside {
     align-content: center;
     align-items: baseline;
     figure {
-      margin: 1em;
+      margin: .5em;
     }
     .profile {
+      align-items: center;
+      display: flex;
       cursor: pointer;
+      padding: 1em;
     }
     .tools {
       display: flex;
       width: 100%;
       padding: 0 1em;
-      justify-content: flex-end;
       a {
         color: $white;
         text-decoration: none;
@@ -274,7 +277,6 @@ aside {
   nav ul{
     font-weight: bold;
     margin: 0;
-    text-align: right;
     text-shadow: 0 0 2px $strong-grey;
     li{
       padding:1em;
@@ -285,11 +287,10 @@ aside {
       }
       .peek {
         margin: 2px 0;
-        max-height: 55px;
+        max-height: 70px;
         overflow: hidden;
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-end;
         li {
           border: 1px solid $white;
           padding:2px .75em;
@@ -343,7 +344,7 @@ aside {
 #application {
   main {
     flex: 1;
-    margin-left: $sidebar-width-percent;
+    padding-right: $sidebar-width-percent;
     &>section{
       min-height: 40vh;
       &:last-child {
@@ -658,7 +659,7 @@ section {
       width: $sidebar-width-px
     }
     main {
-      margin-left: $sidebar-width-px;
+      padding-right: $sidebar-width-px;
     }
   }
 }
