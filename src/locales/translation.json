@@ -50,6 +50,17 @@
       "url":"Send this url to participants",
       "ref":"Follow this link to partifcipate to",
       "default": "My event"
+    },
+    "help": {
+      "info": "Write down a title and a short description for your event",
+      "calendar": "Select the potential dates the event may take place. Once a date is selected you may select times for the attendees to choose from.<br /> You may type in the hour in short format like '115' in place of '01:15' and then press <kbd>Enter</kbd> to submit.",
+      "calendarViewer": "Select the dates or times you would be able to attend the event.",
+      "place": "Select the potential places the event may take place. Either select from the dropdown list provided once you start typing or press <kbd>Enter</kbd> to validate a custom location like 'At home'.",
+      "placeViewer": "Select the places where you could go to attend the event.",
+      "checklist": "Create a checklist of things to prepare for your event. Attendees will be able to assign some of the tasks to themselves.",
+      "checklistViewer": "Here is what is needed for the event, feel free to assign a task or two for yourself by checking the box.",
+      "polls": "You can create polls for the attendees to choose activities or themes etc.",
+      "pollsViewer": "Please vote for the following poll(s)."
     }
   }
 }

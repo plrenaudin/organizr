@@ -10,22 +10,37 @@
         <main>
           <section id="info">
             <h2>{{$t('app.menu.info')}}</h2>
+            <helper>
+              <span v-html="$t('app.help.info')"></span>
+            </helper>
             <info></info>
           </section>
           <section id="calendar">
             <h2>{{$t('app.menu.datetime')}}</h2>
+            <helper>
+              <span v-html="$t('app.help.calendar')"></span>
+            </helper>
             <calendar></calendar>
           </section>
           <section id="place">
             <h2>{{$t('app.menu.location')}}</h2>
+            <helper>
+              <span v-html="$t('app.help.place')"></span>
+            </helper>
             <place></place>
           </section>
           <section id="checklist">
             <h2>{{$t('app.menu.checklist')}}</h2>
+            <helper>
+              <span v-html="$t('app.help.checklist')"></span>
+            </helper>
             <checklist></checklist>
           </section>
           <section id="poll">
             <h2>{{$t('app.menu.polls')}}</h2>
+            <helper>
+              <span v-html="$t('app.help.polls')"></span>
+            </helper>
             <poll></poll>
           </section>
         </main>
@@ -36,6 +51,7 @@
 <script>
   import zenscroll from 'zenscroll'
   import SideBar from './components/SideBar.vue'
+  import Helper from './components/Helper.vue'
   import Loading from './components/Loading.vue'
   import EventNotFound from './components/EventNotFound.vue'
   import Calendar from './components/composer/Calendar.vue'
@@ -47,7 +63,7 @@
 
   export default {
     name: 'composer',
-    components: {EventNotFound, Loading, Calendar, Place, SideBar, Checklist, info, Poll},
+    components: {EventNotFound, Loading, Helper, Calendar, Place, SideBar, Checklist, info, Poll},
     props: ['eventId'],
     data() {
       return {

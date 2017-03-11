@@ -14,18 +14,30 @@
             </section>
             <section id="calendar" v-if="dates.length > 0">
               <h2>{{$t('app.menu.datetime')}}</h2>
+              <helper>
+                <span v-html="$t('app.help.calendarViewer')"></span>
+              </helper>
               <calendar></calendar>
             </section>
             <section id="place" v-if="places.length > 0">
               <h2>{{$t('app.menu.location')}}</h2>
+              <helper>
+                <span v-html="$t('app.help.placeViewer')"></span>
+              </helper>
               <place></place>
             </section>
             <section id="checklist" v-if="checklist.length > 0">
               <h2>{{$t('app.menu.checklist')}}</h2>
+              <helper>
+                <span v-html="$t('app.help.checklistViewer')"></span>
+              </helper>
               <checklist></checklist>
             </section>
             <section id="poll" v-if="polls.length > 0">
               <h2>{{$t('app.menu.polls')}}</h2>
+              <helper>
+                <span v-html="$t('app.help.pollsViewer')"></span>
+              </helper>
               <poll></poll>
             </section>
           </main>
@@ -39,6 +51,7 @@
   import EventNotFound from './components/EventNotFound.vue'
   import Loading from './components/Loading.vue'
   import SideBar from './components/SideBar.vue'
+  import Helper from './components/Helper.vue'
   import Calendar from './components/viewer/CalendarViewer.vue'
   import Place from './components/viewer/PlaceViewer.vue'
   import Checklist from './components/viewer/ChecklistViewer.vue'
@@ -49,7 +62,7 @@
   export default {
     name: 'viewer',
     props: ['eventId'],
-    components: {EventNotFound, Loading, Calendar, Place, SideBar, Checklist, info, Poll},
+    components: {EventNotFound, Helper, Loading, Calendar, Place, SideBar, Checklist, info, Poll},
 
     data() {
       return {

@@ -355,23 +355,32 @@ aside {
         min-height: 100vh;
       }
     }
+    .help {
+      margin-bottom: 1em;
+    }
     #info {
       h2 { border-bottom: 2px solid $color0; }
+      .help { background-color: $white-color0;}
     }
     #calendar {
       h2 { border-bottom: 2px solid $color1; }
+      .help { background-color: $white-color1;}
     }
     #place {
       h2 { border-bottom: 2px solid $color2; }
+      .help { background-color: $white-color2;}
     }
     #checklist {
       h2 { border-bottom: 2px solid $color3; }
+      .help { background-color: $white-color3;}
     }
     #poll {
       h2 { border-bottom: 2px solid $color4; }
+      .help { background-color: $white-color4;}
     }
     #participant {
       h2 { border-bottom: 2px solid $color5; }
+      .help { background-color: $white-color5;}
     }
   }
 }
@@ -426,9 +435,6 @@ section {
         height: 2em;
       }
     }
-  }
-
-  ul.share-buttons li{
   }
 
 }
