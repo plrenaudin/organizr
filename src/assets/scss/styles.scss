@@ -248,6 +248,10 @@ aside {
   section {
     padding:0;
   }
+  section:last-child{
+    bottom:0;
+    position: fixed;
+  }
   .fa {
     color: $white;
   }
@@ -408,6 +412,25 @@ section {
   .name {
     padding: .2em;
   }
+}
+
+.sharer {
+  padding: 0 .5em;
+  ul.share-buttons{
+    list-style: none;
+    padding: 0;
+    li {
+      display: inline;
+      img {
+        width: 2em;
+        height: 2em;
+      }
+    }
+  }
+
+  ul.share-buttons li{
+  }
+
 }
 
 .composer {

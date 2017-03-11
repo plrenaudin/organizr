@@ -70,15 +70,18 @@
         </ul>
       </nav>
     </section>
+    <sharer></sharer>
   </aside>
 </template>
 <script>
   import Formatter from '../helpers/Formatter.js'
   import Auth from '../helpers/Auth.js'
+  import Sharer from './Sharer.vue'
 
   export default {
     name: 'side-bar',
     props: ['view', 'eventId'],
+    components: { Sharer },
     computed: {
       info() { return this.$store.getters.info },
       dates() { return this.$store.getters.dates },

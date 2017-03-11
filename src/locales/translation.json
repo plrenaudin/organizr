@@ -44,6 +44,12 @@
       "title": "The event you are looking for does not exist",
       "create": "Create one!",
       "home": "Go back home"
+    },
+    "share": {
+      "title": "Share this event",
+      "url":"Send this url to participants",
+      "ref":"Follow this link to partifcipate to",
+      "default": "My event"
     }
   }
 }

@@ -30,7 +30,7 @@
               {{formatDate(current.day)}}
             </div>
             <div v-for="time in current.times" class="dateContainer">
-              <i class="fa fa-times action" @click="removeTime(current.day, time)"></i> {{time}}
+              <i class="fa fa-times action" @click="removeTime(current.day, time)"></i> {{time}} <i class="fa fa-clock-o"></i>
             </div>
             <div class="timeInput">
               <input type="text"
