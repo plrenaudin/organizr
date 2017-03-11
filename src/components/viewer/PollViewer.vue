@@ -7,15 +7,18 @@
           <ul class="choice">
             <li v-for="choice, indexChoice in poll.choices">
               <div>
-                <input type="radio"
+                <label class="radio" v-show="!hasVoted(poll.question)">
+                  <input type="radio"
                   v-model="selected[indexPoll]"
                   :name="indexPoll"
                   :value="choice"
                   :id="indexPoll + '-' + indexChoice"
                   class="spaced"
                   v-if="!hasVoted(poll.question)"/>
-                <checkbox :id="indexPoll + '-' + indexChoice" :value="hasVotedFor(poll.question, choice)" :disabled="true" v-if="hasVoted(poll.question)"></checkbox>
-                <label :for="indexPoll + '-' + indexChoice">{{choice}}</label>
+                  <span class="outer"><span class="inner"></span></span>
+                  {{choice}}
+                </label>
+                <checkbox :id="indexPoll + '-' + indexChoice" :value="hasVotedFor(poll.question, choice)" :disabled="true" v-if="hasVoted(poll.question)" :label="choice"></checkbox>
               </div>
               <attendees :list="whoVotedFor(poll.question, choice)" v-if="hasVoted(poll.question)"></attendees>
             </li>

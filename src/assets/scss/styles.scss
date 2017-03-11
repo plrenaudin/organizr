@@ -164,6 +164,62 @@ input[type=text], select, textarea {
   font-size: .75em;
   color: $mid-grey;
 }
+.radio {
+  display: inline-block;
+  padding-right: 20px;
+  font-size: 18px;
+  line-height: 32px;
+  cursor: pointer;
+  input {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    &:checked + .outer .inner {
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+    }
+    &:checked + .outer { border: 3px solid $green; }
+    &:focus + .outer .inner {
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+      background-color: $green;
+    }
+  }
+  .outer {
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+    margin: .2em;
+    border: 3px solid $mid-grey;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+  .inner {
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    width: 16px;
+    height: 16px;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    display: block;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: $green;
+    opacity: 0;
+  }
+  &:hover .inner {
+    -webkit-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: .5;
+  }
+}
 
 .button {
   display: inline-block;
