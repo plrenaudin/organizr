@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-  import Auth0LockPasswordless from 'auth0-lock-passwordless'
   import Auth from '../helpers/Auth.js'
   import Utils from '../helpers/Utils.js'
 

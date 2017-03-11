@@ -44,7 +44,8 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       __API__: apiHost
-    })
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ]
 }
 
