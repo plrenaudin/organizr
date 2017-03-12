@@ -3,7 +3,7 @@
     <h2><i class="fa fa-share-alt"></i> {{$t('app.share.title')}}</h2>
     <div class="urlShare">
       <label>{{$t('app.share.url')}}</label>
-      <input type="text" :value="url">
+      <input type="text" :value="url" onClick="this.setSelectionRange(0, this.value.length)" readonly>
     </div>
     <div class="buttons">
       <ul class="share-buttons">

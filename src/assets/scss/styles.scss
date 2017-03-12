@@ -481,6 +481,11 @@ section {
 
 .sharer {
   padding: 0 .5em;
+  display: flex;
+  flex-direction: column;
+  input {
+    cursor: pointer;
+  }
   ul.share-buttons{
     list-style: none;
     padding: 0;
