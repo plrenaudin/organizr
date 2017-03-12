@@ -1,18 +1,18 @@
 version: "2"
 services:
-  organizr-restify:
+  organizr-restify-prod:
     build: .
     ports:
       - "3003:3003"
     depends_on:
-      - organizr-mongo
+      - organizr-mongo-prod
     networks:
       - all
     environment:
-      MONGODB_URI: "mongodb://organizr-mongo:27017/organizr"
-      NODE_ENV: development
+      MONGODB_URI: "mongodb://organizr-mongo-prod:27017/organizr"
+      NODE_ENV: production
 
-  organizr-mongo:
+  organizr-mongo-prod:
     image: mongo
     volumes:
       - /data/mongodb/db:/data/db
