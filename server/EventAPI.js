@@ -1,4 +1,4 @@
-const db = require('monk')('localhost/organiz')
+const db = require('monk')(process.env.MONGODB_URI)
 module.exports = {
   createNew(user, cb) {
     db.get('events').insert({ admin: user }, cb)

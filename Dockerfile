@@ -1,4 +1,4 @@
-FROM node:boron
+FROM yarnpkg/node-yarn:node7
 
 # Create app directory
 RUN mkdir -p /app
@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install app dependencies
 COPY . /app/
-RUN npm install
+RUN yarn
 
 EXPOSE 3003
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]
