@@ -16,4 +16,4 @@ RUN yarn
 COPY . /app/
 
 EXPOSE 3003
-CMD [ "yarn", "start" ]
+ENTRYPOINT [ "node", "server/server.js" ]
