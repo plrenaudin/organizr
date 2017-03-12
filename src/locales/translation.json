@@ -28,14 +28,25 @@
       "vote": "Vote"
     },
     "landingPage": {
-      "title": "Welcome to Organizr.io!",
-      "description": "Organizr.io helps you organizing events your way.",
-      "getStarted": "Get Started"
+      "title": "Organizr.io",
+      "subtitle": "Oganizing event made easy",
+      "description": "Organizr.io helps you organizing events your own way.",
+      "getStarted": "Get Started",
+      "timeTitle": "Suggest the dates",
+      "time": "The attendees will be able to choose from a selection of dates and times you provide.",
+      "placeTitle": "Suggest the location",
+      "place": "Pick a selection of location your event may take place and let the participants decide which one would suit them.",
+      "checklistTitle": "Delegate the tasks",
+      "checklist": "Write down a checklist of things to bring or to do for the event and let people participate.",
+      "pollsTitle": "Let them choose more...",
+      "polls": "Create polls to ask your participants what they would prefer. "
     },
     "profilePage": {
       "createEvent": "Create an event",
-      "eventList": "List of my events",
-      "title": "Profile of"
+      "eventList": "My events",
+      "title": "Profile of",
+      "isAdmin": "You are the admin fo this event.",
+      "noEvents": "You have no events yet"
     },
     "logout": "Logout",
     "defaultEventName": "(Event without title)",
@@ -57,7 +68,7 @@
       "calendarViewer": "Select the dates or times you would be able to attend the event.",
       "place": "Select the potential places the event may take place. Either select from the dropdown list provided once you start typing or press <kbd>Enter</kbd> to validate a custom location like 'At home'.",
       "placeViewer": "Select the places where you could go to attend the event.",
-      "checklist": "Create a checklist of things to prepare for your event. Attendees will be able to assign some of the tasks to themselves.",
+      "checklist": "Create a checklist of things to prepare for your event. Attendees will be able to assign items to themselves.",
       "checklistViewer": "Here is what is needed for the event, feel free to assign a task or two for yourself by checking the box.",
       "polls": "You can create polls for the attendees to choose activities or themes etc.",
       "pollsViewer": "Please vote for the following poll(s)."

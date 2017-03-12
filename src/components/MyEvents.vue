@@ -1,13 +1,14 @@
 <template>
   <div class="myEvents">
     <ul>
+      <li v-if="events.length === 0">{{$t('app.profilePage.noEvents')}}</li>
       <li v-for="event in events" @click="$router.push('/'+event._id)">
         <div class="name">
           {{formatEventName(event)}}
         </div>
         <div class="dates">
           <i class="fa fa-calendar"></i> {{getEventDates(event)}}
-          <i class="fa fa-pencil" v-if="isAdmin(event)"></i>
+          <i class="fa fa-pencil" :title="$t('app.profilePage.isAdmin')" v-if="isAdmin(event)"></i>
         </div>
         <attendees :list="event.attendees"></attendees>
       </li>

@@ -1,11 +1,15 @@
 <template>
   <div class="profilePage">
-    <h1>{{$t('app.profilePage.title')}} {{username}}</h1>
+    <div class="flex center">
+      <h1><i class="fa fa-user-o"></i> {{$t('app.profilePage.title')}} {{username}}</h1>
+      <div class="button" @click="logout()"><i class="fa fa-sign-out"></i>{{$t('app.logout')}}</div>
+    </div>
     <section id="eventList">
-      <h2>{{$t('app.profilePage.eventList')}}</h2>
+      <div class="flex center">
+        <h2 class="inline">{{$t('app.profilePage.eventList')}}</h2> <a class="createEvent button" @click="createEvent"><i class="fa fa-plus"></i> {{$t('app.profilePage.createEvent')}}</a>
+      </div>
       <my-events></my-events>
     </section>
-    <a class="createEvent button" @click="createEvent"><i class="fa fa-plus"></i> {{$t('app.profilePage.createEvent')}}</a>
   </div>
 </template>
 <script>
@@ -26,6 +30,10 @@
             //TODO error handling
           }
         })
+      },
+      logout() {
+        Auth.logout()
+        document.location = '/'
       }
     },
     computed: {
