@@ -22,9 +22,17 @@
       }
     },
     created() {
-      this.$bus.$on('server.sent', () => this.saving = true && this.call++)
-      this.$bus.$on('server.success', () => this.call-- && (this.saving = this.call !==  0))
-      this.$bus.$on('server.error', () => this.error = true)
+      this.$bus.$on('server.sent', () => {
+        this.call++
+        this.saving = true
+      })
+      this.$bus.$on('server.success', () => {
+        this.call--
+        this.saving = this.call !==  0
+      })
+      this.$bus.$on('server.error', () => {
+        this.error = true
+      })
     }
   }
 </script>
