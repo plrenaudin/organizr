@@ -17,7 +17,7 @@
     },
 
     created() {
-      this.lock = new Auth0LockPasswordless('8xeVAk3AbL9ApMTOcNg4UIPj9HKY8h10','plrenaudin.eu.auth0.com')
+      this.lock = new Auth0LockPasswordless('IJyD4bZzNwZUVmaMrV5BlCqB8tQzAKeo','organizr.eu.auth0.com')
       const hash = this.lock.parseHash(window.location.hash)
       if(hash) {
         localStorage.setItem('profile', JSON.stringify(hash.profile))

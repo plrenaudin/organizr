@@ -11,6 +11,7 @@
           </template>
         </template>
       </div>
+      <saving-indicator></saving-indicator>
       <div class="profile" @click="$router.push('/profile')">
         {{user}}
         <figure class="userPicture">
@@ -77,11 +78,12 @@
   import Formatter from '../helpers/Formatter.js'
   import Auth from '../helpers/Auth.js'
   import Sharer from './Sharer.vue'
+  import SavingIndicator from './SavingIndicator.vue'
 
   export default {
     name: 'side-bar',
     props: ['view', 'eventId'],
-    components: { Sharer },
+    components: { Sharer, SavingIndicator },
     computed: {
       info() { return this.$store.getters.info },
       dates() { return this.$store.getters.dates },

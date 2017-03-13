@@ -3,6 +3,7 @@ const vm = new Vue()
 const fireAndForget = (promise) => {
   promise.then(response => vm.$bus.$emit('server.success', response))
     .catch(err => vm.$bus.$emit('server.error', err))
+  vm.$bus.$emit('server.sent')
 }
 
 const headers = () => {
@@ -35,26 +36,26 @@ export default {
   },
 
   //Mutations
-  addChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/addChecklistItem`, item, headers())) },
-  removeChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/removeChecklistItem`, item, headers())) },
-  updateInfo: (id, info) => { fireAndForget(vm.$http.post(`/${id}/updateInfo`, info, headers())) },
-  addPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/addPlace`, place, headers())) },
-  removePlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/removePlace`, place, headers())) },
-  addDate: (id, date) => { fireAndForget(vm.$http.post(`/${id}/addDate`, date, headers())) },
-  removeDate: (id, date) => { fireAndForget(vm.$http.post(`/${id}/removeDate`, date, headers())) },
-  addTime: (id, dateTime) => { fireAndForget(vm.$http.post(`/${id}/addTime`, dateTime, headers())) },
-  removeTime: (id, dateTime) => { fireAndForget(vm.$http.post(`/${id}/removeTime`, dateTime, headers())) },
-  addPoll: (id, poll) => { fireAndForget(vm.$http.post(`/${id}/addPoll`, poll, headers())) },
-  removePoll: (id, poll) => { fireAndForget(vm.$http.post(`/${id}/removePoll`, poll, headers())) },
-  addPollQuestion: (id, choicePoll) => { fireAndForget(vm.$http.post(`/${id}/addPollQuestion`, choicePoll, headers())) },
-  removePollQuestion: (id, choicePoll) => { fireAndForget(vm.$http.post(`/${id}/removePollQuestion`, choicePoll, headers())) },
+  addChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/addChecklistItem`, {item}, headers())) },
+  removeChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/removeChecklistItem`, {item}, headers())) },
+  updateInfo: (id, info) => { fireAndForget(vm.$http.post(`/${id}/updateInfo`, {info}, headers())) },
+  addPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/addPlace`, {place}, headers())) },
+  removePlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/removePlace`, {place}, headers())) },
+  addDate: (id, date) => { fireAndForget(vm.$http.post(`/${id}/addDate`, {date}, headers())) },
+  removeDate: (id, date) => { fireAndForget(vm.$http.post(`/${id}/removeDate`, {date}, headers())) },
+  addTime: (id, date) => { fireAndForget(vm.$http.post(`/${id}/addTime`, {date}, headers())) },
+  removeTime: (id, date) => { fireAndForget(vm.$http.post(`/${id}/removeTime`, {date}, headers())) },
+  addPoll: (id, poll) => { fireAndForget(vm.$http.post(`/${id}/addPoll`, {poll}, headers())) },
+  removePoll: (id, poll) => { fireAndForget(vm.$http.post(`/${id}/removePoll`, {poll}, headers())) },
+  addPollQuestion: (id, choicePoll) => { fireAndForget(vm.$http.post(`/${id}/addPollQuestion`, {choicePoll}, headers())) },
+  removePollQuestion: (id, choicePoll) => { fireAndForget(vm.$http.post(`/${id}/removePollQuestion`, {choicePoll}, headers())) },
 
   //Participations
-  checkChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/checkChecklistItem`, item, headers())) },
-  uncheckChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/uncheckChecklistItem`, item, headers())) },
+  checkChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/checkChecklistItem`, {item}, headers())) },
+  uncheckChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/uncheckChecklistItem`, {item}, headers())) },
   vote: (id, {question, choice}) => { fireAndForget(vm.$http.post(`/${id}/vote`, { question, choice }, headers())) },
-  selectPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/selectPlace`, place, headers())) },
-  unselectPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/unselectPlace`, place, headers())) },
-  selectDatetime: (id, datetime) => { fireAndForget(vm.$http.post(`/${id}/selectDatetime`, datetime, headers())) },
-  unselectDatetime: (id, datetime) => { fireAndForget(vm.$http.post(`/${id}/unselectDatetime`, datetime, headers())) }
+  selectPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/selectPlace`, {place}, headers())) },
+  unselectPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/unselectPlace`, {place}, headers())) },
+  selectDatetime: (id, date) => { fireAndForget(vm.$http.post(`/${id}/selectDatetime`, {date}, headers())) },
+  unselectDatetime: (id, date) => { fireAndForget(vm.$http.post(`/${id}/unselectDatetime`, {date}, headers())) }
 }

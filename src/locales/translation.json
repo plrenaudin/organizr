@@ -8,8 +8,8 @@
       "polls": "The Polls"
     },
     "sidebar": {
-      "editEvent": "Edit Event",
-      "viewEvent": "View Event"
+      "editEvent": "Edit",
+      "viewEvent": "View"
     },
     "info": {
       "titleInput": "Enter a title",
@@ -72,6 +72,9 @@
       "checklistViewer": "Here is what is needed for the event, feel free to assign a task or two for yourself by checking the box.",
       "polls": "You can create polls for the attendees to choose activities or themes etc.",
       "pollsViewer": "Please vote for the following poll(s)."
-    }
+    },
+    "saving": "Saving...",
+    "saved": "Saved!",
+    "serverError": "Something went wrong..."
   }
 }
