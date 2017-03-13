@@ -2,6 +2,7 @@
   <aside>
     <section id="user">
       <div class="tools">
+        <saving-indicator></saving-indicator>
         <template v-if="isOwner">
           <template v-if="view">
             <router-link :to="'/edit/' + eventId"><i class="fa fa-pencil"></i> {{$t('app.sidebar.editEvent')}}</router-link>
@@ -11,7 +12,6 @@
           </template>
         </template>
       </div>
-      <saving-indicator></saving-indicator>
       <div class="profile" @click="$router.push('/profile')">
         {{user}}
         <figure class="userPicture">
