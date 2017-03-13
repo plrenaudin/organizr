@@ -28,7 +28,14 @@
     methods: {
       show() {
         let options = {
+          'icon':'/dist/logo.svg',
           'primaryColor':'#4CAF50 ',
+          'dict': {
+            'title': 'Organizr.io',
+            'networkOrEmail': {
+              'separatorText': "Or use Passwordless"
+            },
+          },
           'connections':['google-oauth2','facebook'],
           'authParams': { 'scope': 'openid email' }
         }
