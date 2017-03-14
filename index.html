@@ -7,6 +7,19 @@
       href="favicon.png">
     <title>Organizr.io</title>
     <style>
+      .beta {
+        position: fixed;
+        transform: rotate(-45deg);
+        display: inline-block;
+        padding: .5em 10em;
+        left: -9.5em;
+        top: .5em;
+        border: 1px solid #777;
+        z-index: 9000;
+        color: white;
+        font-weight: bold;
+        background-color: #F44336;
+      }
       .loading {
         position: absolute;
         top:30%;
@@ -75,6 +88,7 @@
     </style>
   </head>
   <body>
+    <div class="beta">Beta</div>
     <div id="app">
       <div class="loading">
         <div class="sk-cube-grid">

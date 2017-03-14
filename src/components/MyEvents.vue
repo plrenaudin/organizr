@@ -35,7 +35,9 @@ export default {
       if(err) {
         console.error(err)
       } else {
-        this.events = response.data
+        this.events = response.data.sort((a,b) => {
+          return Utils.getTimestampFromId(b._id) - Utils.getTimestampFromId(a._id)
+        })
       }
     })
   },
