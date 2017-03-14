@@ -5,7 +5,7 @@ var apiHost;
 var setupAPI = function() {
   switch(process.env.NODE_ENV) {
     case 'production':
-      apiHost = "'https://organizr.io:3003/'";
+      apiHost = "'https://organizr.io/api'";
       break;
     case 'staging':
       apiHost = "'https://dev.plrenaudin.com/api'";
