@@ -49,6 +49,10 @@
       "isAdmin": "You are the admin fo this event.",
       "noEvents": "You have no events yet"
     },
+    "footer": {
+      "contact": "Contact me",
+      "eula": "License agreement"
+    },
     "logout": "Logout",
     "defaultEventName": "(Event without title)",
     "remove": "Remove",
