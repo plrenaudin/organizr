@@ -39,7 +39,8 @@
       "checklistTitle": "Delegate the tasks",
       "checklist": "Write down a checklist of things to bring or to do for the event and let people participate.",
       "pollsTitle": "Let them choose more...",
-      "polls": "Create polls to ask your participants what they would prefer. "
+      "polls": "Create polls to ask your participants what they would prefer.",
+      "getStatedToContinue": "Almost there...<br />In order to proceed to the event please click on the \"get started\" button above."
     },
     "profilePage": {
       "createEvent": "Create an event",
