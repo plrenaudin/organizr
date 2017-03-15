@@ -1,6 +1,6 @@
 <template>
   <div class="profilePage">
-    <div class="flex center">
+    <div class="flex center space-between">
       <h1><i class="fa fa-user-o"></i> {{$t('app.profilePage.title')}} {{username}}</h1>
       <div class="button" @click="logout()"><i class="fa fa-sign-out"></i>{{$t('app.logout')}}</div>
     </div>
