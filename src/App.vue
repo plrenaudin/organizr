@@ -5,7 +5,7 @@
     </transition>
     <footer>
       <ul>
-        <li><a class="action" href="mailto:admin@roganizr.io?Subject=Organiz.io">{{$t('app.footer.contact')}}</a></li>
+        <li><a class="action" href="mailto:admin@organizr.io?Subject=Organiz.io">{{$t('app.footer.contact')}}</a></li>
         <li><div class="action" @click="showEulaModal = true">{{$t('app.footer.eula')}}</div></li>
       </ul>
     </footer>
