@@ -63,7 +63,7 @@
     },
     "share": {
       "title": "Share this event",
-      "url":"Send this url to participants",
+      "url":"Url:",
       "ref":"Follow this link to partifcipate to",
       "default": "My event"
     },
