@@ -410,8 +410,18 @@ aside {
 
 .profilePage {
   padding: 0 3em;
-  ul li{
-    margin: .5em 0;
+  #eventList {
+    display: block;
+    .noEvents {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      color: $grey;
+      width: 100%;
+      font-size: 3em;
+    }
   }
 }
 
@@ -761,17 +771,26 @@ section {
   }
 }
 .myEvents {
-  width: 650px;
+  ul{
+    display: flex;
+    flex-wrap: wrap;
+  }
   li {
-    padding: 1em .5em;
-    margin: .5em;
+    flex: 0 0 400px;
+    padding: 1em 1em;
+    margin: 2em;
     border: 1px solid $grey;
     background-color: $white;
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    .name{
-      width: 30%;
+    align-items: center;
+    h2 {
+      margin-top: 0;
+    }
+    .dates {
+      margin-bottom: 1em;
     }
     &:hover {
       background-color: $white-blue;

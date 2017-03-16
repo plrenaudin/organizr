@@ -1,18 +1,24 @@
 <template>
   <div class="myEvents">
-    <ul>
-      <li v-if="events.length === 0">{{$t('app.profilePage.noEvents')}}</li>
-      <li v-for="event in events" @click="$router.push('/'+event._id)">
-        <div class="name">
-          {{formatEventName(event)}}
-        </div>
-        <div class="dates">
-          <i class="fa fa-calendar"></i> {{getEventDates(event)}}
-          <i class="fa fa-pencil" :title="$t('app.profilePage.isAdmin')" v-if="isAdmin(event)"></i>
-        </div>
-        <attendees :list="event.attendees"></attendees>
-      </li>
-    </ul>
+    <div v-show="!loading">
+      <ul v-if="events.length > 0">
+        <li v-for="event in events" @click="$router.push('/'+event._id)">
+          <h2>
+            {{formatEventName(event)}}
+          </h2>
+          <div class="dates">
+            <i class="fa fa-calendar"></i> {{getEventDates(event)}}
+            <i class="fa fa-pencil" :title="$t('app.profilePage.isAdmin')" v-if="isAdmin(event)"></i>
+          </div>
+          <attendees :list="event.attendees"></attendees>
+        </li>
+      </ul>
+      <div class="noEvents" v-else>
+        <i class="fa fa-2x fa-frown-o"></i>
+        <span>{{$t('app.profilePage.noEvents')}}</span>
+      </div>
+    </div>
+    <loading v-show="loading"></loading>
   </div>
 </template>
 <script>
@@ -20,17 +26,20 @@ import Event from '../APIClient/event.js'
 import Formatter from '../helpers/Formatter.js'
 import Utils from '../helpers/Utils.js'
 import Attendees from './Attendees.vue'
+import Loading from './Loading.vue'
 import Auth from '../helpers/Auth.js'
 
 export default {
   name:'my-events',
-  components:{Attendees},
+  components:{Attendees, Loading},
   data() {
     return {
-      events:[]
+      events:[],
+      loading: false
     }
   },
   created() {
+    this.loading = true;
     Event.listMyEvents((err, response) => {
       if(err) {
         console.error(err)
@@ -39,6 +48,7 @@ export default {
           return Utils.getTimestampFromId(b._id) - Utils.getTimestampFromId(a._id)
         })
       }
+      this.loading = false;
     })
   },
   methods: {

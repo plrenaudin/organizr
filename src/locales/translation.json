@@ -45,7 +45,7 @@
     "profilePage": {
       "createEvent": "Create an event",
       "eventList": "My events",
-      "title": "Profile of",
+      "title": "Your profile",
       "isAdmin": "You are the admin fo this event.",
       "noEvents": "You have no events yet"
     },
