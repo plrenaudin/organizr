@@ -2,7 +2,7 @@
   <div class="info">
     <section class="card">
       <h1 v-if="info.title" class="title">{{info.title}}</h1>
-      <p v-if="info.description">{{info.description}}</p>
+      <pre v-if="info.description">{{info.description}}</pre>
     </section>
   </div>
 </template>
