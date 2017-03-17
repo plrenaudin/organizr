@@ -13,6 +13,7 @@
 </template>
 <script>
   import Event from './APIClient/event.js'
+  import Auth from './helpers/Auth.js'
   import MyEvents from './components/MyEvents.vue'
   export default {
     name: 'profile-page',

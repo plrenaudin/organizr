@@ -17,15 +17,24 @@
     },
 
     created() {
-      this.lock = new Auth0LockPasswordless('IJyD4bZzNwZUVmaMrV5BlCqB8tQzAKeo','organizr.eu.auth0.com')
-      const hash = this.lock.parseHash(window.location.hash)
-      if(hash) {
-        localStorage.setItem('profile', JSON.stringify(hash.profile))
-        localStorage.setItem('id_token', hash.id_token)
-        this.$router.push(this.$route.query.redirect || '/profile')
-      }
+      this.init()
     },
     methods: {
+      init() {
+        let me = this
+        if(typeof Auth0LockPasswordless !== 'undefined') {
+          console.log('init')
+          me.lock = new Auth0LockPasswordless('IJyD4bZzNwZUVmaMrV5BlCqB8tQzAKeo','organizr.eu.auth0.com')
+          const hash = me.lock.parseHash(window.location.hash)
+          if(hash) {
+            localStorage.setItem('profile', JSON.stringify(hash.profile))
+            localStorage.setItem('id_token', hash.id_token)
+            me.$router.push(me.$route.query.redirect || '/profile')
+          }
+        } else {
+          setTimeout(me.init, 200)
+        }
+      },
       show() {
         let options = {
           'icon':'/dist/logo.svg',
