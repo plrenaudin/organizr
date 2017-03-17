@@ -23,7 +23,6 @@
       init() {
         let me = this
         if(typeof Auth0LockPasswordless !== 'undefined') {
-          console.log('init')
           me.lock = new Auth0LockPasswordless('IJyD4bZzNwZUVmaMrV5BlCqB8tQzAKeo','organizr.eu.auth0.com')
           const hash = me.lock.parseHash(window.location.hash)
           if(hash) {
