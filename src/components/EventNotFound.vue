@@ -1,6 +1,7 @@
 <template>
-  <div class="notfound">
-    <h1>{{$t('app.notfound.title')}}</h1>
+  <div class="splash">
+    <i class="fa fa-2x fa-exclamation-circle"></i>
+    <span>{{$t('app.notfound.title')}}</span>
     <div class="button" @click="$router.push('/profile')"><i class="fa fa-plus spaced"></i>{{$t('app.notfound.create')}}</div>
   </div>
 </template>

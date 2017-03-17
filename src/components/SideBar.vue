@@ -4,22 +4,18 @@
       <section id="user">
         <div class="tools">
           <saving-indicator></saving-indicator>
-          <template v-if="isOwner">
-            <template v-if="view">
-              <router-link :to="'/edit/' + eventId"><i class="fa fa-pencil"></i> {{$t('app.sidebar.editEvent')}}</router-link>
-            </template>
-            <template v-else>
-              <router-link :to="'/' + eventId"><i class="fa fa-eye"></i> {{$t('app.sidebar.viewEvent')}}</router-link>
-            </template>
-          </template>
         </div>
         <div class="profile" @click="$router.push('/profile')">
           {{user}}
           <figure class="userPicture">
-            <i class="fa fa-2x fa-user-o"></i>
+            <i class="fa fa-2x fa-home"></i>
           </figure>
         </div>
       </section>
+      <div class="toggleButton" v-if="isOwner">
+        <router-link :to="'/edit/' + eventId"><i class="fa fa-pencil"></i> {{$t('app.sidebar.editEvent')}}</router-link>
+        <router-link :to="'/' + eventId"><i class="fa fa-eye"></i> {{$t('app.sidebar.viewEvent')}}</router-link>
+      </div>
       <section id="menuSection">
         <nav>
           <ul>

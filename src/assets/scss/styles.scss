@@ -308,19 +308,56 @@ aside {
   background-color: $strong-grey;
   color: $white;
   box-shadow: 2px 0 10px 0 $grey;
-  section {
-    padding:0;
-  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  section {
+    padding:0;
+  }
   .fa {
     color: $white;
+  }
+  .toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+    a {
+      color: $strong-grey;
+      background-color: $grey;
+      .fa {
+        color: $strong-grey;
+      }
+      padding:.3em 1em;
+      border: 1px solid $white;
+      text-decoration: none;
+      &:visited {
+        color:$strong-grey;
+      }
+      &.router-link-active {
+        cursor: default;
+        color: $white;
+        background-color: $strong-grey;
+        .fa {
+          color: $white;
+        }
+      }
+      &:first-child {
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+        border-right: none;
+      }
+      &:last-child {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
   }
   section#user {
     display: flex;
     align-content: center;
     justify-content: space-between;
+    padding: 0 .5em;
     figure {
       margin: .5em;
     }
@@ -328,13 +365,11 @@ aside {
       align-items: center;
       display: flex;
       cursor: pointer;
-      padding: 1em;
     }
     .tools {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      padding: 1em;
       a {
         color: $white;
         text-decoration: none;
@@ -412,22 +447,29 @@ aside {
   padding: 0 3em;
   #eventList {
     display: block;
-    .noEvents {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 50vh;
-      color: $grey;
-      width: 100%;
-      font-size: 3em;
-    }
+  }
+}
+.splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  color: $grey;
+  width: 100%;
+  font-size: 3em;
+  span {
+    padding: 1em 0;
+  }
+  .button {
+    font-size: 1rem;
   }
 }
 
 // =================================== Application commons
 #application {
   main {
+    min-height: 100vh;
     flex: 1;
     padding-right: $sidebar-width-percent;
     &>section{
@@ -462,6 +504,9 @@ aside {
     #participant {
       h2 { border-bottom: 2px solid $color5; }
       .help { background-color: $white-color5;}
+    }
+    .emptyEvent {
+      font-size: 2em;
     }
   }
 }
