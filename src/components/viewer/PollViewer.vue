@@ -46,7 +46,9 @@
     },
     methods: {
       vote(indexPoll) {
-        this.$store.commit('vote', {question: this.polls[indexPoll].question, choice: this.selected[indexPoll]})
+        if(this.selected[indexPoll]) {
+          this.$store.commit('vote', {question: this.polls[indexPoll].question, choice: this.selected[indexPoll]})
+        }
       },
       hasVoted(question) {
         return this.attendeesWhoVoted.filter(a => a.email === Auth.user() && a.polls.find(p => p.question === question)).length > 0
