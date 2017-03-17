@@ -10,12 +10,27 @@
       </ul>
     </footer>
     <modal v-if="showEulaModal" @close="showEulaModal = false">
-      <h3 slot="header">{{$t('app.footer.eula')}} (MIT)</h3>
-      <p slot="body">
-        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-      </p>
+      <div class="modalContent">
+        <h3>{{$t('app.footer.eula')}} (MIT)</h3>
+        <p>
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        </p>
+        <div class="button" @click="showEulaModal = false">OK</div>
+      </div>
     </modal>
-  </div>
+    <modal v-if="confirmDialogVisible">
+      <div class="dialogBox">
+
+      <div class="modalContent">
+        <h2><i class="fa fa-warning"></i> {{$t('app.confirmTitle')}}</h2>
+        <p v-html="confirmDialogText"></p>
+      </div>
+      <div class="footerButtons">
+        <div class="red" @click="confirmDialogVisible = false"><i class="fa fa-times"></i> Cancel</div>
+        <div class="green" @click="handleConfirm"><i class="fa fa-check"></i> Confirm</div>
+      </div>
+    </div>
+  </modal>
 </template>
 
 <script>
@@ -25,8 +40,30 @@ export default {
   components: {Modal},
   data() {
     return {
-      showEulaModal: false
+      showEulaModal: false,
+      confirmDialogVisible: false,
+      confirmDialogText: '',
+      confirmDialogAction: () => {},
+      confirmDialogActionParams: null
     }
+  },
+  methods: {
+    displayConfirm(text,fn,params) {
+      this.confirmDialogText = text
+      this.confirmDialogAction = fn
+      this.confirmDialogActionParams = params
+      this.confirmDialogVisible = true
+    },
+    handleConfirm() {
+      this.confirmDialogAction(this.confirmDialogActionParams)
+      this.confirmDialogText = ''
+      this.confirmDialogActionParams = null
+      this.confirmDialogAction = () => {}
+      this.confirmDialogVisible = false
+    }
+  },
+  created() {
+    this.$bus.$on('confirm', this.displayConfirm)
   }
 }
 </script>

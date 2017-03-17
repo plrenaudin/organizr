@@ -29,6 +29,12 @@ export default {
       .catch(err => cb(err, null))
   },
 
+  delete: (id, cb) => {
+    vm.$http.delete(`/${id}`, headers())
+      .then(response => cb(null, response))
+      .catch(err => cb(err, null))
+  },
+
   listMyEvents: (cb) => {
     vm.$http.get(`/listMyEvents`, headers())
       .then(response => cb(null, response))

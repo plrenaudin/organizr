@@ -820,6 +820,11 @@ section {
     display: flex;
     flex-wrap: wrap;
   }
+  .action {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+  }
   li {
     flex: 0 0 400px;
     padding: 1em 1em;
@@ -828,6 +833,7 @@ section {
     background-color: $white;
     cursor: pointer;
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -893,32 +899,48 @@ footer {
   background-color: rgba(0, 0, 0, .5);
   display: table;
   transition: opacity .3s ease;
+  .modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .modal-container {
+    width: 400px;
+    margin: 0px auto;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  .modalContent {
+    padding: 1em;
+  }
+  .dialogBox {
+    .footerButtons {
+      display: flex;
+      width: 100%;
+      div {
+        flex: 1;
+        text-align: center;
+        padding: .5em 0;
+        font-weight: bold;
+        color: $white;
+        cursor: pointer;
+        .fa {
+          color:$white;
+        }
+        &.red {
+          background-color: $red;
+        }
+        &.green {
+          background-color: $green;
+        }
+      }
+    }
+  }
 }
 
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
-
-.modal-body {
-  margin: 20px 0;
-}
 
 
 /* ======================== Animations ====================== */

@@ -2,7 +2,8 @@
   <div class="myEvents">
     <div v-show="!loading">
       <ul v-if="events.length > 0">
-        <li v-for="event in events" @click="$router.push('/'+event._id)">
+        <li v-for="event in events" @click="$router.push('/' + event._id)">
+          <i class="fa fa-trash action" @click.stop="deleteEvent(event._id)" v-if="isAdmin(event)"></i>
           <h2>
             {{formatEventName(event)}}
           </h2>
@@ -39,22 +40,24 @@ export default {
     }
   },
   created() {
-    this.loading = true;
-    Event.listMyEvents((err, response) => {
-      if(err) {
-        console.error(err)
-      } else {
-        this.events = response.data.sort((a,b) => {
-          return Utils.getTimestampFromId(b._id) - Utils.getTimestampFromId(a._id)
-        })
-      }
-      this.loading = false;
-    })
+    this.loadEvents()
   },
   methods: {
     formatEventName: Formatter.formatEventName,
     isAdmin(event) {
       return event.admin === Auth.user()
+    },
+    deleteEvent(eventId) {
+      this.$bus.$emit('confirm', this.$t('app.profilePage.deleteEvent'), this.doDelete, eventId)
+    },
+    doDelete(eventId) {
+      Event.delete(eventId, (err, response) => {
+        if(err) {
+          console.error(err)
+        } else {
+          this.loadEvents()
+        }
+      })
     },
     getEventDates(event) {
       if(event && event.dates && event.dates.length > 0) {
@@ -64,6 +67,19 @@ export default {
       } else {
         return ' ? - ? '
       }
+    },
+    loadEvents() {
+      this.loading = true;
+      Event.listMyEvents((err, response) => {
+        if(err) {
+          console.error(err)
+        } else {
+          this.events = response.data.sort((a,b) => {
+            return Utils.getTimestampFromId(b._id) - Utils.getTimestampFromId(a._id)
+          })
+        }
+        this.loading = false;
+      })
     }
   }
 }

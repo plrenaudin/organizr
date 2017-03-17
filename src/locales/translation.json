@@ -47,6 +47,7 @@
       "eventList": "My events",
       "title": "Your profile",
       "isAdmin": "You are the admin fo this event.",
+      "deleteEvent": "Are you sure you want to delete this event?",
       "noEvents": "You have no events yet"
     },
     "footer": {
@@ -81,6 +82,7 @@
     "remove": "Remove",
     "saving": "Saving...",
     "saved": "Saved",
-    "serverError": "Something went wrong..."
+    "serverError": "Something went wrong...",
+    "confirmTitle": "Please confirm."
   }
 }
