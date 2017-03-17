@@ -13,7 +13,7 @@
           <attendees :list="event.attendees"></attendees>
         </li>
       </ul>
-      <div class="noEvents" v-else>
+      <div class="splash" v-else>
         <i class="fa fa-2x fa-frown-o"></i>
         <span>{{$t('app.profilePage.noEvents')}}</span>
       </div>
