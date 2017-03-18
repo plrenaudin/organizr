@@ -27,6 +27,18 @@ module.exports = {
     })
   },
 
+  deleteEvent (id, user, cb) {
+    db.get('events').findOne({ _id: id, admin: user }, (err, data) => {
+      if (err || !data) {
+        err && console.error(err)
+        return cb(new Error('Event not found: ' + id))
+      }
+      db.get('archive').insert(data).then(
+        db.get('events').findOneAndDelete({ _id: id, admin: user }, cb)
+      )
+    });
+  },
+
   findByUser(email, cb) {
     db.get('events').find(
       { $or:[

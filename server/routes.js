@@ -42,11 +42,22 @@ const mutateEvent = (req, res, next) => {
   })
 }
 
+const deleteEvent = (req, res, next) => {
+  eventAPI.deleteEvent(req.params[0], req.user.email, (err, data) => {
+    if(err) {
+      return next(err)
+    }
+    res.json(data)
+    next()
+  })
+}
+
 const eventIdRegex = /([a-z0-9]{24})/
 
 module.exports = function (app) {
   app.post('/', createEvent)
   app.get('/listMyEvents', listUserEvents)
   app.get(eventIdRegex, participate)
+  app.del(eventIdRegex, deleteEvent)
   app.post('/:idEvent/:action', mutateEvent)
 }
