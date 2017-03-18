@@ -1,5 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
 var apiHost;
 var setupAPI = function() {
@@ -20,7 +22,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: 'build.js'
   },
   module: {
@@ -34,6 +36,7 @@ module.exports = {
     ]
   },
   devServer: {
+    contentBase: path.join(__dirname, "dist"),
     historyApiFallback: true,
     noInfo: true
   },
@@ -45,7 +48,14 @@ module.exports = {
     new webpack.DefinePlugin({
       __API__: apiHost
     }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new HtmlWebpackPlugin({
+      template: 'index.ejs',
+      hash: true
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'async'
+    })
   ]
 }
 
