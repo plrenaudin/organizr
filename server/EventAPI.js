@@ -225,8 +225,6 @@ module.exports = {
         { $pull: { 'attendees.$.dates': payload.date } },
         cb
       )
-    },
-
+    }
   }
-
 }

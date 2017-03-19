@@ -1,11 +1,11 @@
 {
   "app": {
     "menu": {
-      "info": "The Event",
-      "datetime": "The Moment",
-      "location": "The Place",
-      "checklist": "The Checklist",
-      "polls": "The Polls"
+      "info": "Event",
+      "datetime": "Time",
+      "location": "Place",
+      "checklist": "Todo",
+      "polls": "Vote"
     },
     "sidebar": {
       "editEvent": "Edit",
