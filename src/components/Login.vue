@@ -36,7 +36,7 @@
       },
       show() {
         let options = {
-          'icon':'/dist/logo.svg',
+          'icon':'/logo.svg',
           'primaryColor':'#4CAF50 ',
           'dict': {
             'title': 'Organizr.io',
