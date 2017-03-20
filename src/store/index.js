@@ -175,14 +175,14 @@ export default new Vuex.Store({
       if (choice && !state.polls[indexPoll].choices.find(item => item === choice)) {
         let concernedPoll = state.polls[indexPoll]
         concernedPoll.choices.push(choice)
-        Event.addPollQuestion(state._id, { question: concernedPoll.question, choice })
+        Event.addPollChoice(state._id, { question: concernedPoll.question, choice })
       }
     },
     removeChoice(state, {indexPoll, indexChoice}) {
       let concernedPoll = state.polls[indexPoll]
       let choiceToRemove = concernedPoll.choices[indexChoice]
       concernedPoll.choices.splice(indexChoice, 1)
-      Event.removePollQuestion(state._id, { question: concernedPoll.question, choice: choiceToRemove })
+      Event.removePollChoice(state._id, { question: concernedPoll.question, choice: choiceToRemove })
     },
 
     vote(state, {question, choice}) {

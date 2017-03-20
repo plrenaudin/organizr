@@ -489,7 +489,7 @@ describe('EventAPI test suite', () => {
   //add poll choice
 
   it('adds a choice to a poll without choice yet', (done) => {
-    sut.eventMutations.addPollQuestion('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice1' } }, (err, data) => {
+    sut.eventMutations.addPollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice1' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.polls.length).to.equal(1)
       expect(data.polls[0].choices.length).to.equal(1)
@@ -499,7 +499,7 @@ describe('EventAPI test suite', () => {
   })
 
   it('adds a choice to a poll with choices', (done) => {
-    sut.eventMutations.addPollQuestion('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice2' } }, (err, data) => {
+    sut.eventMutations.addPollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice2' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.polls.length).to.equal(1)
       expect(data.polls[0].choices.length).to.equal(2)
@@ -510,7 +510,7 @@ describe('EventAPI test suite', () => {
   })
 
   it('adds a choice only if not exist already', (done) => {
-    sut.eventMutations.addPollQuestion('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice2' } }, (err, data) => {
+    sut.eventMutations.addPollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice2' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.polls.length).to.equal(1)
       expect(data.polls[0].choices.length).to.equal(2)
@@ -519,7 +519,7 @@ describe('EventAPI test suite', () => {
   })
 
   it('does not add a choice if not the admin', (done) => {
-    sut.eventMutations.addPollQuestion('anotherUser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice3' } }, (err, data) => {
+    sut.eventMutations.addPollChoice('anotherUser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice3' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.lastErrorObject.updatedExisting).to.be.false
       db.get('events').findOne({ _id: '58c567be9d4bf30001eb100f' }).then((data2) => {
@@ -531,7 +531,7 @@ describe('EventAPI test suite', () => {
   })
 
   it('does not add a choice if poll does not exist', (done) => {
-    sut.eventMutations.addPollQuestion('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'pollNotExisting', choice:'choice3' } }, (err, data) => {
+    sut.eventMutations.addPollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'pollNotExisting', choice:'choice3' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.lastErrorObject.updatedExisting).to.be.false
       db.get('events').findOne({ _id: '58c567be9d4bf30001eb100f' }).then((data2) => {
@@ -545,7 +545,7 @@ describe('EventAPI test suite', () => {
   // remove poll choice
 
   it('removes a poll choice', (done) => {
-    sut.eventMutations.removePollQuestion('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice2' } }, (err, data) => {
+    sut.eventMutations.removePollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice2' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.polls.length).to.equal(1)
       expect(data.polls[0].choices.length).to.equal(1)
@@ -555,7 +555,7 @@ describe('EventAPI test suite', () => {
   })
 
   it('does not remove a poll choice if not admin', (done) => {
-    sut.eventMutations.removePollQuestion('another', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice1' } }, (err, data) => {
+    sut.eventMutations.removePollChoice('another', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice1' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.polls).to.be.undefined
       db.get('events').findOne({ _id: '58c567be9d4bf30001eb100f' }).then((data2) => {
@@ -568,7 +568,7 @@ describe('EventAPI test suite', () => {
   })
 
   it('removes nothing if the poll does not exist', (done) => {
-    sut.eventMutations.removePollQuestion('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll not existing', choice:'choice2' } }, (err, data) => {
+    sut.eventMutations.removePollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll not existing', choice:'choice2' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.lastErrorObject.updatedExisting).to.be.false
       db.get('events').findOne({ _id: '58c567be9d4bf30001eb100f' }).then((data2) => {
@@ -580,7 +580,7 @@ describe('EventAPI test suite', () => {
   })
 
   it('removes nothing if the choice does not exist', (done) => {
-    sut.eventMutations.removePollQuestion('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice3' } }, (err, data) => {
+    sut.eventMutations.removePollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice3' } }, (err, data) => {
       expect(err).to.be.null
       expect(data.polls.length).to.equal(1)
       expect(data.polls[0].choices.length).to.equal(1)
