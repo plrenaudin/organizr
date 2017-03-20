@@ -144,16 +144,16 @@ module.exports = {
 
     addPollQuestion(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
-        { _id: id, admin: user, 'polls.question': payload.choicePoll.question },
-        { $addToSet: { 'polls.$.choices': payload.choicePoll.choice } },
+        { _id: id, admin: user, 'polls.question': payload.poll.question },
+        { $addToSet: { 'polls.$.choices': payload.poll.choice } },
         cb
       )
     },
 
     removePollQuestion(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
-        { _id: id, admin: user, 'polls.question': payload.choicePoll.question },
-        { $pull: { 'polls.$.choices': payload.choicePoll.choice } },
+        { _id: id, admin: user, 'polls.question': payload.poll.question },
+        { $pull: { 'polls.$.choices': payload.poll.choice } },
         cb
       )
     },

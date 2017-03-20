@@ -4,31 +4,13 @@ module.exports = [
     "admin": "testuser",
     "attendees": [
       {
-        "email": "testuser",
-        "dates": [
-          "2017-03-07"
-        ]
+        "email": "testuser"
       }
     ],
     "info": {
       "title": "anotherevent",
       "description": ""
-    },
-    "dates": [
-      {
-        "day": "2017-03-07",
-        "times": []
-      },
-      {
-        "day": "2017-03-23",
-        "times": []
-      }
-    ],
-    "places": [
-      {
-        "name": "plop"
-      }
-    ]
+    }
   }, {
     "_id": "58c56a83ad49880001fc1a0c",
     "admin": "testuser",
@@ -88,5 +70,16 @@ module.exports = [
       "title": "anotherevent",
       "description": ""
     }
+  }, {
+    "_id": "58c6f6a9cdee6c0001ea4d95",
+    "admin": "infouser",
+    "attendees": [
+      {
+        "email": "infouser",
+        "dates": [
+          "2017-03-07"
+        ]
+      }
+    ]
   }
 ]

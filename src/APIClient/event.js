@@ -53,8 +53,8 @@ export default {
   removeTime: (id, date) => { fireAndForget(vm.$http.post(`/${id}/removeTime`, {date}, headers())) },
   addPoll: (id, poll) => { fireAndForget(vm.$http.post(`/${id}/addPoll`, {poll}, headers())) },
   removePoll: (id, poll) => { fireAndForget(vm.$http.post(`/${id}/removePoll`, {poll}, headers())) },
-  addPollQuestion: (id, choicePoll) => { fireAndForget(vm.$http.post(`/${id}/addPollQuestion`, {choicePoll}, headers())) },
-  removePollQuestion: (id, choicePoll) => { fireAndForget(vm.$http.post(`/${id}/removePollQuestion`, {choicePoll}, headers())) },
+  addPollQuestion: (id, poll) => { fireAndForget(vm.$http.post(`/${id}/addPollQuestion`, {poll}, headers())) },
+  removePollQuestion: (id, poll) => { fireAndForget(vm.$http.post(`/${id}/removePollQuestion`, {poll}, headers())) },
 
   //Participations
   checkChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/checkChecklistItem`, {item}, headers())) },
