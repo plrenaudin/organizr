@@ -381,8 +381,15 @@ aside {
     margin: 0;
     text-shadow: 0 0 2px $strong-grey;
     li{
-      padding:1em;
+      padding:1em .5em;
       cursor: pointer;
+      border-top: 1px solid $mid-grey;
+      &:last-child {
+        border-bottom: 1px solid $mid-grey;
+      }
+      &:hover {
+        background-color: $mid-grey;
+      }
       i {
         width: 2em;
         text-align: center;
@@ -404,40 +411,22 @@ aside {
         }
       }
       &.color0 {
-        background-color: $color0;
-        &:hover {
-          background-color: darken($color0,10%);
-        }
+        border-left: 10px solid $color0;
       }
       &.color1 {
-        background-color: $color1;
-        &:hover {
-          background-color: darken($color1,10%);
-        }
+        border-left: 10px solid $color1;
       }
       &.color2 {
-        background-color: $color2;
-        &:hover {
-          background-color: darken($color2,10%);
-        }
+        border-left: 10px solid $color2;
       }
       &.color3 {
-        background-color: $color3;
-        &:hover {
-          background-color: darken($color3,10%);
-        }
+        border-left: 10px solid $color3;
       }
       &.color4 {
-        background-color: $color4;
-        &:hover {
-          background-color: darken($color4,10%);
-        }
+        border-left: 10px solid $color4;
       }
       &.color5 {
-        background-color: $color5;
-        &:hover {
-          background-color: darken($color5,10%);
-        }
+        border-left: 10px solid $color5;
       }
     }
   }
