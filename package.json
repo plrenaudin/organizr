@@ -10,7 +10,8 @@
     "build:staging": "cross-env NODE_ENV=staging webpack --progress --hide-modules",
     "start": "node server/server.js",
     "test:server": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests mocha test/server",
-    "test":"npm run test:server"
+    "test": "npm run test:server",
+    "coverage": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests istanbul cover _mocha -- test/server "
   },
   "dependencies": {
     "bunyan": "^1.8.8",
@@ -32,6 +33,7 @@
     "file-loader": "^0.9.0",
     "font-awesome": "^4.7.0",
     "html-webpack-plugin": "^2.28.0",
+    "istanbul": "^0.4.5",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
     "node-sass": "^4.5.0",

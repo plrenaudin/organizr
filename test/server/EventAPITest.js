@@ -20,11 +20,12 @@ describe('EventAPI test suite', () => {
     })
   })
 
-  it('inserts a new event', (done) => {
+  it('inserts a new event and set the admin', (done) => {
     sut.createNew('newUser', () => {
       sut.findByUser('newUser', (err, data) => {
         expect(err).to.be.null
         expect(data.length).to.equal(1)
+        expect(data[0].admin).to.equal('newUser')
         done()
       })
     })
@@ -56,6 +57,13 @@ describe('EventAPI test suite', () => {
     })
   })
 
+  it('throws an error if the event does not exist and someone tries to participate', (done) => {
+    sut.participate('cccccccccccccccccccccccc', 'anotherAttendee', (err, data) => {
+      expect(err.message).to.equal('Event not found: cccccccccccccccccccccccc')
+      done()
+    })
+  })
+
   it('does not add a new participation if already there', (done) => {
     sut.participate('58c56a83ad49880001fc1a0c', 'testuser', (err, data) => {
       expect(err).to.be.null
@@ -77,6 +85,14 @@ describe('EventAPI test suite', () => {
       })
     })
   })
+
+  it('throws an error if the event does not exist and someone tries to delete it', (done) => {
+    sut.deleteEvent('cccccccccccccccccccccccc', 'someguy', (err, data) => {
+      expect(err.message).to.equal('Event not found: cccccccccccccccccccccccc')
+      done()
+    })
+  })
+
   // Add checklist item
 
   it('adds a checklist item also create the checklist list', (done) => {
@@ -88,8 +104,8 @@ describe('EventAPI test suite', () => {
     })
   })
 
-  it('adds a checklist item to existing checklist list', (done) => {
-    sut.eventMutations.addChecklistItem('testuser', '58c567be9d4bf30001eb100f', { item: 'newitem2' }, (err, data) => {
+  it('uses the mutation nested object and adds a checklist item to existing checklist list',(done) => {
+    sut.mutateEvent('testuser','58c567be9d4bf30001eb100f','addChecklistItem',{ item: 'newitem2' }, (err, data) => {
       expect(err).to.be.null
       expect(data.checklist.length).to.equal(2)
       expect(data.checklist[0]).to.equal('newitem')
