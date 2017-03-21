@@ -587,4 +587,111 @@ describe('EventAPI test suite', () => {
       done()
     })
   })
+
+  //Participations
+
+  //Check checklist item
+
+  it('checks checklist items', (done) => {
+    sut.eventMutations.checkChecklistItem('participant', '58c567be9d4bf30001eb100f', { item: 'newitem' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.attendees[1].checklist.length).to.equal(1)
+      expect(data.attendees[1].checklist[0]).to.equal('newitem')
+      done()
+    })
+  })
+
+  xit('does not check unexisting checklist items', (done) => {
+    sut.eventMutations.checkChecklistItem('participant', '58c567be9d4bf30001eb100f', { item: 'coucou' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.lastErrorObject.updatedExisting).to.be.false
+      done()
+    })
+  })
+
+  //Uncheck checklist item
+
+  it('unchecks checklist items', (done) => {
+    sut.eventMutations.uncheckChecklistItem('participant', '58c567be9d4bf30001eb100f', { item: 'newitem' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.attendees[1].checklist.length).to.equal(0)
+      done()
+    })
+  })
+
+  //Vote
+
+  it('can vote', (done) => {
+    sut.eventMutations.vote('participant', '58c567be9d4bf30001eb100f', { question: 'poll2', choice:'choice1' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.attendees[1].polls.length).to.equal(1)
+      expect(data.attendees[1].polls[0].question).to.equal('poll2')
+      expect(data.attendees[1].polls[0].choice).to.equal('choice1')
+      done()
+    })
+  })
+
+  xit('cannot vote for unexisting choice', (done) => {
+    sut.eventMutations.vote('participant', '58c567be9d4bf30001eb100f', { question: 'poll2', choice:'choice4' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.lastErrorObject.updatedExisting).to.be.false
+      done()
+    })
+  })
+
+  //Place
+
+  it('selects a place', (done) => {
+    sut.eventMutations.selectPlace('participant', '58c567be9d4bf30001eb100f', { place: 'myPlace' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.attendees[1].places.length).to.equal(1)
+      expect(data.attendees[1].places[0]).to.equal('myPlace')
+      done()
+    })
+  })
+
+  xit('cannot select an unexisting place', (done) => {
+    sut.eventMutations.selectPlace('participant', '58c567be9d4bf30001eb100f', { place: 'mars' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.lastErrorObject.updatedExisting).to.be.false
+      done()
+    })
+  })
+
+  it('unselects a place', (done) => {
+    sut.eventMutations.unselectPlace('participant', '58c567be9d4bf30001eb100f', { place: 'myPlace' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.attendees[1].places.length).to.equal(0)
+      done()
+    })
+  })
+
+  //select datetime
+
+  it('selects a date time', (done) => {
+    sut.eventMutations.selectDatetime('participant', '58c567be9d4bf30001eb100f', { date: '2017-07-25' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.attendees[1].dates.length).to.equal(1)
+      expect(data.attendees[1].dates[0]).to.equal('2017-07-25')
+      done()
+    })
+  })
+
+  xit('does not select unexisting date times', (done) => {
+    sut.eventMutations.selectDatetime('participant', '58c567be9d4bf30001eb100f', { date: '2018-07-25' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.lastErrorObject.updatedExisting).to.be.false
+      done()
+    })
+  })
+
+  //Unselect datetime
+
+  it('unselect date time', (done) => {
+    sut.eventMutations.unselectDatetime('participant', '58c567be9d4bf30001eb100f', { date: '2017-07-25' }, (err, data) => {
+      expect(err).to.be.null
+      expect(data.attendees[1].dates.length).to.equal(0)
+      done()
+    })
+  })
 })

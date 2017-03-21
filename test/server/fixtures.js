@@ -5,6 +5,9 @@ module.exports = [
     "attendees": [
       {
         "email": "testuser"
+      },
+      {
+        "email": "participant"
       }
     ],
     "info": {
