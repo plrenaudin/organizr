@@ -1,10 +1,13 @@
 <template>
   <div class="location">
-    <div class="map" v-if="place.valid" @click="gotoMap(place.name)">
-      <img :src="imageUrl + place.name +'&markers='+place.name" />
-    </div>
-    <div class="placePlaceholder" v-else>
-      ?
+    <div class="map">
+      <img width="400" height="170"
+        :src="imageUrl + place.name +'&markers='+place.name"
+        v-if="place.valid"
+        @click="gotoMap(place.name)"/>
+      <div class="placePlaceholder" v-else>
+        ?
+      </div>
     </div>
     <div class="name"><i class="fa fa-map-marker"></i> {{place.name}}</div>
   </div>

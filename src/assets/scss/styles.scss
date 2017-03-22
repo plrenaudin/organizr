@@ -250,14 +250,15 @@ input[type=text], select, textarea {
   }
 }
 
+
 .placePlaceholder {
-  width: $card-min-width;
+  width: 400px;
   height: 170px;
-  background-color: $mid-grey;
   font-size: 5em;
   font-weight: bold;
   color: $white;
   display: flex;
+  cursor: default;
   justify-content: center;
   align-items: center;
   text-shadow: 0 0 6px $strong-grey;
@@ -268,6 +269,9 @@ input[type=text], select, textarea {
   display: inline-block;
   cursor: pointer;
   overflow: hidden;
+  background-image: url('./assets/img/mapPlaceholder.png');
+  background-position: center;
+  img { display: block; }
 }
 
 .card {
@@ -469,30 +473,43 @@ aside {
     }
     .help {
       margin-bottom: 1em;
+      background-color: $grey;
     }
     #info {
-      h2 { border-bottom: 2px solid $color0; }
-      .help { background-color: $white-color0;}
+      h2 {
+        color: $color0;
+        border-bottom: 2px solid $color0;
+      }
     }
     #calendar {
-      h2 { border-bottom: 2px solid $color1; }
-      .help { background-color: $white-color1;}
+      h2 {
+        color: $color1;
+        border-bottom: 2px solid $color1;
+      }
     }
     #place {
-      h2 { border-bottom: 2px solid $color2; }
-      .help { background-color: $white-color2;}
+      h2 {
+        color: $color2;
+        border-bottom: 2px solid $color2;
+      }
     }
     #checklist {
-      h2 { border-bottom: 2px solid $color3; }
-      .help { background-color: $white-color3;}
+      h2 {
+        color: $color3;
+        border-bottom: 2px solid $color3;
+      }
     }
     #poll {
-      h2 { border-bottom: 2px solid $color4; }
-      .help { background-color: $white-color4;}
+      h2 {
+        color: $color4;
+        border-bottom: 2px solid $color4;
+      }
     }
     #participant {
-      h2 { border-bottom: 2px solid $color5; }
-      .help { background-color: $white-color5;}
+      h2 {
+        color: $color5;
+        border-bottom: 2px solid $color5;
+      }
     }
     .emptyEvent {
       font-size: 2em;
