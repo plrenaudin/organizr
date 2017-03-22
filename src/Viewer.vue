@@ -88,11 +88,12 @@
       Event.findById(this.eventId, (err, response) => {
         if(!err) {
           this.$store.commit('loadEvent', response.data)
-          this.loaded = true
         } else {
-          this.loaded = true
           this.invalid = true
         }
+        this.$nextTick(() => {
+          this.loaded = true
+        })
       })
     },
     computed: {
