@@ -1,6 +1,6 @@
 <template>
   <div class="login button" @click="show">
-    {{label}}
+    <i class="fa fa-magic"></i> {{label}}
   </div>
 </template>
 <script>

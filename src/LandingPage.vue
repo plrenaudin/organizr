@@ -3,19 +3,47 @@
     <div class="intro">
       <div class="header">
         <section id="title">
-          <img src="./assets/logo.svg" alt="Logo" />
-          <div class="titleText">
-            <h1>{{$t('app.landingPage.title')}}</h1>
-            <div class="subtitle">{{$t('app.landingPage.subtitle')}}</div>
+          <div>
+            <img src="./assets/logo.svg" alt="Logo" />
+            <div class="titleText inline">
+              <h1>{{$t('app.landingPage.title')}}</h1>
+              <div class="subtitle">{{$t('app.landingPage.subtitle')}}</div>
+            </div>
+          </div>
+          <div v-show="authenticated">
+            <div class="button" @click="logout()"><i class="fa fa-sign-out"></i>{{$t('app.logout')}}</div>
           </div>
         </section>
         <section id="description">
           <p v-html="$t('app.landingPage.description')"></p>
-          <login v-show="!authenticated" :label="$t('app.landingPage.getStarted')"></login>
-          <div v-show="authenticated">
-            <router-link to="/profile" class="button"><i class="fa fa-arrow-right"></i> {{$t('app.landingPage.getStarted')}}</router-link>
-            <div class="button" @click="logout()"><i class="fa fa-sign-out"></i>{{$t('app.logout')}}</div>
-          </div>
+          <ul class="steps">
+            <li>
+              <h2><i class="fa fa-magic"></i>1</h2>
+              <p v-html="$t('app.landingPage.step1')"></p>
+            </li>
+            <li>
+              <h2><i class="fa fa-calendar"></i>2</h2>
+              <p v-html="$t('app.landingPage.step2')"></p>
+            </li>
+            <li>
+              <h2><i class="fa fa-map-marker"></i>3</h2>
+              <p v-html="$t('app.landingPage.step3')"></p>
+            </li>
+            <li>
+              <h2><i class="fa fa-list"></i>4</h2>
+              <p v-html="$t('app.landingPage.step4')"></p>
+            </li>
+            <li>
+              <h2><i class="fa fa-bullhorn"></i>5</h2>
+              <p v-html="$t('app.landingPage.step5')"></p>
+            </li>
+          </ul>
+          <login v-if="!authenticated" :label="$t('app.landingPage.getStarted')"></login>
+          <router-link to="/profile" class="button" v-else>
+            <i class="fa fa-arrow-right"></i> {{$t('app.landingPage.getStartedLogged')}}
+          </router-link>
+          <p class="scrolldown" v-html="$t('app.landingPage.howto')"></p>
+          <i class="fa fa-angle-down"></i>
         </section>
       </div>
     </div>

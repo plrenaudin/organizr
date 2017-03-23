@@ -764,7 +764,6 @@ section {
 .landingPage {
   font-size: 1.2em;
   .intro {
-    position: fixed;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -773,26 +772,60 @@ section {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
     .header {
       display: flex;
-      flex-direction: row;
-      align-content: space-between;
+      flex-direction: column;
       align-items: center;
     }
     h1 {
       margin: 0
     }
     #title {
-      flex: 1;
+      width: 90%;
       display: flex;
       align-items: center;
-      flex-direction: row;
+      justify-content: space-between;
       img{
         width: 4em;
         padding: 0 1em;
+        display: inline-block;
       }
     }
     #description  {
-      text-align: justify;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
       flex: 1;
+      .scrolldown {
+        margin-top: 3em;
+      }
+      ul.steps {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          text-align: center;
+          margin: 1em 2em;
+          border: 2px solid $grey;
+          width: 120px;
+          border-radius: 4px;
+          .fa {
+            color: $white;
+          }
+          &:first-of-type{
+            background-color: $color0;
+          }
+          &:nth-of-type(2) {
+            background-color: $color1;
+          }
+          &:nth-of-type(3) {
+            background-color: $color2;
+          }
+          &:nth-of-type(4) {
+            background-color: $color3;
+          }
+          &:nth-of-type(5) {
+            background-color: $color4;
+          }
+        }
+      }
     }
   }
   .getStartedPlease {
@@ -805,7 +838,6 @@ section {
     align-items: center;
   }
   .description {
-    padding-top: 120px;
     img {
       margin: 0 auto;
     }
