@@ -15,7 +15,7 @@
           </div>
         </section>
         <section id="description">
-          <p v-html="$t('app.landingPage.description')"></p>
+          <h2 v-html="$t('app.landingPage.description')"></h2>
           <ul class="steps">
             <li>
               <h2><i class="fa fa-magic"></i>1</h2>
@@ -42,8 +42,10 @@
           <router-link to="/profile" class="button" v-else>
             <i class="fa fa-arrow-right"></i> {{$t('app.landingPage.getStartedLogged')}}
           </router-link>
-          <p class="scrolldown" v-html="$t('app.landingPage.howto')"></p>
-          <i class="fa fa-angle-down"></i>
+          <div class="scrolldown" @click="scrollTo('time')">
+            <div>{{$t('app.landingPage.howto')}}</div>
+            <i class="fa fa-angle-down"></i>
+          </div>
         </section>
       </div>
     </div>
@@ -74,6 +76,7 @@
   </main>
 </template>
 <script>
+  import zenscroll from 'zenscroll'
   import Login from './components/Login.vue'
   import Auth from './helpers/Auth.js'
   export default {
@@ -90,6 +93,9 @@
       logout() {
         Auth.logout()
         document.location.reload()
+      },
+      scrollTo(element) {
+        zenscroll.to(document.getElementById(element), 250)
       }
     },
     created() {

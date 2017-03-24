@@ -438,8 +438,19 @@ aside {
 
 .profilePage {
   padding: 0 3em;
+  background-color: $strong-grey;
+  color: $white;
   #eventList {
     display: block;
+    color: $strong-grey;
+    ul li {
+      &:first-child {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      background-color: $light-grey;
+    }
   }
 }
 .splash {
@@ -796,15 +807,20 @@ section {
       flex: 1;
       .scrolldown {
         margin-top: 3em;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
       }
       ul.steps {
         display: flex;
         flex-wrap: wrap;
+        margin: 2em 0;
         li {
           text-align: center;
-          margin: 1em 2em;
+          margin: 2em;
+          padding: 0 1em;
           border: 2px solid $grey;
-          width: 120px;
+          width: 110px;
           border-radius: 4px;
           .fa {
             color: $white;

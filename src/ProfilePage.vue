@@ -6,8 +6,7 @@
     </div>
     <section id="eventList" class="card">
       <h2><i class="fa fa-calendar"></i> {{$t('app.profilePage.eventList')}}</h2>
-      <a class="createEvent button" @click="createEvent"><i class="fa fa-plus"></i> {{$t('app.profilePage.createEvent')}}</a>
-      <my-events></my-events>
+      <my-events @create="createEvent"></my-events>
     </section>
   </div>
 </template>

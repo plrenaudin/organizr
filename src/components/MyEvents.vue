@@ -1,8 +1,9 @@
 <template>
   <div class="myEvents">
     <div v-show="!loading">
-      <ul v-if="events.length > 0">
-        <li v-for="event in events" @click="$router.push('/' + event._id)">
+      <ul>
+        <li class="card" @click="$emit('create')"><h2><i class="fa fa-magic"></i> {{$t('app.profilePage.createEvent')}}</h2></li>
+        <li class="card" v-for="event in events" @click="$router.push('/' + event._id)">
           <i class="fa fa-trash action" @click.stop="deleteEvent(event._id)" v-if="isAdmin(event)"></i>
           <h2>
             {{formatEventName(event)}}
@@ -14,7 +15,7 @@
           <attendees :list="event.attendees"></attendees>
         </li>
       </ul>
-      <div class="splash" v-else>
+      <div class="splash" v-if="!events.length">
         <i class="fa fa-2x fa-frown-o"></i>
         <span>{{$t('app.profilePage.noEvents')}}</span>
       </div>
