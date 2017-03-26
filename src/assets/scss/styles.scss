@@ -444,6 +444,7 @@ aside {
   background-color: $strong-grey;
   color: $white;
   #eventList {
+    color: $strong-grey;
     display: block;
   }
 }
@@ -865,7 +866,6 @@ section {
 }
 .myEvents {
   color: $strong-grey;
-
   ul.eventList {
     display: flex;
     flex-wrap: wrap;
