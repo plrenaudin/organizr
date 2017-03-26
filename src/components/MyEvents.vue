@@ -1,7 +1,7 @@
 <template>
   <div class="myEvents">
     <div v-show="!loading">
-      <ul>
+      <ul class="eventList">
         <li class="card" @click="$emit('create')"><h2><i class="fa fa-magic"></i> {{$t('app.profilePage.createEvent')}}</h2></li>
         <li class="card" v-for="event in events" @click="$router.push('/' + event._id)">
           <i class="fa fa-trash action" @click.stop="deleteEvent(event._id)" v-if="isAdmin(event)"></i>

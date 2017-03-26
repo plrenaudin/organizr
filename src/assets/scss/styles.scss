@@ -445,16 +445,6 @@ aside {
   color: $white;
   #eventList {
     display: block;
-    color: $strong-grey;
-    ul li {
-      &:first-child {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        background-color: $white-green;
-      }
-      background-color: $light-grey;
-    }
   }
 }
 .splash {
@@ -874,36 +864,45 @@ section {
   }
 }
 .myEvents {
-  ul{
+  color: $strong-grey;
+
+  ul.eventList {
     display: flex;
     flex-wrap: wrap;
+    >li {
+      flex: 0 0 400px;
+      padding: 1em 1em;
+      margin: 2em;
+      border: 1px solid $grey;
+      background-color: $white;
+      cursor: pointer;
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      h2 {
+        margin-top: 0;
+      }
+      .dates {
+        margin-bottom: 1em;
+      }
+      &:hover {
+        background-color: $white-blue;
+      }
+      &:first-child {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: $white-green;
+      }
+      background-color: $light-grey;
+    }
   }
   .action {
     position: absolute;
     right: 1em;
     top: 1em;
-  }
-  li {
-    flex: 0 0 400px;
-    padding: 1em 1em;
-    margin: 2em;
-    border: 1px solid $grey;
-    background-color: $white;
-    cursor: pointer;
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    h2 {
-      margin-top: 0;
-    }
-    .dates {
-      margin-bottom: 1em;
-    }
-    &:hover {
-      background-color: $white-blue;
-    }
   }
 }
 footer {
