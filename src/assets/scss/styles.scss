@@ -871,6 +871,7 @@ section {
     flex-wrap: wrap;
     >li {
       flex: 0 0 400px;
+      min-height: 100px;
       padding: 1em 1em;
       margin: 2em;
       border: 1px solid $grey;
@@ -932,6 +933,9 @@ footer {
     background-color: $white;
     right: 0;
     z-index: 10;
+    max-height: 200px;
+    max-width: 400px;
+    overflow: auto;
     li {
       padding: .5em;
       margin: 0;
@@ -941,7 +945,7 @@ footer {
   .hoverme {
     cursor:default;
   }
-  .hoverme:hover + .attendeesList {
+  .hoverme:hover + .attendeesList, .attendeesList:hover {
     display: block;
   }
 }
