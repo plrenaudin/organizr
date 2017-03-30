@@ -14,7 +14,11 @@
             <div class="button" @click="logout()"><i class="fa fa-sign-out"></i>{{$t('app.logout')}}</div>
           </div>
         </section>
-        <section id="description">
+        <section class="getStartedPlease" v-if="getStartedToContinue">
+          <p v-html="$t('app.landingPage.getStatedToContinue')"></p>
+          <login v-if="!authenticated" :label="$t('app.landingPage.join')"></login>
+        </section>
+        <section id="description" v-else>
           <h2 v-html="$t('app.landingPage.description')"></h2>
           <ul class="steps">
             <li>
@@ -49,9 +53,7 @@
         </section>
       </div>
     </div>
-    <section class="getStartedPlease" v-if="getStartedToContinue" v-html="$t('app.landingPage.getStatedToContinue')">
-    </section>
-    <div class="description" v-else>
+    <div class="description">
       <section id="time">
         <h3><i class="fa fa-calendar"></i> {{$t('app.landingPage.timeTitle')}}</h3>
         <p v-html="$t('app.landingPage.time')"></p>

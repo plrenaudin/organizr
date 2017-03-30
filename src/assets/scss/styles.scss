@@ -840,11 +840,13 @@ section {
     }
   }
   .getStartedPlease {
-    min-height: 80vh;
     font-weight: bold;
-    color: $mid-grey;
+    margin: 6em 3em;
+    text-align: center;
+    color: $grey;
     font-size: 1.5em;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }

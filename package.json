@@ -1,6 +1,6 @@
 {
-  "name": "organizall",
-  "description": "A Vue.js project",
+  "name": "organizr.io",
+  "description": "Helps you organizing events",
   "version": "1.0.0",
   "author": "Pierre-Louis Renaudin <pl.renaudin@gmail.com>",
   "private": true,
