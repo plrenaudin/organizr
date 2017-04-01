@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var apiHost;
 var setupAPI = function() {
@@ -27,7 +28,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.vue$/, loader: 'vue-loader' },
+      { test: /\.vue$/, loader: 'vue-loader', options: { loaders: { sass: ExtractTextPlugin.extract({ use: ['css-loader','sass-loader'], fallback: 'vue-style-loader' }) } } },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.(png|jpg|gif|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader', options: { name: '[name].[ext]?[hash]' } },
@@ -53,6 +54,7 @@ module.exports = {
       template: 'index.ejs',
       hash: true
     }),
+    new ExtractTextPlugin("style.css"),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async'
     })
