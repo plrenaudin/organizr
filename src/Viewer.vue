@@ -1,9 +1,9 @@
 <template>
   <div id="application" class="viewer">
-    <loading v-show="!loaded"></loading>
-    <template v-show="loaded">
-      <side-bar @scrollto="scrollTo" :view="true" :eventId="eventId"></side-bar>
-        <main>
+    <main>
+      <loading v-show="!loaded"></loading>
+      <template v-show="loaded">
+        <side-bar @scrollto="scrollTo" :view="true" :eventId="eventId"></side-bar>
         <template v-if="invalid">
           <event-not-found></event-not-found>
         </template>

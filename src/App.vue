@@ -21,17 +21,17 @@
       </modal>
       <modal v-if="confirmDialogVisible">
         <div class="dialogBox">
-
-        <div class="modalContent">
-          <h2><i class="fa fa-warning"></i> {{$t('app.confirmTitle')}}</h2>
-          <p v-html="confirmDialogText"></p>
+          <div class="modalContent">
+            <h2><i class="fa fa-warning"></i> {{$t('app.confirmTitle')}}</h2>
+            <p v-html="confirmDialogText"></p>
+          </div>
+          <div class="footerButtons">
+            <div class="red" @click="confirmDialogVisible = false"><i class="fa fa-times"></i> Cancel</div>
+            <div class="green" @click="handleConfirm"><i class="fa fa-check"></i> Confirm</div>
+          </div>
         </div>
-        <div class="footerButtons">
-          <div class="red" @click="confirmDialogVisible = false"><i class="fa fa-times"></i> Cancel</div>
-          <div class="green" @click="handleConfirm"><i class="fa fa-check"></i> Confirm</div>
-        </div>
-      </div>
-    </modal>
+      </modal>
+    </div>
   </div>
 </template>
 
