@@ -70,7 +70,7 @@ export default {
       }
     },
     loadEvents() {
-      this.loading = true;
+      this.loading = true
       Event.listMyEvents((err, response) => {
         if(err) {
           console.error(err)
@@ -79,7 +79,7 @@ export default {
             return Utils.getTimestampFromId(b._id) - Utils.getTimestampFromId(a._id)
           })
         }
-        this.loading = false;
+        this.loading = false
       })
     }
   }

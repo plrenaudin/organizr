@@ -82,7 +82,7 @@ export default new Vuex.Store({
               attendee.dates.push(item)
               Event.selectDatetime(state._id, item)
             }
-            break;
+            break
           }
         }
       }
@@ -116,7 +116,7 @@ export default new Vuex.Store({
               attendee.places.push(item)
               Event.selectPlace(state._id, item)
             }
-            break;
+            break
           }
         }
       }
@@ -150,7 +150,7 @@ export default new Vuex.Store({
               attendee.checklist.push(item)
               Event.checkChecklistItem(state._id, item)
             }
-            break;
+            break
           }
         }
       }
@@ -198,7 +198,7 @@ export default new Vuex.Store({
             attendee.polls.push({ question, choice })
             Event.vote(state._id, { question, choice })
           }
-          break;
+          break
         }
       }
     }
@@ -206,7 +206,7 @@ export default new Vuex.Store({
   getters: {
     dates: state => {
       let result = JSON.parse(JSON.stringify(state.dates))
-      return result.sort(Utils.compareDayAsc).map( item => item.times.sort() && item);
+      return result.sort(Utils.compareDayAsc).map( item => item.times.sort() && item)
     },
     places: state => state.places,
     checklist: state => state.checklist,

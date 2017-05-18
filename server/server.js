@@ -14,13 +14,13 @@ const server = restify.createServer({
   name: 'organiz',
   log: log
 })
-server.use(restify.requestLogger());
+server.use(restify.requestLogger())
 server.pre(function (request, response, next) {
   if(request.method !== 'OPTIONS') {
-    request.log.info({ req: request }, 'REQUEST');
+    request.log.info({ req: request }, 'REQUEST')
   }
-  next();
-});
+  next()
+})
 restify.CORS.ALLOW_HEADERS.push('authorization')
 
 server.pre(restify.CORS())

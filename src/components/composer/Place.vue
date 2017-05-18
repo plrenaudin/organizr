@@ -54,11 +54,11 @@
         let placeName = place.formatted_address ? place.formatted_address : place.name
         this.$store.commit('addPlace', {name: placeName, valid: place.formatted_address})
         let inputAc = this.$el.querySelector('#autocomplete')
-        inputAc.blur();
+        inputAc.blur()
         setTimeout(() => {
           inputAc.value = ''
           inputAc.focus()
-        },10);
+        },10)
       },
       removePlace(index) {
         this.$store.commit('removePlace', index)

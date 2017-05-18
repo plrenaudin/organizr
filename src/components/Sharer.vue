@@ -45,7 +45,7 @@
     name: 'sharer',
     computed: {
       url() {
-        let pageurl = JSON.parse(JSON.stringify(document.location.href));
+        let pageurl = JSON.parse(JSON.stringify(document.location.href))
         return pageurl.replace(/edit\//,'')
       },
       title() {
