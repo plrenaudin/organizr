@@ -1,5 +1,6 @@
 import Vue from 'vue'
 const vm = new Vue()
+
 const fireAndForget = (promise) => {
   promise.then(response => vm.$bus.$emit('server.success', response))
     .catch(err => vm.$bus.$emit('server.error', err))

@@ -1,7 +1,7 @@
 import Formatter from './Formatter.js'
 export default {
 
-  parseTimeInput (input) {
+  parseTimeInput(input) {
     const data = input.replace(/[^0-9]/g, '')
     let hours = '00'
     let minutes = '00'
@@ -21,12 +21,12 @@ export default {
     return hours + ':' + minutes
   },
 
-  compareDayAsc (a, b) {
+  compareDayAsc(a, b) {
     if (a.day < b.day) return -1
     if (a.day > b.day) return 1
     return 0
   },
-  getTimestampFromId (id) {
-    return parseInt( id.toString().substring(0, 8), 16 ) * 1000
+  getTimestampFromId(id) {
+    return parseInt(id.toString().substring(0, 8), 16) * 1000
   }
 }
