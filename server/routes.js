@@ -1,6 +1,5 @@
 const eventAPI = require('./EventAPI')
 const jwt = require('jsonwebtoken')
-const secrets = require('./.secrets')
 
 const createEvent = (req, res, next) => {
   eventAPI.createNew(req.user.email, (err, data) => {
