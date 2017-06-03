@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build:staging": "cross-env NODE_ENV=staging webpack --progress --hide-modules",
-    "start": "node server/server.js",
+    "start": "MONGODB_URI=mongodb://localhost:27017/organizr node server/server.js",
     "test:server": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests mocha test/server",
     "test": "npm run test:server",
     "coverage": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests istanbul cover _mocha -- test/server "
