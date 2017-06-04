@@ -19,8 +19,6 @@
   import Location from '../Location.vue'
   import Attendees from '../Attendees.vue'
 
-  const API_KEY = "AIzaSyDlSpeVFymuJjOUrrIrLkBh1Xh3Mop1VrY"
-  const SCRIPTURL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`
   export default {
     name:'place-viewer',
     components: {Checkbox, Attendees, Location},

@@ -1,4 +1,5 @@
-const db = require('monk')(process.env.MONGODB_URI)
+const secret = require('../../server/.env')
+const db = require('monk')(secret.MONGODB_URI)
 const expect = require('chai').expect
 const sut = require('../../server/EventAPI.js')
 const data = require('./fixtures.js')
