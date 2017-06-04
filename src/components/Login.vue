@@ -1,54 +1,52 @@
 <template>
-  <div class="login button" @click="show">
-    <i class="fa fa-magic"></i> {{label}}
+  <div class="login button" @click="loginGoogle">
+    <i class="fa fa-google"></i> {{label}}
   </div>
 </template>
 <script>
-  import Auth from '../helpers/Auth.js'
-  import Utils from '../helpers/Utils.js'
+import Auth from '../helpers/Auth.js'
+import Utils from '../helpers/Utils.js'
+import Hello from 'hellojs'
 
-  export default {
-    name:'login',
-    props: ['label'],
-    data() {
-      return {
-        lock: {}
+export default {
+  name: 'login',
+  props: ['label'],
+
+  created() {
+    this.init()
+  },
+  methods: {
+    init() {
+      Hello.init({
+        google: __GOOGLE_CLIENT_ID__
+      }, {
+          scope: 'email',
+          redirect_uri: '/'
+        })
+
+      Hello.on('auth.login', auth => {
+        authenticate(auth.network, auth.authResponse.access_token)
+      })
+      const parseJwt = (token) => {
+        let base64Url = token.split('.')[1]
+        let base64 = base64Url.replace('-', '+').replace('_', '/')
+        return window.atob(base64)
+      }
+      const authenticate = (network, socialToken) => {
+        var me = this
+        me.$http.post('/api/auth', {
+          network,
+          socialToken
+        }).then(token => {
+          localStorage.setItem('id_token',token.data)
+          localStorage.setItem('profile', parseJwt(token.data))
+          me.$router.push('/profile')
+        })
       }
     },
-
-    created() {
-      this.init()
-    },
-    methods: {
-      init() {
-        let me = this
-        if(typeof Auth0LockPasswordless !== 'undefined') {
-          me.lock = new Auth0LockPasswordless('IJyD4bZzNwZUVmaMrV5BlCqB8tQzAKeo','organizr.eu.auth0.com')
-          const hash = me.lock.parseHash(window.location.hash)
-          if(hash) {
-            localStorage.setItem('profile', JSON.stringify(hash.profile))
-            localStorage.setItem('id_token', hash.id_token)
-            me.$router.push(me.$route.query.redirect || '/profile')
-          }
-        } else {
-          setTimeout(me.init, 200)
-        }
-      },
-      show() {
-        let options = {
-          'icon':'/logo.svg',
-          'primaryColor':'#4CAF50 ',
-          'dict': {
-            'title': 'Organizr.io',
-            'networkOrEmail': {
-              'separatorText': "Or use Passwordless"
-            },
-          },
-          'connections':['google-oauth2','facebook'],
-          'authParams': { 'scope': 'openid email' }
-        }
-        this.lock.socialOrMagiclink(options)
-      }
+    loginGoogle() {
+      Hello.login('google')
     }
   }
+}
 </script>

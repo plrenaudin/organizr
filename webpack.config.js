@@ -3,7 +3,9 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var env = require('./server/.env')
 
+var googleClientId = "'" + env.GOOGLE_CLIENT_ID + "'"
 var apiHost;
 var setupAPI = function() {
   switch(process.env.NODE_ENV) {
@@ -47,7 +49,8 @@ module.exports = {
   devtool: '#eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
-      __API__: apiHost
+      __API__: apiHost,
+      __GOOGLE_CLIENT_ID__: `${googleClientId}`
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new HtmlWebpackPlugin({
