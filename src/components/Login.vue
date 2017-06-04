@@ -8,6 +8,12 @@ import Auth from '../helpers/Auth.js'
 import Utils from '../helpers/Utils.js'
 import Hello from 'hellojs'
 
+const parseJwt = token => {
+  let base64Url = token.split('.')[1]
+  let base64 = base64Url.replace('-', '+').replace('_', '/')
+  return window.atob(base64)
+}
+
 export default {
   name: 'login',
   props: ['label'],
@@ -17,21 +23,9 @@ export default {
   },
   methods: {
     init() {
-      Hello.init({
-        google: __GOOGLE_CLIENT_ID__
-      }, {
-          scope: 'email',
-          redirect_uri: '/'
-        })
+      Hello.init({ google: __GOOGLE_CLIENT_ID__  }, { scope: 'email', redirect_uri: '/' })
 
-      Hello.on('auth.login', auth => {
-        authenticate(auth.network, auth.authResponse.access_token)
-      })
-      const parseJwt = (token) => {
-        let base64Url = token.split('.')[1]
-        let base64 = base64Url.replace('-', '+').replace('_', '/')
-        return window.atob(base64)
-      }
+      Hello.on('auth.login', auth => authenticate(auth.network, auth.authResponse.access_token))
       const authenticate = (network, socialToken) => {
         var me = this
         me.$http.post('/api/auth', {

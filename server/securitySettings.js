@@ -3,19 +3,19 @@ const jwt = require('jsonwebtoken')
 const restifyJwt = require('restify-jwt')
 const env = require('./.env')
 
-var providers = {
+let providers = {
   facebook: { url: 'https://graph.facebook.com/me' },
   google: { url: 'https://www.googleapis.com/oauth2/v3/tokeninfo' }
 }
 
-createJwt = (profile) => {
+createJwt = profile => {
   let payload = JSON.parse(JSON.stringify(profile))
   payload.exp = Number(payload.exp)
   return jwt.sign(payload, env.pk, { issuer: 'Organizr.io' })
 }
 
-function validateWithProvider(network, socialToken) {
-  return new Promise((resolve, reject) => {
+const validateWithProvider = (network, socialToken) =>
+  new Promise((resolve, reject) => {
     // Send a GET request to Facebook with the token as query string
     request({
       url: providers[network].url,
@@ -30,9 +30,8 @@ function validateWithProvider(network, socialToken) {
       }
     )
   })
-}
 
-module.exports = (server) => {
+module.exports = server => {
   server.post('/api/auth', (req, res) => {
     let { network, socialToken } = req.body
 
@@ -43,5 +42,5 @@ module.exports = (server) => {
     })
   })
 
-  server.use(restifyJwt({ secret: env.pk }).unless({ path: ['/api/auth'] }));
+  server.use(restifyJwt({ secret: env.pk }).unless({ path: ['/api/auth'] }))
 }

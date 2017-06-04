@@ -6,21 +6,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var env = require('./server/.env')
 
 var googleClientId = "'" + env.GOOGLE_CLIENT_ID + "'"
-var apiHost;
-var setupAPI = function() {
-  switch(process.env.NODE_ENV) {
-    case 'production':
-      apiHost = "'https://organizr.io/api'";
-      break;
-    case 'staging':
-      apiHost = "'https://dev.plrenaudin.com/api'";
-      break;
-    default:
-      apiHost = "'http://localhost:3003/'"
-      break;
-  }
-}
-setupAPI()
+var apiHost = "'" + env.SERVER_URL + "'"
+
 module.exports = {
   entry: './src/main.js',
   output: {
