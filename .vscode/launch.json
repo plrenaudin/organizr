@@ -5,6 +5,9 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
+      "env": {
+        "MONGODB_URI": "mongodb://localhost:27017/organizr"
+      },
       "program": "${workspaceRoot}/server/server.js"
     },
     {
