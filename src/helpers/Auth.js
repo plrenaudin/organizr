@@ -1,4 +1,6 @@
 import Formatter from './Formatter.js'
+import Hello from 'hellojs'
+
 export default {
   isAuthenticated() {
     return !!localStorage.getItem('profile')
@@ -11,6 +13,7 @@ export default {
     return user ? Formatter.formatNameByEmail(user) : ''
   },
   logout() {
+    Hello.logout(JSON.parse(localStorage.getItem('profile')).network)
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
   }
