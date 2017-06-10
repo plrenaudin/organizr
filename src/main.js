@@ -22,7 +22,7 @@ const routes = [
   { path: '/profile', component: ProfilePage, meta: { requiresAuth: true } },
   { path: '/edit/:eventId([a-z0-9]{24})', component: Composer, props: true, meta: { requiresAuth: true } },
   { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } },
-  { path: '*',  component: PageNotFound }
+  { path: '*', component: PageNotFound }
 ]
 
 const router = new VueRouter({
@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
     if (!Auth.isAuthenticated()) {
       if (to.query.token) {
         Auth.login(to.query.token)
-        next()
+        next({ path: to.query.redirect || '/' })
       } else {
         next({
           path: '/',
@@ -53,32 +53,32 @@ router.beforeEach((to, from, next) => {
 // Configure globals
 axios.defaults.baseURL = __API__
 axios.interceptors.response.use((response) => {
-    return response
-  }, function (error) {
-    if(error.response && error.response.status === 401) {
-      Auth.logout()
-      router.push('/')
-    } else {
-      return Promise.reject(error)
-    }
-  })
+  return response
+}, function (error) {
+  if (error.response && error.response.status === 401) {
+    Auth.logout()
+    router.push('/')
+  } else {
+    return Promise.reject(error)
+  }
+})
 
 Object.defineProperty(Vue.prototype, '$http', {
-    get() {
-        return axios
-    }
+  get() {
+    return axios
+  }
 })
 const bus = new Vue({})
 Object.defineProperty(Vue.prototype, '$bus', {
-    get() {
-        return bus
-    }
+  get() {
+    return bus
+  }
 })
 
 Object.defineProperty(Vue.prototype, '$t', {
-    get() {
-        return t
-    }
+  get() {
+    return t
+  }
 })
 
 
