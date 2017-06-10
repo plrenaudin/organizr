@@ -1,14 +1,14 @@
 <template>
   <ul class="loginbuttons">
-    <li v-for="provider in providers" class="login button" @click="login(provider)">
-      <i class="fa fa-sign-in"></i> {{label}} with {{provider}}
+    <li class="login button" ref="signinBtn">
+      <i class="fa fa-sign-in"></i> {{label}} with Google
     </li>
   </ul>
 </template>
 <script>
 import Auth from '../helpers/Auth.js'
 import Utils from '../helpers/Utils.js'
-import Hello from 'hellojs'
+
 
 const parseJwt = token => {
   let base64Url = token.split('.')[1]
@@ -19,38 +19,23 @@ const parseJwt = token => {
 export default {
   name: 'login',
   props: ['label'],
-
-  data() {
-    return {
-      providers: ['google', 'facebook']
-    }
-  },
-  created() {
-    this.init()
-  },
-  methods: {
-    init() {
-      Hello.init({
-        google: __GOOGLE_CLIENT_ID__,
-        facebook: __FACEBOOK_CLIENT_ID__
-      }, { scope: 'email'
+  mounted() {
+    window.gapi.load('auth2', () => {
+      const auth2 = window.gapi.auth2.init({
+        client_id: __GOOGLE_CLIENT_ID__
       })
-      Hello.on('auth.login', auth => authenticate(auth.network, auth.authResponse.access_token))
-      const authenticate = (network, socialToken) => {
-        var me = this
-        me.$http.post('/api/auth', { network, socialToken })
+      auth2.attachClickHandler(this.$refs.signinBtn, {}, googleUser => {
+        const me = this
+        const socialToken = googleUser.getAuthResponse(true).access_token
+        this.$http.post('/api/auth', { network: 'google', socialToken })
           .then(token => {
             let data = JSON.parse(parseJwt(token.data))
-            data.network = network
             localStorage.setItem('id_token', token.data)
             localStorage.setItem('profile', JSON.stringify(data))
             me.$router.push('/profile')
           })
-      }
-    },
-    login(provider) {
-      Hello.login(provider).then(console.log.bind(console),console.error.bind(console))
-    }
+      }, error => console.log(error))
+    })
   }
 }
 </script>
