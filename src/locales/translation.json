@@ -68,6 +68,13 @@
       "ref":"Follow this link to partifcipate to",
       "default": "My event"
     },
+    "login": {
+      "google": "Sign in with Google",
+      "passwordlessIntro": "Or send me a magic link",
+      "passwordless": "Send me the magic link",
+      "email": "Email address",
+      "sent": "Sent"
+    },
     "help": {
       "info": "Write down a title and a short description for your event",
       "calendar": "Select the potential dates the event may take place. Once a date is selected you may select times for the attendees to choose from.<br /> You may type in the hour in short format like '115' in place of '01:15' and then press <kbd>Enter</kbd> to submit.",

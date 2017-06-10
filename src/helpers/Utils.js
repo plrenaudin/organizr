@@ -1,5 +1,10 @@
 import Formatter from './Formatter.js'
 export default {
+  parseJwt (token) {
+    let base64Url = token.split('.')[1]
+    let base64 = base64Url.replace('-', '+').replace('_', '/')
+    return window.atob(base64)
+  },
 
   parseTimeInput(input) {
     const data = input.replace(/[^0-9]/g, '')
@@ -26,6 +31,7 @@ export default {
     if (a.day > b.day) return 1
     return 0
   },
+
   getTimestampFromId(id) {
     return parseInt(id.toString().substring(0, 8), 16) * 1000
   }

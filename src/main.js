@@ -33,10 +33,15 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!Auth.isAuthenticated()) {
-      next({
-        path: '/',
-        query: { redirect: to.fullPath }
-      })
+      if (to.query.token) {
+        Auth.login(to.query.token)
+        next()
+      } else {
+        next({
+          path: '/',
+          query: { redirect: to.fullPath }
+        })
+      }
     } else {
       next()
     }
@@ -46,6 +51,23 @@ router.beforeEach((to, from, next) => {
 })
 
 // Configure globals
+axios.defaults.baseURL = __API__
+axios.interceptors.response.use((response) => {
+    return response
+  }, function (error) {
+    if(error.response && error.response.status === 401) {
+      Auth.logout()
+      router.push('/')
+    } else {
+      return Promise.reject(error)
+    }
+  })
+
+Object.defineProperty(Vue.prototype, '$http', {
+    get() {
+        return axios
+    }
+})
 const bus = new Vue({})
 Object.defineProperty(Vue.prototype, '$bus', {
     get() {
@@ -59,22 +81,6 @@ Object.defineProperty(Vue.prototype, '$t', {
     }
 })
 
-axios.defaults.baseURL = __API__
-axios.interceptors.response.use((response) => {
-    return response
-  }, function (error) {
-    if(error.response && error.response.status === 401) {
-      Auth.logout()
-      router.push('/')
-    } else {
-      return Promise.reject(error)
-    }
-  })
-Object.defineProperty(Vue.prototype, '$http', {
-    get() {
-        return axios
-    }
-})
 
 new Vue({
   el: '#app',

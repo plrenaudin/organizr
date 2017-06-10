@@ -15,9 +15,12 @@
   },
   "dependencies": {
     "bunyan": "^1.8.9",
+    "emailjs": "^1.0.9",
     "jsonwebtoken": "^7.4.1",
     "mongodb": "^2.2.25",
     "monk": "^4.0.0",
+    "passwordless": "^1.1.2",
+    "passwordless-mongostore": "^0.1.4",
     "request": "^2.81.0",
     "restify": "^4.3.0",
     "restify-jwt": "^0.4.0",

@@ -2,10 +2,49 @@ const request = require('request')
 const jwt = require('jsonwebtoken')
 const restifyJwt = require('restify-jwt')
 const env = require('./.env')
+const passwordless = require('passwordless')
+const MongoStore = require('passwordless-mongostore')
+const email = require("emailjs")
+const mongoUri = process.env.MONGODB_URI
+const storeUri = mongoUri.substring(0, mongoUri.lastIndexOf('/') + 1) + 'passwordless'
 
+const smtpServer = email.server.connect({
+  user: env.SMTP_USER,
+  password: env.SMTP_PASS,
+  host: env.SMTP_HOST,
+  ssl: true
+})
+
+const validateEmail = (email) => {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
+passwordless.init(new MongoStore(storeUri))
+passwordless.addDelivery((tokenToSend, uidToSend, recipient, callback) => {
+  if(!validateEmail(recipient)) {
+    callback(`invalid email: ${recipient}`)
+    return
+  }
+  smtpServer.send({
+    text: `Welcome to Organizr.io!
+
+Here is your magic link: ${env.SERVER_URL}/api/auth/passwordless?token=${tokenToSend}&uid=${encodeURIComponent(uidToSend)}
+
+This link is valid only once!`,
+    from: 'Organizr.io <admin@organizr.io>',
+    to: recipient,
+    subject: 'Your magic link'
+  }, function (err, message) {
+    if (err) {
+      console.log(err)
+    }
+    callback(err)
+  })
+})
 let providers = {
   facebook: { url: 'https://graph.facebook.com/me' },
-  google: { url: 'https://www.googleapis.com/oauth2/v3/tokeninfo'}
+  google: { url: 'https://www.googleapis.com/oauth2/v3/tokeninfo' }
 }
 
 createJwt = profile => {
@@ -42,6 +81,22 @@ module.exports = server => {
       res.send('Failed!' + err)
     })
   })
+
+  server.get('/api/auth/passwordless', passwordless.acceptToken(), (req, res, next) => {
+    if (req.user) {
+      let payload = createJwt({
+        email: req.user,
+        exp: Math.floor(new Date().getTime() / 1000) + 3600
+      })
+      res.redirect(env.FRONT_URL + '/profile?token=' + payload, next)
+    } else {
+      res.redirect(env.FRONT_URL, next)
+    }
+  })
+
+  server.post('/api/sendToken', passwordless.requestToken((user, delivery, callback, req) => callback(null, user)),
+    (req, res) => { res.json('{sent:true}') }
+  )
 
   server.use(restifyJwt({ secret: env.pk }).unless({ path: ['/api/auth'] }))
 }

@@ -16,7 +16,7 @@
         </section>
         <section class="getStartedPlease" v-if="getStartedToContinue">
           <p v-html="$t('app.landingPage.getStatedToContinue')"></p>
-          <login v-if="!authenticated" :label="$t('app.landingPage.join')"></login>
+          <login v-if="!authenticated"></login>
         </section>
         <section id="description" v-else>
           <h2 v-html="$t('app.landingPage.description')"></h2>
@@ -42,7 +42,7 @@
               <p v-html="$t('app.landingPage.step5')"></p>
             </li>
           </ul>
-          <login v-if="!authenticated" :label="$t('app.landingPage.getStarted')"></login>
+          <login v-if="!authenticated"></login>
           <router-link to="/profile" class="button" v-else>
             <i class="fa fa-arrow-right"></i> {{$t('app.landingPage.getStartedLogged')}}
           </router-link>
