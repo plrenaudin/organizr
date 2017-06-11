@@ -8,6 +8,7 @@ import axios from 'axios'
 import Auth from './helpers/Auth.js'
 
 import LandingPage from './LandingPage.vue'
+import LoginPage from './LoginPage.vue'
 import ProfilePage from './ProfilePage.vue'
 import Composer from './Composer.vue'
 import Viewer from './Viewer.vue'
@@ -16,14 +17,25 @@ import Login from './components/Login.vue'
 
 Vue.use(VueRouter)
 
+const redirect = (to, from, next) => {
+  const redirection = localStorage.getItem('redirection')
+  if(redirection) {
+    localStorage.removeItem('redirection')
+    next(redirection)
+  } else {
+    next()
+  }
+}
+
 const routes = [
   { path: '/', component: LandingPage },
-  { path: '/login', component: Login },
-  { path: '/profile', component: ProfilePage, meta: { requiresAuth: true } },
+  { path: '/login', component: LoginPage },
+  { path: '/profile', component: ProfilePage, meta: { requiresAuth: true }, beforeEnter: redirect},
   { path: '/edit/:eventId([a-z0-9]{24})', component: Composer, props: true, meta: { requiresAuth: true } },
   { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } },
   { path: '*', component: PageNotFound }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
@@ -35,19 +47,16 @@ router.beforeEach((to, from, next) => {
     if (!Auth.isAuthenticated()) {
       if (to.query.token) {
         Auth.login(to.query.token)
-        next({ path: to.query.redirect || '/' })
       } else {
         next({
-          path: '/',
+          path: '/login',
           query: { redirect: to.fullPath }
         })
+        return
       }
-    } else {
-      next()
     }
-  } else {
-    next()
   }
+  next()
 })
 
 // Configure globals

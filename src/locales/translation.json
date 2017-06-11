@@ -68,6 +68,10 @@
       "ref":"Follow this link to partifcipate to",
       "default": "My event"
     },
+    "loginPage": {
+      "title": "Log In",
+      "intro": "The page you are trying to reach requires you to log in"
+    },
     "login": {
       "google": "Sign in with Google",
       "passwordlessIntro": "Or send me a magic link",
@@ -87,7 +91,7 @@
       "pollsViewer": "Please vote for the following poll(s)."
     },
     "notfound": {
-      "title": "The event you are looking for does not exist",
+      "title": "The page you are looking for does not exist",
       "create": "Create one!",
       "home": "Go back home"
     },

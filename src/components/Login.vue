@@ -21,12 +21,10 @@ export default {
   props: ['label'],
   data() {
     return {
-      state:'waiting',
-      destination: ''
+      state:'waiting'
     }
   },
   mounted() {
-    this.destination = this.$router.currentRoute.query.redirect || '/profile'
     window.gapi.load('auth2', () => {
       const auth2 = window.gapi.auth2.init({
         client_id: __GOOGLE_CLIENT_ID__
@@ -37,7 +35,7 @@ export default {
         this.$http.post('/api/auth', { network: 'google', socialToken })
           .then(token => {
             Auth.login(token.data)
-            me.$router.push(this.destination)
+            me.$router.push('/profile')
           })
       }, error => console.log(error))
     })
