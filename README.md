@@ -23,7 +23,10 @@ module.exports = {
   GOOGLE_CLIENT_ID: [KEY],
   GOOGLE_CLIENT_SECRET: [SECRET],
   SERVER_URL: 'http://localhost:3003',
-  MONGODB_URI: 'mongodb://localhost:27017/organizr'
+  FRONT_URL: 'http://localhost:8080',
+  SMTP_USER: 'admin@organizr.io',
+  SMTP_PASS: [PASS],
+  SMTP_HOST: [HOST]
 }
 ```
 
