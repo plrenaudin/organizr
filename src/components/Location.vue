@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-  const API_KEY = "AIzaSyDlSpeVFymuJjOUrrIrLkBh1Xh3Mop1VrY"
+  const API_KEY = "AIzaSyBQlCcDsgaJIna1DjKVvdnOSzaroB92TYU"
   export default {
     name: 'location',
     props: ['place'],
