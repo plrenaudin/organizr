@@ -27,9 +27,19 @@ const redirect = (to, from, next) => {
   }
 }
 
+const refreshSession = (to, from, next) => {
+  const token = localStorage.getItem('profile')
+  if(token) {
+    if(new Date().getTime() > Number(JSON.parse(token).exp) * 1000) {
+      Auth.logout()
+    }
+  }
+  next()
+}
+
 const routes = [
-  { path: '/', component: LandingPage },
-  { path: '/login', component: LoginPage },
+  { path: '/', component: LandingPage, beforeEnter: refreshSession },
+  { path: '/login', component: LoginPage, beforeEnter: refreshSession },
   { path: '/profile', component: ProfilePage, meta: { requiresAuth: true }, beforeEnter: redirect},
   { path: '/edit/:eventId([a-z0-9]{24})', component: Composer, props: true, meta: { requiresAuth: true } },
   { path: '/:eventId([a-z0-9]{24})', component: Viewer, props: true, meta: { requiresAuth: true } },
