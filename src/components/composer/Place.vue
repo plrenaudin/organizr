@@ -20,7 +20,7 @@
 </template>
 <script>
   import Location from '../Location.vue'
-  const API_KEY = "AIzaSyDlSpeVFymuJjOUrrIrLkBh1Xh3Mop1VrY"
+  const API_KEY = "AIzaSyCpXyx4HDbN_7UDmglKe30nfWQLcu-C804"
   const SCRIPTURL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`
   export default {
     name:'place',
