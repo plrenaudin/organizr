@@ -342,7 +342,7 @@ aside {
       &.router-link-active {
         cursor: default;
         color: $white;
-        background-color: $strong-grey;
+        background-color: $blue;
         .fa {
           color: $white;
         }
@@ -558,10 +558,10 @@ section {
 
 .location {
   width: 400px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   .name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     padding: .2em;
   }
 }
@@ -569,16 +569,20 @@ section {
 .sharer {
   padding: 0 .5em;
   h2 {
-    margin-bottom: 0;
+    margin: 0 1em 0 0;
+    display: inline-block;
   }
   input {
     cursor: pointer;
   }
   ul.share-buttons{
+    display: inline-block;
     list-style: none;
     padding: 0;
+    margin: 0;
     li {
       display: inline;
+      margin: 0;
     }
   }
   .urlShare {

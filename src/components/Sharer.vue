@@ -1,7 +1,7 @@
 <template>
-  <section class="sharer">
-    <h2><i class="fa fa-share-alt"></i> {{$t('app.share.title')}}</h2>
-    <div class="buttons">
+  <section class="sharer flex column">
+    <div class="buttons flex center">
+      <h2><i class="fa fa-share-alt"></i> {{$t('app.share.title')}}</h2>
       <ul class="share-buttons">
         <li>
           <a :href="`https://www.facebook.com/sharer/sharer.php?u=${this.url}&t=${this.title}!`" title="Share on Facebook" target="_blank">
@@ -28,15 +28,12 @@
             <img alt="Send email" src="../assets/img/Email.svg" width="32" heigth="32" />
           </a>
         </li>
-        <li>
-          <div class="urlShare">
-            <label for="eventUrl">{{$t('app.share.url')}}</label>
-            <input type="text" id="eventUrl" :value="url" onClick="this.setSelectionRange(0, this.value.length)" readonly>
-          </div>
-        </li>
       </ul>
     </div>
-
+    <div class="urlShare">
+      <label for="eventUrl">{{$t('app.share.url')}}</label>
+      <input type="text" id="eventUrl" :value="url" onClick="this.setSelectionRange(0, this.value.length)" readonly>
+    </div>
   </section>
 </template>
 <script>
