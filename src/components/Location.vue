@@ -9,7 +9,7 @@
         ?
       </div>
     </div>
-    <div class="name"><i class="fa fa-map-marker"></i> {{place.name}}</div>
+    <div class="name" :title="place.name"><i class="fa fa-map-marker"></i> {{place.name}}</div>
   </div>
 </template>
 <script>

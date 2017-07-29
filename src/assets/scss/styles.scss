@@ -558,6 +558,9 @@ section {
 
 .location {
   width: 400px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   .name {
     padding: .2em;
   }
