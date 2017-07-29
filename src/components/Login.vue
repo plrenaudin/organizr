@@ -44,7 +44,7 @@ export default {
     sendToken() {
       let me = this
       const mail = me.$refs.emailField.value
-      if (mail && mail.indexOf('@') > 0) {
+      if (mail && mail.indexOf('@') > 0 && me.state === 'waiting') {
         me.state = 'sending'
         me.$http.post('/api/sendToken', {user: mail})
           .then(data => me.state = 'sent')
