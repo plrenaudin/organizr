@@ -12,7 +12,6 @@
       <div class="sk-cube sk-cube9"></div>
     </div>
   </div>
-  </div>
 </template>
 <script>
   export default {

@@ -29,18 +29,20 @@ export default {
       const auth2 = window.gapi.auth2.init({
         client_id: __GOOGLE_CLIENT_ID__
       })
-      auth2.attachClickHandler(this.$refs.signinBtn, {}, googleUser => {
-        const me = this
-        const socialToken = googleUser.getAuthResponse(true).access_token
-        this.$http.post('/api/auth', { network: 'google', socialToken })
-          .then(token => {
-            Auth.login(token.data)
-            me.$router.push('/profile')
-          })
-      }, error => console.log(error))
+      auth2.attachClickHandler(this.$refs.signinBtn, {}, this.authentify, error => console.log(error))
     })
   },
   methods: {
+    authentify(googleUser) {
+      this.$emit('authenticating')
+      const me = this
+      const socialToken = googleUser.getAuthResponse(true).access_token
+      this.$http.post('/api/auth', { network: 'google', socialToken })
+        .then(token => {
+          Auth.login(token.data)
+          me.$router.push('/profile')
+        })
+    },
     sendToken() {
       let me = this
       const mail = me.$refs.emailField.value
