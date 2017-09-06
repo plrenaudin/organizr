@@ -4,13 +4,13 @@
       <i class="fa fa-sign-in"></i>{{$t('app.login.google')}}
     </li>
     <li>{{$t('app.login.passwordlessIntro')}}
-    <li class="passwordlessInput">
-      <input type="text" id="emailPasswordless" :placeholder="$t('app.login.email')" ref="emailField" @keyup.enter="sendToken" :disabled="state !== 'waiting'" />
-      <div @click="sendToken" :title="$t('app.login.passwordless')">
-        <i :class="['fa', {'fa-magic' : state === 'waiting'}, {'fa-spinner': state === 'sending'}, {'fa-check': state === 'sent'}]"></i>
-        <span v-show="state === 'sent'" v-html="$t('app.login.sent')"></span>
-      </div>
-    </li>
+      <li class="passwordlessInput">
+        <input type="text" id="emailPasswordless" :placeholder="$t('app.login.email')" ref="emailField" @keyup.enter="sendToken" :disabled="state !== 'waiting'" />
+        <div @click="sendToken" :title="$t('app.login.passwordless')">
+          <i :class="['fa', {'fa-magic' : state === 'waiting'}, {'fa-spinner': state === 'sending'}, {'fa-check': state === 'sent'}]"></i>
+          <span v-show="state === 'sent'" v-html="$t('app.login.sent')"></span>
+        </div>
+      </li>
   </ul>
 </template>
 <script>
@@ -21,16 +21,11 @@ export default {
   props: ['label'],
   data() {
     return {
-      state:'waiting'
+      state: 'waiting'
     }
   },
   mounted() {
-    window.gapi.load('auth2', () => {
-      const auth2 = window.gapi.auth2.init({
-        client_id: __GOOGLE_CLIENT_ID__
-      })
-      auth2.attachClickHandler(this.$refs.signinBtn, {}, this.authentify, error => console.log(error))
-    })
+    this.onMounted()
   },
   methods: {
     authentify(googleUser) {
@@ -43,12 +38,29 @@ export default {
           me.$router.push('/profile')
         })
     },
+    onMounted() {
+      if (!window.gapi) {
+        console.log('Defer Loading Auth...')
+        setTimeout(this.onMounted, 250)
+      } else {
+        console.log('Loading Auth...')
+        this.loadGoogleAuth()
+      }
+    },
+    loadGoogleAuth() {
+      window.gapi.load('auth2', () => {
+        const auth2 = window.gapi.auth2.init({
+          client_id: __GOOGLE_CLIENT_ID__
+        })
+        auth2.attachClickHandler(this.$refs.signinBtn, {}, this.authentify, error => console.log(error))
+      })
+    },
     sendToken() {
       let me = this
       const mail = me.$refs.emailField.value
       if (mail && mail.indexOf('@') > 0 && me.state === 'waiting') {
         me.state = 'sending'
-        me.$http.post('/api/sendToken', {user: mail})
+        me.$http.post('/api/sendToken', { user: mail })
           .then(data => me.state = 'sent')
           .catch(err => console.error(err))
       }
