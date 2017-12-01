@@ -1,17 +1,17 @@
 const db = require('monk')(process.env.MONGODB_URI)
 module.exports = {
   createNew(user, cb) {
-    db.get('events').insert({ admin: user }, cb)
+    db.get('events').insert({ admin: user }).then(cb)
   },
 
   findById(id, cb) {
-    db.get('events').findOne({ _id: id }, cb)
+    db.get('events').findOne({ _id: id }).then(cb)
   },
 
   participate(id, user, cb) {
-    this.findById(id, (err, data) => {
-      if (err || !data) {
-        err && console.error(err)
+    this.findById(id, (data) => {
+      if (!data) {
+        console.error('Event not found: ' + id)
         return cb(new Error('Event not found: ' + id))
       }
       if (data.attendees && data.attendees.some(item => item.email === user)) {
@@ -20,21 +20,20 @@ module.exports = {
         db.get('events').findOneAndUpdate(
           { _id: id },
           { $addToSet: { attendees: { email: user } } },
-          { returnNewDocument: true },
-          cb
-        )
+          { returnNewDocument: true }
+        ).then(cb)
       }
     })
   },
 
   deleteEvent (id, user, cb) {
-    db.get('events').findOne({ _id: id, admin: user }, (err, data) => {
-      if (err || !data) {
-        err && console.error(err)
+    db.get('events').findOne({ _id: id, admin: user }).then((data) => {
+      if (!data) {
+        console.error('Event not found: ' + id)
         return cb(new Error('Event not found: ' + id))
       }
       db.get('archive').insert(data).then(
-        db.get('events').findOneAndDelete({ _id: id, admin: user }, cb)
+        db.get('events').findOneAndDelete({ _id: id, admin: user }).then(cb)
       )
     });
   },
@@ -45,8 +44,8 @@ module.exports = {
         { admin: email },
         { 'attendees.email': email }
       ]},
-      'admin info dates attendees',
-      cb)
+      'admin info dates attendees'
+    ).then(cb)
   },
 
   mutateEvent(user, id, action, payload, cb) {
@@ -57,121 +56,106 @@ module.exports = {
     addChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $addToSet: { checklist: payload.item } },
-        cb
-      )
+        { $addToSet: { checklist: payload.item } }
+      ).then(cb)
     },
 
     removeChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { checklist: payload.item } },
-        cb
-      )
+        { $pull: { checklist: payload.item } }
+      ).then(cb)
     },
 
     updateInfo(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $set: { info: payload.info } },
-        cb
-      )
+        { $set: { info: payload.info } }
+      ).then(cb)
     },
 
     addPlace(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $addToSet: { places: payload.place } },
-        cb
-      )
+        { $addToSet: { places: payload.place } }
+      ).then(cb)
     },
 
     removePlace(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { places: payload.place } },
-        cb
-      )
+        { $pull: { places: payload.place } }
+      ).then(cb)
     },
 
     addDate(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $addToSet: { dates: payload.date } },
-        cb
-      )
+        { $addToSet: { dates: payload.date } }
+      ).then(cb)
     },
 
     removeDate(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { dates: { day: payload.date } } },
-        cb
-      )
+        { $pull: { dates: { day: payload.date } } }
+      ).then(cb)
     },
 
     addTime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user, 'dates.day': payload.date.day },
-        { $addToSet: { 'dates.$.times': payload.date.time } },
-        cb
-      )
+        { $addToSet: { 'dates.$.times': payload.date.time } }
+      ).then(cb)
     },
 
     removeTime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user, 'dates.day': payload.date.day },
-        { $pull: { 'dates.$.times': payload.date.time } },
-        cb
-      )
+        { $pull: { 'dates.$.times': payload.date.time } }
+      ).then(cb)
     },
 
     addPoll(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $addToSet: { polls: payload.poll } },
-        cb
-      )
+        { $addToSet: { polls: payload.poll } }
+      ).then(cb)
     },
 
     removePoll(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user },
-        { $pull: { polls: payload.poll } },
-        cb
-      )
+        { $pull: { polls: payload.poll } }
+      ).then(cb)
     },
 
     addPollChoice(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user, 'polls.question': payload.poll.question },
-        { $addToSet: { 'polls.$.choices': payload.poll.choice } },
-        cb
-      )
+        { $addToSet: { 'polls.$.choices': payload.poll.choice } }
+      ).then(cb)
     },
 
     removePollChoice(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, admin: user, 'polls.question': payload.poll.question },
-        { $pull: { 'polls.$.choices': payload.poll.choice } },
-        cb
-      )
+        { $pull: { 'polls.$.choices': payload.poll.choice } }
+      ).then(cb)
     },
 
     checkChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $addToSet: { 'attendees.$.checklist': payload.item } },
-        cb
-      )
+        { $addToSet: { 'attendees.$.checklist': payload.item } }
+      ).then(cb)
     },
 
     uncheckChecklistItem(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $pull: { 'attendees.$.checklist': payload.item } },
-        cb
-      )
+        { $pull: { 'attendees.$.checklist': payload.item } }
+      ).then(cb)
     },
 
     vote(user, id, payload, cb) {
@@ -191,40 +175,35 @@ module.exports = {
             }
           }
         },
-        { $addToSet: { 'attendees.$.polls': { question: payload.question, choice: payload.choice } } },
-        cb
-      )
+        { $addToSet: { 'attendees.$.polls': { question: payload.question, choice: payload.choice } } }
+      ).then(cb)
     },
 
     selectPlace(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $addToSet: { 'attendees.$.places': payload.place } },
-        cb
-      )
+        { $addToSet: { 'attendees.$.places': payload.place } }
+      ).then(cb)
     },
 
     unselectPlace(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $pull: { 'attendees.$.places': payload.place } },
-        cb
-      )
+        { $pull: { 'attendees.$.places': payload.place } }
+      ).then(cb)
     },
     selectDatetime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $addToSet: { 'attendees.$.dates': payload.date } },
-        cb
-      )
+        { $addToSet: { 'attendees.$.dates': payload.date } }
+      ).then(cb)
     },
 
     unselectDatetime(user, id, payload, cb) {
       db.get('events').findOneAndUpdate(
         { _id: id, 'attendees.email': user },
-        { $pull: { 'attendees.$.dates': payload.date } },
-        cb
-      )
+        { $pull: { 'attendees.$.dates': payload.date } }
+      ).then(cb)
     }
   }
 }
