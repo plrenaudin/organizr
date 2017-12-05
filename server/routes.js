@@ -3,10 +3,7 @@ const jwt = require('jsonwebtoken')
 const eventIdRegex = /([a-z0-9]{24})/
 
 const sendResult = (res, next) => {
-  return (err,data) => {
-    if(err) {
-      return next(err)
-    }
+  return (data) => {
     res.json(data)
     next()
   }

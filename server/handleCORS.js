@@ -1,20 +1,14 @@
-module.exports= (server, restify) => {
+const corsMiddleware = require('restify-cors-middleware')
 
-  restify.CORS.ALLOW_HEADERS.push('authorization')
+module.exports= (server) => {
 
-  server.pre((req, res, next) => {
-    req.headers.accept = 'application/json'
-    return next()
+  const cors = corsMiddleware({
+    preflightMaxAge: 5, //Optional
+    origins: ['http://localhost:8080', 'https://organizr.io'],
+    allowHeaders: ['API-Token','authorization'],
+    exposeHeaders: ['API-Token-Expiry', 'Access-Control-Allow-Headers']
   })
 
-  server.on("MethodNotAllowed", (req, res) => {
-    if (req.method.toUpperCase() === "OPTIONS") {
-      // Send the CORS headers
-      res.header("Access-Control-Allow-Headers", restify.CORS.ALLOW_HEADERS.join(", "))
-      res.send(204)
-    }
-    else {
-      res.send(new restify.MethodNotAllowedError())
-    }
-  })
+  server.pre(cors.preflight)
+  server.use(cors.actual)
 }

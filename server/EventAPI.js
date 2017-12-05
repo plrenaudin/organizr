@@ -15,7 +15,7 @@ module.exports = {
         return cb(new Error('Event not found: ' + id))
       }
       if (data.attendees && data.attendees.some(item => item.email === user)) {
-        cb(null, data)
+        cb(data)
       } else {
         db.get('events').findOneAndUpdate(
           { _id: id },

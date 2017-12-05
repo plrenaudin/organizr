@@ -1,28 +1,17 @@
 const restify = require('restify')
-const Logger = require('bunyan')
+const logger = require('restify-bunyan-logger')
 
-const log = new Logger.createLogger({ name: 'organiz', serializers: { req: Logger.stdSerializers.req } })
+const server = restify.createServer({ name: 'organiz' })
+server.on('after', logger())
+server.use(restify.plugins.jsonp())
+server.use(restify.plugins.gzipResponse())
+server.use(restify.plugins.fullResponse())
+server.use(restify.plugins.queryParser({mapParams:true}))
+server.use(restify.plugins.bodyParser({mapParams:true}))
 
-const server = restify.createServer({ name: 'organiz', log: log })
-
-server.use(restify.requestLogger())
-server.pre((request, response, next) => {
-  if (request.method !== 'OPTIONS') {
-    request.log.info({ req: request }, 'REQUEST')
-  }
-  next()
-})
-
-server.pre(restify.CORS())
-server.use(restify.jsonp())
-server.use(restify.gzipResponse())
-server.use(restify.fullResponse())
-server.use(restify.queryParser())
-server.use(restify.bodyParser())
-
+require('./handleCORS.js')(server)
 require('./securitySettings.js')(server)
 require('./routes.js')(server)
-require('./handleCORS.js')(server, restify)
 
 server.on('uncaughtException', (req, res, route, err) => {
   console.log('uncaughtException', err.stack)

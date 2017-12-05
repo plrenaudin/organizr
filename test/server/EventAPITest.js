@@ -60,8 +60,7 @@ describe('EventAPI test suite', () => {
   })
 
   it('does not add a new participation if already there', (done) => {
-    sut.participate('58c56a83ad49880001fc1a0c', 'testuser', (err, data) => {
-      expect(err).to.be.null
+    sut.participate('58c56a83ad49880001fc1a0c', 'testuser', (data) => {
       expect(data.attendees.length).to.equal(2)
       done()
     })
