@@ -1,8 +1,14 @@
 const restify = require('restify')
-const logger = require('restify-bunyan-logger')
+const Logger = require('bunyan');
+const bunyanLogger = require('restify-bunyan-logger')
 
-const server = restify.createServer({ name: 'organiz' })
-server.on('after', logger())
+const server = restify.createServer({
+  name: 'organiz',
+  log: Logger.createLogger({
+    name: 'organizr.io'
+  })
+})
+server.on('after', bunyanLogger())
 server.use(restify.plugins.jsonp())
 server.use(restify.plugins.gzipResponse())
 server.use(restify.plugins.fullResponse())
