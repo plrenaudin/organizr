@@ -1,6 +1,6 @@
 const request = require('request')
 const jwt = require('jsonwebtoken')
-const restifyJwt = require('restify-jwt')
+const restifyJwt = require('restify-jwt-community')
 const env = require('./.env')
 const passwordless = require('passwordless')
 const MongoStore = require('passwordless-mongostore')
