@@ -7,7 +7,7 @@ services:
       - "5858:5858"
     entrypoint:
       - node
-      - --debug=0.0.0.0:5858
+      - --inspect=0.0.0.0:5858
       - server/server.js
     depends_on:
       - organizr-mongo

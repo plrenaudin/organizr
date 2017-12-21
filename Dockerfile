@@ -1,4 +1,4 @@
-FROM yarnpkg/node-yarn:node7
+FROM node:8
 
 RUN groupadd -r nodejs && useradd -m -r -g nodejs nodejs
 
