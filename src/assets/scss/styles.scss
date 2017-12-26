@@ -2,8 +2,17 @@
 
 $white-color-percentage: 35%;
 $sidebar-width-percent: 30%;
-$sidebar-width-px: 400px;
+$sidebar-width-lg-px: 310px;
+$sidebar-width-md-px: 200px;
+$sidebar-width-sm-px: 150px;
+$sidebar-width-xs-px: 50px;
 $card-min-width: 400px;
+
+$xl: 1440px;
+$lg: 1200px;
+$md: 992px;
+$sm: 768px;
+$xs: 412px;
 
 $red:           #F44336;
 $green:         #4CAF50;
@@ -225,6 +234,7 @@ input[type=text], select, textarea {
   padding: .4em 1.4em;
   background: $green;
   color: $white;
+  white-space: nowrap;
   cursor: pointer;
   text-decoration: none;
   font-weight: bold;
@@ -253,7 +263,6 @@ input[type=text], select, textarea {
 
 
 .placePlaceholder {
-  width: 400px;
   height: 170px;
   font-size: 5em;
   font-weight: bold;
@@ -265,9 +274,23 @@ input[type=text], select, textarea {
   text-shadow: 0 0 6px $strong-grey;
 }
 
+.place {
+  ul.placeList {
+    max-width: $card-min-width;
+    box-sizing: border-box;
+    margin: 0 auto;
+    li {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .button {
+      align-self: flex-end;
+    }
+  }
+}
+
 .map {
   position: relative;
-  display: inline-block;
   cursor: pointer;
   overflow: hidden;
   background-image: url('./assets/img/mapPlaceholder.png');
@@ -305,7 +328,6 @@ ul.card-group {
 
 // =================================== Sidebar
 aside {
-  width: $sidebar-width-percent;
   right: 0;
   z-index: 16;
   height: 100%;
@@ -360,6 +382,7 @@ aside {
   }
   section#user {
     display: flex;
+    flex-wrap: wrap;
     align-content: center;
     justify-content: space-between;
     padding: 0 .5em;
@@ -470,10 +493,13 @@ aside {
 #application {
   main {
     min-height: 100vh;
-    flex: 1;
-    padding-right: $sidebar-width-percent;
+    display: inline-block;
+    column-count: 1;
+    flex-wrap: wrap;
     &>section{
-      min-height: 40vh;
+      min-height: 30vh;
+      box-sizing: border-box;
+      width: 50%;
       &:last-child {
         min-height: 100vh;
       }
@@ -526,6 +552,7 @@ aside {
 section {
   padding: 1em;
   &>h2 {
+    padding-left: 1em;
     margin-top: 0;
   }
 }
@@ -545,10 +572,10 @@ section {
   flex-direction: column;
   align-items: center;
   .card {
-    min-width: $card-min-width;
+    width: 100%;
+    box-sizing: border-box;
   }
   input, textarea {
-    width: 50%;
     margin: 1em;
   }
   textarea {
@@ -557,19 +584,18 @@ section {
 }
 
 .location {
-  width: 400px;
   .name {
     text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
-    padding: .2em;
+    padding: .2em .5em;
+    white-space: nowrap;
   }
 }
 
 .sharer {
   padding: 0 .5em;
   h2 {
-    margin: 0 1em 0 0;
+    margin: 0 .5em 0 0;
     display: inline-block;
   }
   input {
@@ -583,7 +609,10 @@ section {
     li {
       display: inline;
       margin: 0;
+      img {
+        width: 32px;
     }
+  }
   }
   .urlShare {
     display: flex;
@@ -693,15 +722,6 @@ section {
     .placeInput {
       display: flex;
       justify-content: center;
-      input {
-        width: 50%;
-      }
-    }
-    ul.placeList {
-      margin: 0;
-      .button {
-        align-self: flex-end;
-      }
     }
   }
   .checklist {
@@ -716,7 +736,6 @@ section {
 .viewer {
   .calendar {
     ul.dates {
-      margin-left: 1em;
       li {
         .day {
           display: flex;
@@ -742,8 +761,11 @@ section {
   }
   .poll {
     ul.question {
+      li {
+        width: 100%;
+        box-sizing: border-box;
+      }
       ul.choice > li {
-        min-width: $card-min-width;
         display: flex;
         padding: 0.4em;
         align-items: center;
@@ -778,6 +800,18 @@ section {
 
 .landingPage {
   font-size: 1.2em;
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1em 0;
+    .wording {
+      max-width: 66%;
+      p {
+        padding-right: 2em;
+      }
+    }
+  }
   .intro {
     width: 100%;
     display: flex;
@@ -818,6 +852,7 @@ section {
       ul.steps {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         margin: 2em 0;
         li {
           text-align: center;
@@ -866,6 +901,8 @@ section {
   }
 }
 .savingIndicator {
+  white-space: nowrap;
+  padding-top: .5em;
   .saved {
     color: $green;
     i { color: $green; }
@@ -879,12 +916,13 @@ section {
   color: $strong-grey;
   ul.eventList {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     >li {
       flex: 0 0 400px;
       min-height: 100px;
       padding: 1em 1em;
-      margin: 2em;
+      margin: 1em;
       border: 1px solid $grey;
       background-color: $white;
       cursor: pointer;
@@ -903,6 +941,9 @@ section {
         background-color: $white-blue;
       }
       &:first-child {
+        h2 {
+          margin: 0;
+        }
         flex-direction: row;
         align-items: center;
         justify-content: center;
@@ -936,7 +977,7 @@ footer {
 }
 .attendees {
   position: relative;
-
+  white-space: nowrap;
   .attendeesList {
     display: none;
     position: absolute;
@@ -1073,14 +1114,156 @@ footer {
 }
 
 /* ======================== Responsive ====================== */
-
-@media only screen and (min-width:1200px){
+img {
+  width: 100%;
+}
+// Huge screen
+@media only screen and (min-width:$xl){
   #page #application {
     aside {
-      width: $sidebar-width-px
+      width: $sidebar-width-lg-px
     }
     main {
-      padding-right: $sidebar-width-px;
+      padding-right: $sidebar-width-lg-px;
+    }
+  }
+  #application {
+    main > section {
+      width: 33.333333%;
+    }
+  }
+}
+// Desktop
+@media only screen and (min-width:$lg){
+  #page #application {
+    aside {
+      width: $sidebar-width-lg-px
+    }
+    main {
+      padding-right: $sidebar-width-lg-px;
+    }
+  }
+}
+// Small Desktop
+@media only screen and (max-width:$lg){
+  #page #application {
+    aside {
+      width: $sidebar-width-lg-px
+    }
+    main {
+      padding-right: $sidebar-width-lg-px;
+    }
+  }
+}
+// Tablets
+@media only screen and (max-width:$md){
+  #page #application {
+    aside {
+      width: $sidebar-width-md-px
+    }
+    main {
+      padding-right: $sidebar-width-md-px;
+    }
+  }
+  .landingPage {
+    .intro {
+      section {
+        flex-direction: column;
+      }
+      #description {
+        margin-top: 0;
+        padding-top: 0;
+        ul.steps {
+          margin: 0;
+          li {
+            margin: .5em;
+          }
+        }
+        .scrolldown {
+          margin: 0;
+        }
+      }
+    }
+  }
+  aside {
+    nav ul li .peek {
+      display: none;
+    }
+    .sharer {
+      h2{
+        display: none;
+      }
+    }
+    .sharer .urlShare {
+      label, input[type=text] {
+        padding:.3em;
+        border-radius: 0;
+      }
+    }
+  }
+}
+// Small tablets
+@media only screen and (max-width:$sm){
+  #page #application {
+    aside {
+      width: $sidebar-width-sm-px
+    }
+    main {
+      padding-right: $sidebar-width-sm-px;
+    }
+  }
+  .myEvents{
+    ul.eventList > li {
+      flex: 0 0 auto;
+      h2 {
+        padding: 0 1em;
+      }
+    }
+  }
+  .landingPage section {
+    flex-direction: column;
+    .wording {
+      max-width: 100%;
+    }
+  }
+  #application {
+    main > section {
+      width: 100%;
+    }
+  }
+  aside {
+    section#user {
+      .profile label, .savingIndicator label{
+        display: none;
+      }
+    }
+  }
+  footer ul {
+    justify-content: flex-start;
+    li {
+      padding: 1em;
+    }
+  }
+  .toggleButton label {
+    display: none;
+  }
+}
+
+// Phones
+@media only screen and (max-width:$xs){
+  #page #application {
+    aside {
+      width: $sidebar-width-xs-px
+    }
+    main {
+      padding-right: $sidebar-width-xs-px;
+    }
+  }
+  aside {
+    section#menuSection {
+      label {
+        display: none;
+      }
     }
   }
 }

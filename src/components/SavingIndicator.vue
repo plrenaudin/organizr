@@ -1,13 +1,13 @@
 <template>
   <div class="savingIndicator">
     <div class="saving" v-show="saving">
-      <i class="fa fa-cog fa-spin"></i>{{$t('app.saving')}}
+      <i class="fa fa-cog fa-spin"></i><label>{{$t('app.saving')}}</label>
     </div>
     <div class="saved" v-show="!saving && !error">
-      <i class="fa fa-check"></i>{{$t('app.saved')}}
+      <i class="fa fa-check"></i><label>{{$t('app.saved')}}</label>
     </div>
     <div class="serverError" v-show="error">
-      <i class="fa fa-exclamation"></i>{{$t('app.serverError')}}
+      <i class="fa fa-exclamation"></i><label>{{$t('app.serverError')}}</label>
     </div>
   </div>
 </template>

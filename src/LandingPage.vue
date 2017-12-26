@@ -52,24 +52,40 @@
       </div>
       <div class="description">
         <section id="time">
-          <h3><i class="fa fa-calendar"></i> {{$t('app.landingPage.timeTitle')}}</h3>
-          <p v-html="$t('app.landingPage.time')"></p>
-          <img src="./assets/img/calendar.jpg" alt="Calendar" class="card" />
+          <div class="wording">
+            <h3><i class="fa fa-calendar"></i> {{$t('app.landingPage.timeTitle')}}</h3>
+            <p v-html="$t('app.landingPage.time')"></p>
+          </div>
+          <div class="picture">
+            <img src="./assets/img/calendar.jpg" alt="Calendar" class="card" />
+          </div>
         </section>
         <section id="place">
-          <h3><i class="fa fa-map-marker"></i> {{$t('app.landingPage.placeTitle')}}</h3>
-          <p v-html="$t('app.landingPage.place')"></p>
-          <img src="./assets/img/location.jpg" alt="Location" class="card" />
+          <div class="wording">
+            <h3><i class="fa fa-map-marker"></i> {{$t('app.landingPage.placeTitle')}}</h3>
+            <p v-html="$t('app.landingPage.place')"></p>
+          </div>
+          <div class="picture">
+            <img src="./assets/img/location.jpg" alt="Location" class="card" />
+          </div>
         </section>
         <section id="checklist">
-          <h3><i class="fa fa-list"></i> {{$t('app.landingPage.checklistTitle')}}</h3>
-          <p v-html="$t('app.landingPage.checklist')"></p>
-          <img src="./assets/img/checklist.jpg" alt="Checklist" class="card" />
+          <div class="wording">
+            <h3><i class="fa fa-list"></i> {{$t('app.landingPage.checklistTitle')}}</h3>
+            <p v-html="$t('app.landingPage.checklist')"></p>
+          </div>
+          <div class="picture">
+            <img src="./assets/img/checklist.jpg" alt="Checklist" class="card" />
+          </div>
         </section>
         <section id="polls">
-          <h3><i class="fa fa-bullhorn"></i> {{$t('app.landingPage.pollsTitle')}}</h3>
-          <p v-html="$t('app.landingPage.polls')"></p>
-          <img src="./assets/img/polls.jpg" alt="Polls" class="card" />
+          <div class="wording">
+            <h3><i class="fa fa-bullhorn"></i> {{$t('app.landingPage.pollsTitle')}}</h3>
+            <p v-html="$t('app.landingPage.polls')"></p>
+          </div>
+          <div class="picture">
+            <img src="./assets/img/polls.jpg" alt="Polls" class="card" />
+          </div>
         </section>
       </div>
     </div>
