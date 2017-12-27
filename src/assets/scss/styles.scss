@@ -493,13 +493,12 @@ aside {
 #application {
   main {
     min-height: 100vh;
-    display: inline-block;
-    column-count: 1;
+    display: flex;
     flex-wrap: wrap;
     &>section{
       min-height: 30vh;
       box-sizing: border-box;
-      width: 50%;
+      width: 100%;
       &:last-child {
         min-height: 100vh;
       }
@@ -1121,26 +1120,27 @@ img {
 @media only screen and (min-width:$xl){
   #page #application {
     aside {
-      width: $sidebar-width-lg-px
+      width: $sidebar-width-lg-px;
     }
     main {
       padding-right: $sidebar-width-lg-px;
+      &>section {
+        width: 33.333333%;
+      }
     }
   }
-  #application {
-    main > section {
-      width: 33.333333%;
     }
-  }
-}
 // Desktop
-@media only screen and (min-width:$lg){
+@media only screen and (min-width:$lg) and (max-width:$xl){
   #page #application {
     aside {
-      width: $sidebar-width-lg-px
+      width: $sidebar-width-lg-px;
     }
     main {
       padding-right: $sidebar-width-lg-px;
+      &>section {
+        width: 50%;
+      }
     }
   }
 }
@@ -1148,10 +1148,13 @@ img {
 @media only screen and (max-width:$lg){
   #page #application {
     aside {
-      width: $sidebar-width-lg-px
+      width: $sidebar-width-lg-px;
     }
     main {
       padding-right: $sidebar-width-lg-px;
+      &>section {
+        width: 50%;
+      }
     }
   }
 }
@@ -1159,13 +1162,19 @@ img {
 @media only screen and (max-width:$md){
   #page #application {
     aside {
-      width: $sidebar-width-md-px
+      width: $sidebar-width-md-px;
     }
     main {
       padding-right: $sidebar-width-md-px;
+      &>section {
+        width: 100%;
+      }
     }
   }
   .landingPage {
+    .button {
+      margin-top: 1em;
+    }
     .intro {
       section {
         flex-direction: column;
@@ -1180,7 +1189,7 @@ img {
           }
         }
         .scrolldown {
-          margin: 0;
+          margin: 1em;
         }
       }
     }
@@ -1206,10 +1215,13 @@ img {
 @media only screen and (max-width:$sm){
   #page #application {
     aside {
-      width: $sidebar-width-sm-px
+      width: $sidebar-width-sm-px;
     }
     main {
       padding-right: $sidebar-width-sm-px;
+      &>section {
+        width: 100%;
+      }
     }
   }
   .myEvents{
@@ -1224,11 +1236,6 @@ img {
     flex-direction: column;
     .wording {
       max-width: 100%;
-    }
-  }
-  #application {
-    main > section {
-      width: 100%;
     }
   }
   aside {
@@ -1253,17 +1260,50 @@ img {
 @media only screen and (max-width:$xs){
   #page #application {
     aside {
-      width: $sidebar-width-xs-px
+      width: $sidebar-width-xs-px;
     }
     main {
       padding-right: $sidebar-width-xs-px;
+      &>section {
+        width: 100%;
+      }
     }
   }
   aside {
+    nav ul li{
+      padding: 1em .3em;
+      i {
+        width: auto;
+      }
+    }
+    section#user {
+      padding: 0;
+      figure {
+        margin: 0;
+      }
+    }
+    .toggleButton {
+      flex-direction: column;
+      a {
+        padding: .5em;
+        border: 1px solid $white;
+        &:first-child {
+          border-radius: 4px 4px 0 0;
+          border-right: 1px solid $white;
+        }
+        &:last-child {
+          border-radius: 0 0 4px 4px;
+          border-left: 1px solid $white;
+        }
+      }
+    }
     section#menuSection {
       label {
         display: none;
       }
+    }
+    .sharer .urlShare {
+      display: none;
     }
   }
 }
