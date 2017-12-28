@@ -47,7 +47,7 @@
 <script>
 import moment from 'moment'
 import Formatter from '../../helpers/Formatter.js'
-import Utils from '../../helpers/Utils.js'
+import {parseTimeInput} from '../../helpers/Utils.js'
 
 export default {
   name: 'calendar',
@@ -70,7 +70,7 @@ export default {
     },
     addTime(event) {
       if(!event.target.value) return
-      const value = Utils.parseTimeInput(event.target.value)
+      const value = parseTimeInput(event.target.value)
       const day = event.target.name.substring(8)
       this.$store.commit('addTime', {day, value})
       event.target.value = ''

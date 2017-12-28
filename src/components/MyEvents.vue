@@ -26,7 +26,7 @@
 <script>
 import Event from '../APIClient/event.js'
 import Formatter from '../helpers/Formatter.js'
-import Utils from '../helpers/Utils.js'
+import {compareDayAsc, getTimestampFromId} from '../helpers/Utils.js'
 import Attendees from './Attendees.vue'
 import Loading from './Loading.vue'
 import Auth from '../helpers/Auth.js'
@@ -62,7 +62,7 @@ export default {
     },
     getEventDates(event) {
       if(event && event.dates && event.dates.length > 0) {
-        const result = event.dates.slice().sort(Utils.compareDayAsc)
+        const result = event.dates.slice().sort(compareDayAsc)
         return Formatter.dateToReadableDate(result[0].day) +
         ' - ' + Formatter.dateToReadableDate(result[result.length - 1].day)
       } else {
@@ -76,7 +76,7 @@ export default {
           console.error(err)
         } else {
           this.events = response.data.sort((a,b) => {
-            return Utils.getTimestampFromId(b._id) - Utils.getTimestampFromId(a._id)
+            return getTimestampFromId(b._id) - getTimestampFromId(a._id)
           })
         }
         this.loading = false

@@ -802,13 +802,12 @@ section {
   section {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 1em 0;
     .wording {
-      max-width: 66%;
-      p {
-        padding-right: 2em;
-      }
+      text-align: right;
+      max-width: 400px;
+      padding-right: 1em;
     }
   }
   .intro {
@@ -1174,6 +1173,11 @@ img {
   .landingPage {
     .button {
       margin-top: 1em;
+    }
+    section {
+      .wording {
+        text-align: center;
+      }
     }
     .intro {
       section {

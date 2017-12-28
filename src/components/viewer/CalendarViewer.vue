@@ -23,7 +23,6 @@
 <script>
 import moment from 'moment'
 import Formatter from '../../helpers/Formatter.js'
-import Utils from '../../helpers/Utils.js'
 import Auth from '../../helpers/Auth.js'
 import Checkbox from '../Checkbox.vue'
 import Attendees from '../Attendees.vue'

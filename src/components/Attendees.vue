@@ -7,6 +7,7 @@
 
       <ul class="attendeesList">
         <li v-for="attendee,index in list">
+          <i class="fa fa-user" :style="`color:${generateColor(attendee.email)}`"></i>
           {{attendee.email}}
         </li>
       </ul>
@@ -15,10 +16,13 @@
   </div>
 </template>
 <script>
-
+import {generateColor} from "../helpers/Utils"
 
   export default {
     name:'attendees',
-    props:['list']
+    props:['list'],
+    methods: {
+      generateColor
+    }
   }
 </script>
