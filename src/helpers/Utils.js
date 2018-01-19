@@ -72,7 +72,6 @@ const generateColor = input => {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
   let c = (hash & 0x00FFFFFF).toString(16).toUpperCase();
-  console.log('c',c);
   return "#000000".substring(0, 7 - c.length) + c;
 }
 
