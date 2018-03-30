@@ -1,5 +1,4 @@
 const eventAPI = require('./EventAPI')
-const jwt = require('jsonwebtoken')
 const eventIdRegex = /([a-z0-9]{24})/
 
 const sendResult = (res, next) => {

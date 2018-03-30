@@ -1,6 +1,7 @@
 const restify = require('restify')
 const Logger = require('bunyan');
 const bunyanLogger = require('restify-bunyan-logger')
+const cacheControl = require('./cacheControl')
 
 const server = restify.createServer({
   name: 'organiz',
@@ -14,6 +15,7 @@ server.use(restify.plugins.gzipResponse())
 server.use(restify.plugins.fullResponse())
 server.use(restify.plugins.queryParser({mapParams:true}))
 server.use(restify.plugins.bodyParser({mapParams:true}))
+server.use(cacheControl)
 
 require('./handleCORS.js')(server)
 require('./securitySettings.js')(server)
