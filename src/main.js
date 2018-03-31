@@ -1,4 +1,5 @@
 import 'babel-polyfill'
+import registerServiceWorker from './registerServiceWorker';
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
@@ -108,3 +109,5 @@ new Vue({
   router,
   render: h => h(App)
 })
+
+registerServiceWorker();

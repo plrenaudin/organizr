@@ -1,13 +1,16 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var env = require('./server/.env')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const env = require('./server/.env')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var googleClientId = "'" + env.GOOGLE_CLIENT_ID + "'"
-var facebookClientId = "'" + env.FACEBOOK_CLIENT_ID + "'"
-var apiHost = "'" + env.SERVER_URL + "'"
+const googleClientId = "'" + env.GOOGLE_CLIENT_ID + "'"
+const facebookClientId = "'" + env.FACEBOOK_CLIENT_ID + "'"
+const apiHost = "'" + env.SERVER_URL + "'"
 
 module.exports = {
   entry: './src/main.js',
@@ -18,7 +21,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.vue$/, loader: 'vue-loader', options: { loaders: { sass: ExtractTextPlugin.extract({ use: ['css-loader','sass-loader'], fallback: 'vue-style-loader' }) } } },
+      { test: /\.vue$/, loader: 'vue-loader', options: { loaders: { sass: ExtractTextPlugin.extract({ use: ['css-loader', 'sass-loader'], fallback: 'vue-style-loader' }) } } },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.(png|jpg|gif|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader', options: { name: '[name].[ext]?[hash]' } },
@@ -49,6 +52,31 @@ module.exports = {
     new ExtractTextPlugin("style.css"),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async'
+    }),
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json',
+    }),
+    new CopyWebpackPlugin([
+      { from: 'src/assets/manifest.json' },
+      { from: 'src/assets/logo.png' }
+    ]),
+    new SWPrecacheWebpackPlugin({
+      // By default, a cache-busting query parameter is appended to requests
+      // used to populate the caches, to ensure the responses are fresh.
+      // If a URL is already hashed by Webpack, then there is no concern
+      // about it being stale, and the cache-busting can be skipped.
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'service-worker.js',
+      logger(message) {
+        if (message.indexOf('Total precache size is') === 0) {
+          // This message occurs for every build and is a bit too noisy.
+          return;
+        }
+        console.log(message);
+      },
+      minify: true, // minify and uglify the script
+      navigateFallback: '/index.html',
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     })
   ]
 }
