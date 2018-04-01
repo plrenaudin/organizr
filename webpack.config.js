@@ -1,8 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const env = require('./server/.env')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
@@ -14,6 +12,7 @@ const apiHost = "'" + env.SERVER_URL + "'"
 
 module.exports = {
   entry: './src/main.js',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
@@ -21,12 +20,11 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.vue$/, loader: 'vue-loader', options: { loaders: { sass: ExtractTextPlugin.extract({ use: ['css-loader', 'sass-loader'], fallback: 'vue-style-loader' }) } } },
+      { test: /\.vue$/, loader: 'vue-loader'},
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.(png|jpg|gif|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader', options: { name: '[name].[ext]?[hash]' } },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
-      { test: /\.json$/, loader: 'json-loader', exclude: /node_modules/ }
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" }
     ]
   },
   devServer: {
@@ -36,6 +34,18 @@ module.exports = {
   },
   performance: {
     hints: false
+  },
+  optimization:{
+    splitChunks:{
+      chunks: "all",
+      cacheGroups: {
+        vue: {
+            name: 'vue',
+            test: /\/node_modules\/vue.*/
+        },
+        vendors: { test: /\/node_modules\/[^vue].*/, name: "vendors" }
+      }
+    }
   },
   devtool: '#eval-source-map',
   plugins: [
@@ -48,10 +58,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.ejs',
       hash: true
-    }),
-    new ExtractTextPlugin("style.css"),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'async'
     }),
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
@@ -75,7 +81,7 @@ module.exports = {
         console.log(message);
       },
       minify: true, // minify and uglify the script
-      navigateFallback: '/index.html',
+      navigateFallback: '/',
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     })
   ]
@@ -89,15 +95,6 @@ if (['production', 'staging'].indexOf(process.env.NODE_ENV) > -1) {
       'process.env': {
         NODE_ENV: '"production"'
       }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
     })
   ])
 }
