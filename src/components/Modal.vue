@@ -3,14 +3,14 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <slot></slot>
+          <slot/>
         </div>
       </div>
     </div>
   </transition>
 </template>
 <script>
-  export default {
-    name: 'modal'
-  }
+export default {
+  name: 'Modal'
+};
 </script>

@@ -11,7 +11,9 @@
     "start": "MONGODB_URI=mongodb://localhost:27017/organizr node server/server.js",
     "test:server": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests mocha test/server --exit",
     "test": "npm run test:server",
-    "coverage": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests istanbul cover _mocha -- test/server "
+    "coverage": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests istanbul cover _mocha -- test/server",
+    "lint": "eslint --ext js,vue  src",
+    "lint:fix": "eslint --ext js,vue --fix src"
   },
   "dependencies": {
     "bunyan": "^1.8.12",
@@ -38,12 +40,15 @@
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
+    "eslint-plugin-vue": "^4.4.0",
     "file-loader": "^1.1.11",
     "font-awesome": "^4.7.0",
     "html-webpack-plugin": "^3.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
     "node-sass": "^4.8.3",
+    "prettier": "^1.11.1",
+    "prettier-eslint": "^8.8.1",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "sw-precache-webpack-plugin": "^0.11.5",
