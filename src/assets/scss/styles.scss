@@ -691,29 +691,41 @@ section {
       }
     }
     ul.selected {
-      li {
+      &>li {
         display: flex;
-        flex-wrap: wrap;
         align-items: baseline;
         padding: .5em 0;
         margin: .5em 0;
         .formattedDate {
-          width: 180px;
+          width: 100%;
           text-align: center;
         }
       }
     }
     .dateContainer {
-      padding: 12px;
+      padding: 12px 0;
       margin: .5em;
       background-color: $light-blue;
       border: 1px solid $grey;
       border-radius: 4px;
       box-sizing: border-box;
+      .date {
+        border-bottom: 1px solid $grey;
+        padding-bottom: 12px;
+        .fa-close {
+          float: right;
+        }
+      }
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          margin: .5em;
+        }
+      }
     }
     .timeInput input {
       text-align: center;
-      margin: 0 1em;
       width: 5em;
     }
   }

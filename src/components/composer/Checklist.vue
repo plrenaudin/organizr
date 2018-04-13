@@ -1,7 +1,7 @@
 <template>
   <div class="checklist">
     <section class="card">
-      <ul>
+      <ul v-if="items && items.length > 0">
         <li v-for="(item, index) in items"><i
           class="fa fa-trash action"
           @click="removeItem(index)"/> {{ item }}</li>

@@ -33,27 +33,27 @@
       v-show="selected.length > 0">
       <ul class="selected">
         <li :key="current.day" v-for="current in selected">
-          <i
-            class="fa fa-trash action"
-            @click="removeDate(current.day)"/>
           <div class="formattedDate dateContainer">
-            <i class="fa fa-calendar"/>
-            {{ formatDate(current.day) }}
-          </div>
-          <div
-            :key="time" v-for="time in current.times"
-            class="dateContainer">
-            <i
-              class="fa fa-times action"
-              @click="removeTime(current.day, time)"/> {{ time }} <i class="fa fa-clock-o"/>
-          </div>
-          <div class="timeInput">
-            <input
-              type="text"
-              placeholder="00:00"
-              :name="'addTime-' + current.day"
-              @keyup.enter="addTime"
-              @blur="addTime">
+            <div class="date">
+              <i class="fa fa-calendar"/>
+              {{ formatDate(current.day) }}
+              <i
+              class="fa fa-close action"
+              @click="removeDate(current.day)"/>
+            </div>
+            <ul>
+              <li :key="time" v-for="time in current.times">
+                <i class="fa fa-times action" @click="removeTime(current.day, time)"/> {{ time }} <i class="fa fa-clock-o"/>
+              </li>
+            </ul>
+            <div class="timeInput">
+              <input
+                type="text"
+                placeholder="00:00"
+                :name="'addTime-' + current.day"
+                @keyup.enter="addTime"
+                @blur="addTime">
+            </div>
           </div>
         </li>
       </ul>
