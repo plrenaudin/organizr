@@ -1,4 +1,4 @@
 module.exports = (req,res, next) => {
-    res.noCache()
-    next();
-}
+  res.noCache();
+  next();
+};

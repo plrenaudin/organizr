@@ -1,4 +1,4 @@
-const corsMiddleware = require('restify-cors-middleware')
+const corsMiddleware = require('restify-cors-middleware');
 
 module.exports= (server) => {
 
@@ -7,8 +7,8 @@ module.exports= (server) => {
     origins: ['http://localhost:8080', 'https://organizr.io'],
     allowHeaders: ['API-Token','authorization'],
     exposeHeaders: ['API-Token-Expiry', 'Access-Control-Allow-Headers']
-  })
+  });
 
-  server.pre(cors.preflight)
-  server.use(cors.actual)
-}
+  server.pre(cors.preflight);
+  server.use(cors.actual);
+};

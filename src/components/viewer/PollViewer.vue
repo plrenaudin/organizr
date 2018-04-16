@@ -10,15 +10,14 @@
                 <div>
                   <label
                     class="radio"
-                    v-show="!hasVoted(poll.question)">
+                    v-if="!hasVoted(poll.question)">
                     <input
                       type="radio"
                       v-model="selected[indexPoll]"
                       :name="indexPoll"
                       :value="choice"
                       :id="indexPoll + '-' + indexChoice"
-                      class="spaced"
-                      v-if="!hasVoted(poll.question)">
+                      class="spaced">
                     <span class="outer"><span class="inner"/></span>
                     {{ choice }}
                   </label>
@@ -26,7 +25,7 @@
                     :id="indexPoll + '-' + indexChoice"
                     :value="hasVotedFor(poll.question, choice)"
                     :disabled="true"
-                    v-if="hasVoted(poll.question)"
+                    v-else
                     :label="choice"/>
                 </div>
                 <attendees

@@ -10,10 +10,10 @@
     "build:staging": "webpack --mode development",
     "start": "MONGODB_URI=mongodb://localhost:27017/organizr node server/server.js",
     "test:server": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests mocha test/server --exit",
-    "test": "npm run test:server",
+    "test": "yarn test:server",
     "coverage": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests istanbul cover _mocha -- test/server",
-    "lint": "eslint --ext js,vue  src",
-    "lint:fix": "eslint --ext js,vue --fix src"
+    "lint": "eslint --ext js,vue  src server",
+    "lint:fix": "eslint --ext js,vue --fix src server"
   },
   "dependencies": {
     "bunyan": "^1.8.12",
@@ -62,5 +62,8 @@
     "webpack-dev-server": "3.1.1",
     "webpack-manifest-plugin": "^2.0.0-rc.2",
     "zenscroll": "^4.0.0"
+  },
+  "prettier" : {
+    "eslintIntegration":true
   }
 }

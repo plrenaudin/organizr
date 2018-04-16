@@ -69,12 +69,13 @@ ul {
 
     &:disabled + label:before {
       pointer-events: none;
-      background: $grey;
-      border-color: $grey;
+      background: none;
+      border: none;
     }
 
     &:disabled:checked + label:before {
       background: transparent;
+      border:1px solid transparent;
       border-bottom-color: $grey;
       border-right-color: $grey;
     }
