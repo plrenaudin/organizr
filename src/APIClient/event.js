@@ -45,6 +45,7 @@ export default {
   //Mutations
   addChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/addChecklistItem`, {item}, headers())); },
   removeChecklistItem: (id, item) => { fireAndForget(vm.$http.post(`/${id}/removeChecklistItem`, {item}, headers())); },
+  editChecklistItem: (id, index, value) => { fireAndForget(vm.$http.post(`/${id}/editChecklistItem`, {index, value}, headers())); },
   updateInfo: (id, info) => { fireAndForget(vm.$http.post(`/${id}/updateInfo`, {info}, headers())); },
   addPlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/addPlace`, {place}, headers())); },
   removePlace: (id, place) => { fireAndForget(vm.$http.post(`/${id}/removePlace`, {place}, headers())); },

@@ -127,6 +127,10 @@ export default new Vuex.Store({
         Event.addChecklistItem(state._id, item);
       }
     },
+    editChecklistItem(state,{index,value}) {
+      state.checklist.splice(index,1, value);
+      Event.editChecklistItem(state._id, index, value);
+    },
     removeChecklistItem(state, index) {
       let itemToRemove = state.checklist[index];
       state.checklist.splice(index, 1);

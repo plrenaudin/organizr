@@ -69,7 +69,11 @@ module.exports = {
   },
 
   mutateEvent(user, id, action, payload, cb) {
-    this.eventMutations[action](user, id, payload, cb);
+    if (payload && this.eventMutations[action]) {
+      this.eventMutations[action](user, id, payload, cb);
+    } else {
+      cb();
+    }
   },
 
   eventMutations: {
@@ -80,6 +84,15 @@ module.exports = {
           { _id: id, admin: user },
           { $addToSet: { checklist: payload.item } }
         )
+        .then(cb);
+    },
+
+    editChecklistItem(user, id, payload, cb) {
+      const update = { $set: {} };
+      update['$set']['checklist.' + payload.index] = payload.value;
+      db
+        .get('events')
+        .findOneAndUpdate({ _id: id, admin: user }, update)
         .then(cb);
     },
 
@@ -278,7 +291,11 @@ module.exports = {
       db
         .get('events')
         .findOneAndUpdate(
-          { _id: id, places:{$elemMatch:{name:payload.place} }, 'attendees.email': user},
+          {
+            _id: id,
+            places: { $elemMatch: { name: payload.place } },
+            'attendees.email': user
+          },
           { $addToSet: { 'attendees.$.places': payload.place } }
         )
         .then(cb);

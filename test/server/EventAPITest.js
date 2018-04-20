@@ -96,10 +96,10 @@ describe('EventAPI test suite', () => {
   });
 
   it('uses the mutation nested object and adds a checklist item to existing checklist list',(done) => {
-    sut.mutateEvent('testuser','58c567be9d4bf30001eb100f','addChecklistItem',{ item: 'newitem2' }, (data) => {
+    sut.mutateEvent('testuser','58c567be9d4bf30001eb100f','addChecklistItem',{ item: 'newItem2' }, (data) => {
       expect(data.checklist.length).to.equal(2);
       expect(data.checklist[0]).to.equal('newitem');
-      expect(data.checklist[1]).to.equal('newitem2');
+      expect(data.checklist[1]).to.equal('newItem2');
       done();
     });
   });
@@ -121,10 +121,19 @@ describe('EventAPI test suite', () => {
     });
   });
 
+  //edit checklist item
+
+  it('edits a checklist item', done => {
+    sut.eventMutations.editChecklistItem('testuser', '58c567be9d4bf30001eb100f', {index:1,value:'editedItem'}, data => {
+      expect(data.checklist[1]).to.equal('editedItem');
+      done();
+    });
+  });
+
   //remove checklist item
 
   it('removes a checklist item', (done) => {
-    sut.eventMutations.removeChecklistItem('testuser', '58c567be9d4bf30001eb100f', { item: 'newitem2' }, (data) => {
+    sut.eventMutations.removeChecklistItem('testuser', '58c567be9d4bf30001eb100f', { item: 'editedItem' }, (data) => {
       expect(data.checklist.length).to.equal(1);
       expect(data.checklist[0]).to.equal('newitem');
       done();
@@ -132,7 +141,7 @@ describe('EventAPI test suite', () => {
   });
 
   it('does not remove a checklist item if not admin', (done) => {
-    sut.eventMutations.removeChecklistItem('another', '58c567be9d4bf30001eb100f', { item: 'newitem2' }, (data) => {
+    sut.eventMutations.removeChecklistItem('another', '58c567be9d4bf30001eb100f', { item: 'editedItem' }, (data) => {
       expect(data).to.be.null;
       db.get('events').findOne({ _id: '58c567be9d4bf30001eb100f' }).then((data2) => {
         expect(data2.checklist.length).to.equal(1);

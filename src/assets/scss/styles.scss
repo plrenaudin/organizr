@@ -1011,7 +1011,25 @@ footer {
     display: block;
   }
 }
-
+.contentEditable {
+  width: 100%;
+  padding: .3rem;
+  border: 1px solid transparent;
+  &.focused:hover {
+    border: 1px solid transparent;
+  }
+  &:hover {
+    border: 1px solid $blue;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  input {
+    outline: none;
+    border:none;
+    margin: 0;
+    padding: 0;
+  }
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;

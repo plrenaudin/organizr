@@ -2,9 +2,11 @@
   <div class="checklist">
     <section class="card">
       <ul v-if="items && items.length > 0">
-        <li v-for="(item, index) in items"><i
+        <li :key="index" v-for="(item, index) in items"><i
           class="fa fa-trash action"
-          @click="removeItem(index)"/> {{ item }}</li>
+          @click="removeItem(index)"/>
+          <content-editable @change="editItem(index)" :value="item"></content-editable>
+        </li>
       </ul>
       <input
         type="text"
@@ -14,8 +16,10 @@
   </div>
 </template>
 <script>
+import ContentEditable from "./ContentEditable.vue"
 export default {
   name: 'Checklist',
+  components: {ContentEditable},
   computed: {
     items() { return this.$store.getters.checklist; }
   },
@@ -26,6 +30,10 @@ export default {
         this.$store.commit('addChecklistItem', itemToAdd);
         event.target.value = '';
       }
+    },
+    editItem(index) {
+      const value = event.target.value;
+      this.$store.commit('editChecklistItem', {index,value});
     },
     removeItem(index) {
       this.$store.commit('removeChecklistItem', index);
