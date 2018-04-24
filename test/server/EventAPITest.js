@@ -436,10 +436,19 @@ describe('EventAPI test suite', () => {
     });
   });
 
+  //edit poll
+
+  it('edits a poll question', done => {
+    sut.eventMutations.editPoll('testuser', '58c567be9d4bf30001eb100f', {index:0,value:'poll1Edited'}, data => {
+      expect(data.polls[0].question).to.equal('poll1Edited');
+      done();
+    });
+  });
+
   // remove poll
 
   it('removes a poll', (done) => {
-    sut.eventMutations.removePoll('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll1' } }, (data) => {
+    sut.eventMutations.removePoll('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll1Edited' } }, (data) => {
       expect(data.polls.length).to.equal(1);
       expect(data.polls[0].question).to.equal('poll2');
       done();
@@ -514,10 +523,18 @@ describe('EventAPI test suite', () => {
     });
   });
 
+  //edit poll choice
+
+  it('edits a poll choice', done => {
+    sut.eventMutations.editPollChoice('testuser', '58c567be9d4bf30001eb100f', {indexPoll:0,indexChoice:1,value:'choice2Edited'}, data => {
+      expect(data.polls[0].choices[1]).to.equal('choice2Edited');
+      done();
+    });
+  });
   // remove poll choice
 
   it('removes a poll choice', (done) => {
-    sut.eventMutations.removePollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice2' } }, (data) => {
+    sut.eventMutations.removePollChoice('testuser', '58c567be9d4bf30001eb100f', { poll: { question: 'poll2', choice:'choice2Edited' } }, (data) => {
       expect(data.polls.length).to.equal(1);
       expect(data.polls[0].choices.length).to.equal(1);
       expect(data.polls[0].choices[0]).to.equal('choice1');

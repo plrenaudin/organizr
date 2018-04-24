@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn lint
+  /usr/bin/node /usr/bin/yarn test
 
 PATH: 
   /home/plrenaudin/.rvm/gems/ruby-2.3.0/bin:/home/plrenaudin/.rvm/gems/ruby-2.3.0@global/bin:/home/plrenaudin/.rvm/rubies/ruby-2.3.0/bin:/home/plrenaudin/bin:/home/plrenaudin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/plrenaudin/.rvm/bin:/home/plrenaudin/.rvm/bin:/home/plrenaudin/.rvm/bin
@@ -26,10 +26,10 @@ npm manifest:
       "build:staging": "webpack --mode development",
       "start": "MONGODB_URI=mongodb://localhost:27017/organizr node server/server.js",
       "test:server": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests mocha test/server --exit",
-      "test": "npm run test:server",
+      "test": "yarn test:server",
       "coverage": "NODE_ENV=test MONGODB_URI=mongodb://localhost:27017/tests istanbul cover _mocha -- test/server",
-      "lint": "eslint --ext js,vue  src",
-      "lint:fix": "eslint --ext js,vue --fix src"
+      "lint": "eslint --ext js,vue  src server",
+      "lint:fix": "eslint --ext js,vue --fix src server"
     },
     "dependencies": {
       "bunyan": "^1.8.12",
@@ -78,6 +78,9 @@ npm manifest:
       "webpack-dev-server": "3.1.1",
       "webpack-manifest-plugin": "^2.0.0-rc.2",
       "zenscroll": "^4.0.0"
+    },
+    "prettier" : {
+      "eslintIntegration":true
     }
   }
 
@@ -8958,7 +8961,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c eslint --ext js,vue  src
+  Arguments: -c yarn test:server
   Directory: /home/plrenaudin/projects/organizall
   Output:
   

@@ -128,6 +128,7 @@ export default new Vuex.Store({
       }
     },
     editChecklistItem(state,{index,value}) {
+      if(!value) return;
       state.checklist.splice(index,1, value);
       Event.editChecklistItem(state._id, index, value);
     },
@@ -170,6 +171,11 @@ export default new Vuex.Store({
         Event.addPoll(state._id, { question, choices: [] });
       }
     },
+    editPoll(state,{index,value}) {
+      if(!value) return;
+      state.polls[index].question = value;
+      Event.editPoll(state._id, index,value);
+    },
     removePoll(state, pollIndex) {
       let pollToRemove = state.polls[pollIndex];
       state.polls.splice(pollIndex, 1);
@@ -181,6 +187,11 @@ export default new Vuex.Store({
         concernedPoll.choices.push(choice);
         Event.addPollChoice(state._id, { question: concernedPoll.question, choice });
       }
+    },
+    editPollChoice(state,{indexPoll,indexChoice,value}) {
+      if(!value) return;
+      state.polls[indexPoll].choices.splice(indexChoice,1, value);
+      Event.editPollChoice(state._id, indexPoll, indexChoice, value);
     },
     removeChoice(state, {indexPoll, indexChoice}) {
       let concernedPoll = state.polls[indexPoll];

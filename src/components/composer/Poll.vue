@@ -3,18 +3,19 @@
     <ul class="card-group vertical">
       <li v-for="(poll, indexPoll) in polls">
         <section class="card">
-          <span>
+          <div class="flex center">
             <i
               class="fa fa-trash action"
               @click="removePoll(indexPoll)"/>
-            <strong>{{ poll.question }}</strong>
-          </span>
+
+            <content-editable @change="editPoll(indexPoll)" :value="poll.question"></content-editable>
+          </div>
           <ul>
-            <li v-for="(choice,indexChoice) in poll.choices">
+            <li v-for="(choice,indexChoice) in poll.choices" class="flex center">
               <i
                 class="fa fa-trash action"
                 @click="removeChoice(indexPoll,indexChoice)"/>
-              {{ choice }}
+              <content-editable @change="editChoice(indexPoll,indexChoice)" :value="choice"></content-editable>
             </li>
           </ul>
           <input
@@ -31,8 +32,11 @@
   </div>
 </template>
 <script>
+import ContentEditable from "./ContentEditable.vue"
+
 export default {
   name: 'Poll',
+  components: {ContentEditable},
   computed: {
     polls() { return this.$store.getters.polls; }
   },
@@ -44,6 +48,10 @@ export default {
         event.target.value = '';
       }
     },
+    editPoll(index) {
+      const value = event.target.value;
+      this.$store.commit('editPoll', {index,value});
+    },
     removePoll(index) {
       this.$store.commit('removePoll', index);
     },
@@ -53,6 +61,11 @@ export default {
         this.$store.commit('addChoice', {indexPoll, choice});
         event.target.value = '';
       }
+    },
+    editChoice(indexPoll,indexChoice) {
+      console.log("init",indexPoll, indexChoice,event.target.value);
+      const value = event.target.value;
+      this.$store.commit('editPollChoice', {indexPoll,indexChoice,value});
     },
     removeChoice(indexPoll, indexChoice) {
       this.$store.commit('removeChoice', { indexPoll, indexChoice });

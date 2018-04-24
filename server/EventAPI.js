@@ -88,6 +88,7 @@ module.exports = {
     },
 
     editChecklistItem(user, id, payload, cb) {
+      if(!payload.value) return;
       const update = { $set: {} };
       update['$set']['checklist.' + payload.index] = payload.value;
       db
@@ -186,6 +187,16 @@ module.exports = {
         .then(cb);
     },
 
+    editPoll(user, id, payload, cb) {
+      if(!payload.value) return;
+      const update = { $set: {} };
+      update['$set']['polls.' + payload.index + '.question'] = payload.value;
+      db
+        .get('events')
+        .findOneAndUpdate({ _id: id, admin: user }, update)
+        .then(cb);
+    },
+
     removePoll(user, id, payload, cb) {
       db
         .get('events')
@@ -203,6 +214,16 @@ module.exports = {
           { _id: id, admin: user, 'polls.question': payload.poll.question },
           { $addToSet: { 'polls.$.choices': payload.poll.choice } }
         )
+        .then(cb);
+    },
+
+    editPollChoice(user, id, payload, cb) {
+      if(!payload.value) return;
+      const update = { $set: {} };
+      update['$set']['polls.' + payload.indexPoll + '.choices.' + payload.indexChoice] = payload.value;
+      db
+        .get('events')
+        .findOneAndUpdate({ _id: id, admin: user }, update)
         .then(cb);
     },
 
