@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git pull
 yarn
 yarn build
 rm -rf /var/www/prod/*
