@@ -7,7 +7,7 @@ Before starting you will need a Google API account and a server with Docker and 
 Tech stack:
 
 * Frontend built with [Vue.js](https://vuejs.org/)
-* Backend built with [Restify](http://restify.com/)
+* Backend built with [Restify](http://restify.com/) and [MongoDB](https://www.mongodb.com/)
 * Integration of Google API and [Passwordless](https://passwordless.net/)
 
 ## Frontend Build Setup
