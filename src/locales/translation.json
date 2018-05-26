@@ -1,0 +1,107 @@
+{
+  "app": {
+    "menu": {
+      "info": "Event",
+      "datetime": "Time",
+      "location": "Place",
+      "checklist": "Todo",
+      "polls": "Vote"
+    },
+    "sidebar": {
+      "editEvent": "Edit",
+      "viewEvent": "View"
+    },
+    "info": {
+      "titleInput": "Enter a title",
+      "descInput": "Enter a description"
+    },
+    "checklist": {
+      "addItem": "Add an item",
+      "volunteers": "Assignee(s)"
+    },
+    "place": {
+      "select":"Can come here"
+    },
+    "poll": {
+      "addItem": "Add a new poll",
+      "addChoice": "Add a new choice",
+      "vote": "Vote"
+    },
+    "landingPage": {
+      "title": "Organizr.io",
+      "subtitle": "Events made easy",
+      "description": "Organizing events your own way",
+      "getStarted": "Get Started",
+      "join": "Join the Event",
+      "getStartedLogged": "Go to my Profile",
+      "timeTitle": "Suggest Dates",
+      "time": "Pick potential dates and times for your event and the attendees will be able to select the ones where they are available.",
+      "placeTitle": "Pick Locations",
+      "place": "Pick a selection of location your event may take place and let the participants decide which one would suit them.",
+      "checklistTitle": "Delegate Tasks",
+      "checklist": "Write down a checklist of things to bring or to do for the event and let people help.",
+      "pollsTitle": "Let them choose more...",
+      "howto": "How does it work?",
+      "polls": "Create polls to ask your participants what they would prefer.",
+      "getStatedToContinue": "You have been invited.<br />In order to join the event please click button bellow.",
+      "step1":"<strong>Create</strong> your event",
+      "step2":"<strong>Suggest</strong> Dates",
+      "step3":"<strong>Pick</strong> Locations",
+      "step4":"<strong>Delegate</strong> Tasks",
+      "step5":"<strong>Offer</strong> more Choices"
+    },
+    "profilePage": {
+      "createEvent": "Create an event",
+      "eventList": "My events",
+      "title": "Your profile",
+      "isAdmin": "You are the admin fo this event.",
+      "deleteEvent": "Are you sure you want to delete this event?",
+      "noEvents": "You have no events yet"
+    },
+    "footer": {
+      "contact": "Contact me",
+      "eula": "License agreement"
+    },
+    "share": {
+      "title": "Share",
+      "url":"Url:",
+      "ref":"Follow this link to partifcipate to",
+      "default": "My event"
+    },
+    "loginPage": {
+      "title": "Log In",
+      "intro": "The page you are trying to reach requires you to log in"
+    },
+    "login": {
+      "google": "Sign in with Google",
+      "passwordlessIntro": "Or send me a magic link",
+      "passwordless": "Send me the magic link",
+      "email": "Email address",
+      "sent": "Sent"
+    },
+    "help": {
+      "info": "Write down a title and a short description for your event",
+      "calendar": "Select the potential dates the event may take place. Once a date is selected you may select times for the attendees to choose from.<br /> You may type in the hour in short format like '115' in place of '01:15' and then press <kbd>Enter</kbd> to submit.",
+      "calendarViewer": "Select the dates or times you would be able to attend the event.",
+      "place": "Select the potential places the event may take place. Either select from the dropdown list provided once you start typing or, if you can't find it, press <kbd>Enter</kbd> for a custom location.",
+      "placeViewer": "Select the places where you could go to attend the event.",
+      "checklist": "Create a checklist of things to prepare for your event. Attendees will be able to assign items to themselves.",
+      "checklistViewer": "Here is what is needed for the event, feel free to assign a task or two for yourself by checking the box.",
+      "polls": "You can create polls for the attendees to choose activities or themes etc.",
+      "pollsViewer": "Please vote for the following poll(s)."
+    },
+    "notfound": {
+      "title": "The page you are looking for does not exist",
+      "create": "Create one!",
+      "home": "Go back home"
+    },
+    "emptyEvent": "This event is empty.",
+    "logout": "Logout",
+    "defaultEventName": "(Event without title)",
+    "remove": "Remove",
+    "saving": "Saving...",
+    "saved": "Saved",
+    "serverError": "Something went wrong...",
+    "confirmTitle": "Please confirm."
+  }
+}

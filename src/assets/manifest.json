@@ -1,0 +1,17 @@
+{
+  "short_name": "Organizr.io",
+  "name": "Organizr.io",
+  "background_color": "#4C4C4C",
+  "theme_color": "#4C4C4C",
+  "description": "A simple way to organize events with friends.",
+  "start_url": ".",
+  "display": "standalone",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "72x72 96x96 128x128 256x256"
+    }
+  ]
+}

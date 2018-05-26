@@ -1,0 +1,30 @@
+version: "2"
+services:
+  organizr-restify:
+    build: .
+    ports:
+      - "3003:3003"
+      - "5858:5858"
+    entrypoint:
+      - node
+      - --inspect=0.0.0.0:5858
+      - server/server.js
+    depends_on:
+      - organizr-mongo
+    networks:
+      - all
+    environment:
+      MONGODB_URI: "mongodb://organizr-mongo:27017/organizr"
+      NODE_ENV: development
+
+  organizr-mongo:
+    image: mongo
+    volumes:
+      - /data/mongodb/db:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - all
+
+networks:
+  all:
