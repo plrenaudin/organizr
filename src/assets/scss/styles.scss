@@ -1,4 +1,4 @@
-@import './normalize.scss';
+@import "./normalize.scss";
 
 $white-color-percentage: 35%;
 $sidebar-width-percent: 30%;
@@ -14,57 +14,69 @@ $md: 992px;
 $sm: 768px;
 $xs: 412px;
 
-$red:           #F44336;
-$green:         #4CAF50;
-$light-green:   lighten($green, 20);
-$white-green:   lighten($green, $white-color-percentage);
-$orange:        #FFC107;
-$light-orange:  lighten($orange, 20);
-$white-orange:  lighten($orange, $white-color-percentage);
-$blue:          #2196f3;
-$light-blue:    lighten($blue, 20);
-$white-blue:    lighten($blue, $white-color-percentage);
-$grey:          #ddd;
-$light-grey:    #fafafa;
-$mid-grey:      #777;
-$strong-grey:   #4C4C4C;
-$white:         white;
-$color0:        #9C27B0;
-$color1:        #F44336;
-$color2:        #4CAF50;
-$color3:        #FF9800;
-$color4:        #2196F3;
-$color5:        #795548;
+$red: #f44336;
+$green: #4caf50;
+$light-green: lighten($green, 20);
+$white-green: lighten($green, $white-color-percentage);
+$orange: #ffc107;
+$light-orange: lighten($orange, 20);
+$white-orange: lighten($orange, $white-color-percentage);
+$blue: #2196f3;
+$light-blue: lighten($blue, 20);
+$white-blue: lighten($blue, $white-color-percentage);
+$grey: #ddd;
+$light-grey: #fafafa;
+$mid-grey: #777;
+$strong-grey: #4c4c4c;
+$white: white;
+$color0: #9c27b0;
+$color1: #f44336;
+$color2: #4caf50;
+$color3: #ff9800;
+$color4: #2196f3;
+$color5: #795548;
 
 // =================================== Basic and small components
 
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
-  src: local('Roboto Light'), local('Roboto-Light'), url('./assets/fonts/Roboto-Light.ttf') format('truetype');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+  src: local("Roboto Light"), local("Roboto-Light"),
+    url("./assets/fonts/Roboto-Light.ttf") format("truetype");
+  unicode-range: U + 0000-00ff, U + 0131, U + 0152-0153, U + 02c6, U + 02da,
+    U + 02dc, U + 2000-206f, U + 2074, U + 20ac, U + 2212, U + 2215, U + E0FF,
+    U + EFFD, U + F000;
 }
 
-html,body {
-  font-family: "Roboto",Helvetica,"PingFang SC","Hiragino Sans GB",Arial,sans-serif;
+html,
+body {
+  font-family: "Roboto", Helvetica, "PingFang SC", "Hiragino Sans GB", Arial,
+    sans-serif;
   margin: 0;
   padding: 0;
   background-color: $light-grey;
   scroll-behavior: smooth;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 200;
 }
 
 ul {
-    list-style-type: none;
-    padding:0;
+  list-style-type: none;
+  padding: 0;
 }
+
+pre {
+  white-space: pre-wrap;
+}
+
 .checkbox {
   display: inline-block;
-  input[type=checkbox] {
+  input[type="checkbox"] {
     display: none;
 
     &:disabled + label:before {
@@ -75,14 +87,14 @@ ul {
 
     &:disabled:checked + label:before {
       background: transparent;
-      border:1px solid transparent;
+      border: 1px solid transparent;
       border-bottom-color: $grey;
       border-right-color: $grey;
     }
 
     & + label {
       padding-left: 35px;
-      padding-top:.2em;
+      padding-top: 0.2em;
       cursor: pointer;
       position: relative;
       top: 0;
@@ -125,14 +137,16 @@ ul {
   }
 }
 
-input[type=text], select, textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid $grey;
-    border-radius: 4px;
-    box-sizing: border-box;
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid $grey;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .fa {
@@ -170,7 +184,7 @@ input[type=text], select, textarea {
 }
 
 .small-text {
-  font-size: .75em;
+  font-size: 0.75em;
   color: $mid-grey;
 }
 .radio {
@@ -189,7 +203,9 @@ input[type=text], select, textarea {
       transform: scale(1);
       opacity: 1;
     }
-    &:checked + .outer { border: 3px solid $green; }
+    &:checked + .outer {
+      border: 3px solid $green;
+    }
     &:focus + .outer .inner {
       -webkit-transform: scale(1);
       -ms-transform: scale(1);
@@ -203,7 +219,7 @@ input[type=text], select, textarea {
     height: 20px;
     display: block;
     float: left;
-    margin: .2em;
+    margin: 0.2em;
     border: 3px solid $mid-grey;
     border-radius: 50%;
     background-color: #fff;
@@ -226,13 +242,13 @@ input[type=text], select, textarea {
     -webkit-transform: scale(0.5);
     -ms-transform: scale(0.5);
     transform: scale(0.5);
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 
 .button {
   display: inline-block;
-  padding: .4em 1.4em;
+  padding: 0.4em 1.4em;
   background: $green;
   color: $white;
   white-space: nowrap;
@@ -240,28 +256,27 @@ input[type=text], select, textarea {
   text-decoration: none;
   font-weight: bold;
   box-shadow: 0 0 4px 1px $mid-grey;
-  margin: 0 .5em;
-  border-radius: .2em;
+  margin: 0 0.5em;
+  border-radius: 0.2em;
   &:hover {
     box-shadow: 0 0 2px 1px $mid-grey;
   }
   &:active {
     box-shadow: none;
-    background: lighten($green, 10%)
+    background: lighten($green, 10%);
   }
   &.red {
     background: $red;
   }
   .fa {
-    min-width:0;
+    min-width: 0;
     color: $white;
   }
-  &>.fa {
+  & > .fa {
     margin-right: 1em;
     text-align: left;
   }
 }
-
 
 .placePlaceholder {
   height: 170px;
@@ -294,20 +309,23 @@ input[type=text], select, textarea {
   position: relative;
   cursor: pointer;
   overflow: hidden;
-  background-image: url('./assets/img/mapPlaceholder.png');
+  background-image: url("./assets/img/mapPlaceholder.png");
   background-position: center;
-  img { display: block; }
+  img {
+    display: block;
+  }
 }
 
 .card {
   background-color: $white;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   &.full-width {
-    padding-top:0;
-    padding-left:0;
-    padding-right:0;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 ul.card-group {
@@ -319,11 +337,14 @@ ul.card-group {
     flex-direction: column;
   }
   li {
-    padding: .5em;
+    padding: 0.5em;
   }
 }
 
-.landingPage, .profilePage, .loginPage, .notfound {
+.landingPage,
+.profilePage,
+.loginPage,
+.notfound {
   min-height: 100vh;
 }
 
@@ -340,7 +361,7 @@ aside {
   flex-direction: column;
   justify-content: space-between;
   section {
-    padding:0;
+    padding: 0;
   }
   .fa {
     color: $white;
@@ -356,11 +377,11 @@ aside {
       .fa {
         color: $strong-grey;
       }
-      padding:.3em 1em;
+      padding: 0.3em 1em;
       border: 1px solid $white;
       text-decoration: none;
       &:visited {
-        color:$strong-grey;
+        color: $strong-grey;
       }
       &.router-link-active {
         cursor: default;
@@ -386,9 +407,9 @@ aside {
     flex-wrap: wrap;
     align-content: center;
     justify-content: space-between;
-    padding: 0 .5em;
+    padding: 0 0.5em;
     figure {
-      margin: .5em;
+      margin: 0.5em;
     }
     .profile {
       align-items: center;
@@ -405,12 +426,12 @@ aside {
       }
     }
   }
-  nav ul{
+  nav ul {
     font-weight: bold;
     margin: 0;
     text-shadow: 0 0 2px $strong-grey;
-    li{
-      padding:1em .5em;
+    li {
+      padding: 1em 0.5em;
       cursor: pointer;
       border-top: 1px solid $mid-grey;
       &:last-child {
@@ -434,9 +455,9 @@ aside {
         flex-wrap: wrap;
         li {
           border: 1px solid $white;
-          padding:3px .75em;
+          padding: 3px 0.75em;
           margin: 2px;
-          font-size: .75em;
+          font-size: 0.75em;
           border-radius: 1em;
           background-color: $strong-grey;
           box-shadow: 0 0 1px 0px $white inset, 0 0 1px 0px $white;
@@ -496,7 +517,7 @@ aside {
     min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
-    &>section{
+    & > section {
       min-height: 30vh;
       box-sizing: border-box;
       width: 100%;
@@ -551,7 +572,7 @@ aside {
 }
 section {
   padding: 1em;
-  &>h2 {
+  & > h2 {
     padding-left: 1em;
     margin-top: 0;
   }
@@ -560,7 +581,7 @@ section {
 // =================================== Components
 
 .notfound {
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -575,7 +596,8 @@ section {
     width: 100%;
     box-sizing: border-box;
   }
-  input, textarea {
+  input,
+  textarea {
     margin: 1em;
   }
   textarea {
@@ -587,21 +609,21 @@ section {
   .name {
     text-overflow: ellipsis;
     overflow: hidden;
-    padding: .2em .5em;
+    padding: 0.2em 0.5em;
     white-space: nowrap;
   }
 }
 
 .sharer {
-  padding: 0 .5em;
+  padding: 0 0.5em;
   h2 {
-    margin: 0 .5em 0 0;
+    margin: 0 0.5em 0 0;
     display: inline-block;
   }
   input {
     cursor: pointer;
   }
-  ul.share-buttons{
+  ul.share-buttons {
     display: inline-block;
     list-style: none;
     padding: 0;
@@ -611,8 +633,8 @@ section {
       margin: 0;
       img {
         width: 32px;
+      }
     }
-  }
   }
   .urlShare {
     display: flex;
@@ -641,17 +663,18 @@ section {
       max-width: 450px;
       margin: 0 auto;
     }
-    .calendar-header{
+    .calendar-header {
       display: flex;
       align-items: baseline;
       justify-content: center;
-      font-size:1.5em;
+      font-size: 1.5em;
       h3 {
         width: 250px;
         text-align: center;
       }
     }
-    ul.dates, ul.weekdays {
+    ul.dates,
+    ul.weekdays {
       margin: 0 auto;
       padding: 10px 0;
       display: flex;
@@ -686,17 +709,17 @@ section {
           }
           cursor: pointer;
         }
-        &.selected span{
+        &.selected span {
           background-color: $light-blue;
         }
       }
     }
     ul.selected {
-      &>li {
+      & > li {
         display: flex;
         align-items: baseline;
-        padding: .5em 0;
-        margin: .5em 0;
+        padding: 0.5em 0;
+        margin: 0.5em 0;
         .formattedDate {
           width: 100%;
           text-align: center;
@@ -705,7 +728,7 @@ section {
     }
     .dateContainer {
       padding: 12px 0;
-      margin: .5em;
+      margin: 0.5em;
       background-color: $light-blue;
       border: 1px solid $grey;
       border-radius: 4px;
@@ -721,7 +744,7 @@ section {
         display: flex;
         flex-wrap: wrap;
         li {
-          margin: .5em;
+          margin: 0.5em;
         }
       }
     }
@@ -738,7 +761,7 @@ section {
   }
   .checklist {
     li {
-      padding: .5em;
+      padding: 0.5em;
       display: flex;
       align-items: baseline;
     }
@@ -761,7 +784,7 @@ section {
       ul.times {
         margin-left: 1em;
         li {
-          padding:0.5em;
+          padding: 0.5em;
           display: flex;
           align-items: center;
           span {
@@ -783,7 +806,7 @@ section {
         align-items: center;
         justify-content: space-between;
         label {
-          cursor:pointer
+          cursor: pointer;
         }
       }
     }
@@ -798,12 +821,12 @@ section {
       align-items: center;
     }
     .checkbox {
-      margin: .5em 1em;
+      margin: 0.5em 1em;
     }
   }
   .checklist {
     li {
-      padding: .5em;
+      padding: 0.5em;
       display: flex;
       align-items: baseline;
     }
@@ -829,27 +852,28 @@ section {
     flex-direction: column;
     background-color: $strong-grey;
     color: $white;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2);
     .header {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     h1 {
-      margin: 0
+      margin: 0;
     }
     #title {
       width: 90%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      img{
+      img {
         width: 4em;
         padding: 0 1em;
         display: inline-block;
       }
     }
-    #description  {
+    #description {
       align-items: center;
       display: flex;
       flex-direction: column;
@@ -874,7 +898,7 @@ section {
           .fa {
             color: $white;
           }
-          &:first-of-type{
+          &:first-of-type {
             background-color: $color0;
           }
           &:nth-of-type(2) {
@@ -912,14 +936,18 @@ section {
 }
 .savingIndicator {
   white-space: nowrap;
-  padding-top: .5em;
+  padding-top: 0.5em;
   .saved {
     color: $green;
-    i { color: $green; }
+    i {
+      color: $green;
+    }
   }
   .serverError {
     color: $red;
-    i { color: $red; }
+    i {
+      color: $red;
+    }
   }
 }
 .myEvents {
@@ -928,7 +956,7 @@ section {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    >li {
+    > li {
       flex: 0 0 400px;
       min-height: 100px;
       padding: 1em 1em;
@@ -991,7 +1019,8 @@ footer {
   .attendeesList {
     display: none;
     position: absolute;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2);
     background-color: $white;
     right: 0;
     z-index: 10;
@@ -999,21 +1028,22 @@ footer {
     max-width: 400px;
     overflow: auto;
     li {
-      padding: .5em;
+      padding: 0.5em;
       margin: 0;
       border: none;
     }
   }
   .hoverme {
-    cursor:default;
+    cursor: default;
   }
-  .hoverme:hover + .attendeesList, .attendeesList:hover {
+  .hoverme:hover + .attendeesList,
+  .attendeesList:hover {
     display: block;
   }
 }
 .contentEditable {
   width: 100%;
-  padding: .3rem;
+  padding: 0.3rem;
   border: 1px solid transparent;
   &.focused:hover {
     border: 1px solid transparent;
@@ -1025,7 +1055,7 @@ footer {
   }
   input {
     outline: none;
-    border:none;
+    border: none;
     margin: 0;
     padding: 0;
   }
@@ -1037,9 +1067,9 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
   .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
@@ -1050,8 +1080,8 @@ footer {
     margin: 0px auto;
     background-color: #fff;
     border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-    transition: all .3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    transition: all 0.3s ease;
     font-family: Helvetica, Arial, sans-serif;
   }
   .modalContent {
@@ -1064,12 +1094,12 @@ footer {
       div {
         flex: 1;
         text-align: center;
-        padding: .5em 0;
+        padding: 0.5em 0;
         font-weight: bold;
         color: $white;
         cursor: pointer;
         .fa {
-          color:$white;
+          color: $white;
         }
         &.red {
           background-color: $red;
@@ -1087,14 +1117,14 @@ footer {
   flex-direction: column;
   align-items: center;
   li {
-    margin: .5em 0;
+    margin: 0.5em 0;
   }
   .passwordlessInput {
     display: flex;
     input {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
-      margin:0;
+      margin: 0;
     }
     div {
       padding: 12px;
@@ -1121,10 +1151,12 @@ footer {
 
 /* ======================== Animations ====================== */
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 .modal-enter {
@@ -1146,56 +1178,56 @@ img {
   width: 100%;
 }
 // Huge screen
-@media only screen and (min-width:$xl){
+@media only screen and (min-width: $xl) {
   #page #application {
     aside {
       width: $sidebar-width-lg-px;
     }
     main {
       padding-right: $sidebar-width-lg-px;
-      &>section {
+      & > section {
         width: 33.333333%;
       }
     }
   }
-    }
+}
 // Desktop
-@media only screen and (min-width:$lg) and (max-width:$xl){
+@media only screen and (min-width: $lg) and (max-width: $xl) {
   #page #application {
     aside {
       width: $sidebar-width-lg-px;
     }
     main {
       padding-right: $sidebar-width-lg-px;
-      &>section {
+      & > section {
         width: 50%;
       }
     }
   }
 }
 // Small Desktop
-@media only screen and (max-width:$lg){
+@media only screen and (max-width: $lg) {
   #page #application {
     aside {
       width: $sidebar-width-lg-px;
     }
     main {
       padding-right: $sidebar-width-lg-px;
-      &>section {
+      & > section {
         width: 50%;
       }
     }
   }
 }
 // Tablets
-@media only screen and (max-width:$md){
+@media only screen and (max-width: $md) {
   #page #application {
     aside {
       width: $sidebar-width-md-px;
     }
     main {
       padding-right: $sidebar-width-md-px;
-      &>section {
+      & > section {
         width: 100%;
       }
     }
@@ -1219,7 +1251,7 @@ img {
         ul.steps {
           margin: 0;
           li {
-            margin: .5em;
+            margin: 0.5em;
           }
         }
         .scrolldown {
@@ -1233,32 +1265,33 @@ img {
       display: none;
     }
     .sharer {
-      h2{
+      h2 {
         display: none;
       }
     }
     .sharer .urlShare {
-      label, input[type=text] {
-        padding:.3em;
+      label,
+      input[type="text"] {
+        padding: 0.3em;
         border-radius: 0;
       }
     }
   }
 }
 // Small tablets
-@media only screen and (max-width:$sm){
+@media only screen and (max-width: $sm) {
   #page #application {
     aside {
       width: $sidebar-width-sm-px;
     }
     main {
       padding-right: $sidebar-width-sm-px;
-      &>section {
+      & > section {
         width: 100%;
       }
     }
   }
-  .myEvents{
+  .myEvents {
     ul.eventList > li {
       flex: 0 0 auto;
       h2 {
@@ -1274,7 +1307,8 @@ img {
   }
   aside {
     section#user {
-      .profile label, .savingIndicator label{
+      .profile label,
+      .savingIndicator label {
         display: none;
       }
     }
@@ -1291,21 +1325,21 @@ img {
 }
 
 // Phones
-@media only screen and (max-width:$xs){
+@media only screen and (max-width: $xs) {
   #page #application {
     aside {
       width: $sidebar-width-xs-px;
     }
     main {
       padding-right: $sidebar-width-xs-px;
-      &>section {
+      & > section {
         width: 100%;
       }
     }
   }
   aside {
-    nav ul li{
-      padding: 1em .3em;
+    nav ul li {
+      padding: 1em 0.3em;
       i {
         width: auto;
       }
@@ -1319,7 +1353,7 @@ img {
     .toggleButton {
       flex-direction: column;
       a {
-        padding: .5em;
+        padding: 0.5em;
         border: 1px solid $white;
         &:first-child {
           border-radius: 4px 4px 0 0;
