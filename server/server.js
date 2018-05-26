@@ -6,7 +6,7 @@ const cacheControl = require('./cacheControl');
 const server = restify.createServer({
   name: 'organiz',
   log: Logger.createLogger({
-    name: 'organizr.io'
+    name: 'organizr'
   })
 });
 server.on('after', bunyanLogger());

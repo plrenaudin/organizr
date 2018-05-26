@@ -28,7 +28,7 @@
       "vote": "Vote"
     },
     "landingPage": {
-      "title": "Organizr.io",
+      "title": "Organizr",
       "subtitle": "Events made easy",
       "description": "Organizing events your own way",
       "getStarted": "Get Started",
@@ -59,7 +59,6 @@
       "noEvents": "You have no events yet"
     },
     "footer": {
-      "contact": "Contact me",
       "eula": "License agreement"
     },
     "share": {
