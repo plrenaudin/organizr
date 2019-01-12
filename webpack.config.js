@@ -5,6 +5,8 @@ const env = require('./server/.env');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 
 const googleClientId = `"${env.GOOGLE_CLIENT_ID}"`;
 const facebookClientId = `"${env.FACEBOOK_CLIENT_ID}"`;
@@ -21,6 +23,8 @@ module.exports = {
   module: {
     rules: [
       { test: /\.vue$/, loader: 'vue-loader' },
+
+      { test: /\.scss$/, loader: 'vue-style-loader!css-loader!sass-loader' },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       {
@@ -56,6 +60,7 @@ module.exports = {
   },
   devtool: '#eval-source-map',
   plugins: [
+    new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       __API__: apiHost,
       __GOOGLE_CLIENT_ID__: `${googleClientId}`,
