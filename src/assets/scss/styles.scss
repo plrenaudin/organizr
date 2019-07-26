@@ -43,7 +43,7 @@ $color5: #795548;
   font-style: normal;
   font-weight: 300;
   src: local("Roboto Light"), local("Roboto-Light"),
-    url("../fonts/Roboto-Light.ttf") format("truetype");
+    url("./assets/fonts/Roboto-Light.ttf") format("truetype");
   unicode-range: U + 0000-00ff, U + 0131, U + 0152-0153, U + 02c6, U + 02da,
     U + 02dc, U + 2000-206f, U + 2074, U + 20ac, U + 2212, U + 2215, U + E0FF,
     U + EFFD, U + F000;
@@ -309,7 +309,7 @@ textarea {
   position: relative;
   cursor: pointer;
   overflow: hidden;
-  background-image: url("../img/mapPlaceholder.png");
+  background-image: url("./assets/img/mapPlaceholder.png");
   background-position: center;
   img {
     display: block;
@@ -1118,27 +1118,6 @@ footer {
   align-items: center;
   li {
     margin: 0.5em 0;
-  }
-  .passwordlessInput {
-    display: flex;
-    input {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      margin: 0;
-    }
-    div {
-      padding: 12px;
-      cursor: pointer;
-      background-color: $green;
-      display: flex;
-      align-items: center;
-      border-bottom-right-radius: 4px;
-      border-top-right-radius: 4px;
-      color: $white;
-      .fa {
-        color: $white;
-      }
-    }
   }
 }
 .loginPage {

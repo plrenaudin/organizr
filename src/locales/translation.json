@@ -73,8 +73,6 @@
     },
     "login": {
       "google": "Sign in with Google",
-      "passwordlessIntro": "Or send me a magic link",
-      "passwordless": "Send me the magic link",
       "email": "Email address",
       "sent": "Sent"
     },

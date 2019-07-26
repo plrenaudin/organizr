@@ -76,6 +76,6 @@ export default {
 };
 </script>
 
-<style lang="sass">
-  import './assets/scss/styles.scss';
+<style lang="scss">
+  @import './assets/scss/styles.scss';
 </style>

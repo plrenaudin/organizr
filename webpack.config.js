@@ -22,11 +22,11 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.vue$/, loader: 'vue-loader' },
+      { test: /\.vue$/, use: 'vue-loader' },
 
-      { test: /\.scss$/, loader: 'vue-style-loader!css-loader!sass-loader' },
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.scss$/, use: ['vue-style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.css$/, use: ['style-loader','css-loader'] },
+      { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
       {
         test: /\.(png|jpg|gif|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
@@ -34,14 +34,17 @@ module.exports = {
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&minetype=application/font-woff'
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          minetype: 'application/font-woff'
+        }
       }
     ]
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    historyApiFallback: true,
-    noInfo: true
+    historyApiFallback: true
   },
   performance: {
     hints: false

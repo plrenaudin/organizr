@@ -2,13 +2,12 @@
 
 > This project is a Doodle clone which allows to organize events collaboratively by choosing a Date, a Location, creating a Todo List and Polls.
 
-Before starting you will need a Google API account and a server with Docker, Mongodb and SMTP support (only for passwordless feature).
+Before starting you will need a Google API account and a server with Docker and Mongodb.
 
 Tech stack:
 
 * Frontend built with [Vue.js](https://vuejs.org/)
 * Backend built with [Restify](http://restify.com/) and [MongoDB](https://www.mongodb.com/)
-* Integration of Google API and [Passwordless](https://passwordless.net/)
 
 ## Frontend Build Setup
 
@@ -33,15 +32,12 @@ module.exports = {
   GOOGLE_CLIENT_ID: [GOOGLE_CLIENT_ID],
   GOOGLE_CLIENT_SECRET: [GOOGLE_CLIENT_SECRET],
   SERVER_URL: "http://localhost:3003",
-  FRONT_URL: "http://localhost:8080",
-  SMTP_USER: [SMTP_SERVER_USER],
-  SMTP_PASS: [PASSWORD],
-  SMTP_HOST: [HOST]
+  FRONT_URL: "http://localhost:8080"
 };
 ```
 
 ```bash
-docker-compose down
+docker-compose stop
 docker-compose build
 docker-compose up
 ```

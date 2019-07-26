@@ -5,24 +5,6 @@
       ref="signinBtn">
       <i class="fa fa-sign-in"/>{{ $t('app.login.google') }}
     </li>
-    <li>{{ $t('app.login.passwordlessIntro') }}
-    </li><li class="passwordlessInput">
-      <input
-        type="text"
-        id="emailPasswordless"
-        :placeholder="$t('app.login.email')"
-        ref="emailField"
-        @keyup.enter="sendToken"
-        :disabled="state !== 'waiting'" >
-      <div
-        @click="sendToken"
-        :title="$t('app.login.passwordless')">
-        <i :class="['fa', {'fa-magic' : state === 'waiting'}, {'fa-spinner': state === 'sending'}, {'fa-check': state === 'sent'}]"/>
-        <span
-          v-show="state === 'sent'"
-          v-html="$t('app.login.sent')"/>
-      </div>
-    </li>
   </ul>
 </template>
 <script>
@@ -66,16 +48,6 @@ export default {
         });
         auth2.attachClickHandler(this.$refs.signinBtn, {}, this.authentify, error => console.log(error));
       });
-    },
-    sendToken() {
-      let me = this;
-      const mail = me.$refs.emailField.value;
-      if (mail && mail.indexOf('@') > 0 && me.state === 'waiting') {
-        me.state = 'sending';
-        me.$http.post('/api/sendToken', { user: mail })
-          .then(() => me.state = 'sent')
-          .catch(err => console.error(err));
-      }
     }
   }
 };
