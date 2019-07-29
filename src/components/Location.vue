@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-const API_KEY = 'AIzaSyCpXyx4HDbN_7UDmglKe30nfWQLcu-C804';
+const API_KEY = 'AIzaSyCF4NJ94e0qifAS-wYU70X9f2F4zVab2QA';
 export default {
   name: 'Location',
   props: ['place'],
