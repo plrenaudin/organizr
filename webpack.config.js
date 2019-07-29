@@ -1,16 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const env = require('./server/.env');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 
-const googleClientId = `"${env.GOOGLE_CLIENT_ID}"`;
-const facebookClientId = `"${env.FACEBOOK_CLIENT_ID}"`;
-const apiHost = `"${env.SERVER_URL}"`;
+const googleClientId = `"${process.env.GOOGLE_CLIENT_ID}"`;
+const facebookClientId = `"${process.env.FACEBOOK_CLIENT_ID}"`;
+const apiHost = `"${process.env.SERVER_URL}"`;
 
 module.exports = {
   entry: './src/main.js',

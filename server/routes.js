@@ -1,5 +1,5 @@
 const eventAPI = require('./EventAPI');
-const eventIdRegex = /([a-z0-9]{24})/;
+const eventIdRegex = '/:id(^[a-z0-9]{24}$)';
 
 const sendResult = (res, next) => {
   return (data) => {

@@ -1,21 +1,18 @@
 version: "2"
 services:
-  organizr-restify:
-    build: .
-    ports:
-      - "3003:3003"
-      - "5858:5858"
-    entrypoint:
-      - node
-      - --inspect=0.0.0.0:5858
-      - server/server.js
-    depends_on:
-      - organizr-mongo
+  organizr-api:
+    build: ./server
+    working_dir: "/app" # Where to container will assume it should run commands and where you will start out if you go inside the container
     networks:
-      - all
+    - app # Networking can get complex, but for all intents and purposes just know that containers on the same network can speak to each other
+    ports:
+    - "3003:3003" # <host-port>:<container-port> to listen to, so anything running on port 3000 of the container will map to port 3000 on our localhost
+    # volumes:
+    # - ./server:/app # <host-directory>:<container-directory> this says map the current directory from your system to the /app directory in the docker container
+    command: "npx pm2 start server.js --watch --no-daemon" # The command docker will execute when starting the container, this command is not allowed to exit, if it does your container will stop
     environment:
-      MONGODB_URI: "mongodb://organizr-mongo:27017/organizr"
-      NODE_ENV: development
+      MONGODB_URI: "mongodb://organizr-mongo-prod:27017/organizr"
+      NODE_ENV: production
 
   organizr-mongo:
     image: mongo
@@ -24,7 +21,7 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - all
+      - app
 
 networks:
-  all:
+  app:
