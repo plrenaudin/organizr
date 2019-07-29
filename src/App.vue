@@ -9,9 +9,6 @@
       </transition>
       <footer>
         <ul>
-          <li><a 
-            class="action" 
-            href="mailto:admin@organizr.io?Subject=Organiz.io">{{ $t('app.footer.contact') }}</a></li>
           <li><div 
             class="action" 
             @click="showEulaModal = true">{{ $t('app.footer.eula') }}</div></li>
@@ -51,24 +48,24 @@
 </template>
 
 <script>
-import Modal from './components/Modal.vue';
+import Modal from "./components/Modal.vue";
 export default {
-  name: 'App',
-  components: {Modal},
+  name: "App",
+  components: { Modal },
   data() {
     return {
       showEulaModal: false,
       confirmDialogVisible: false,
-      confirmDialogText: '',
+      confirmDialogText: "",
       confirmDialogAction: () => {},
       confirmDialogActionParams: null
     };
   },
   created() {
-    this.$bus.$on('confirm', this.displayConfirm);
+    this.$bus.$on("confirm", this.displayConfirm);
   },
   methods: {
-    displayConfirm(text,fn,params) {
+    displayConfirm(text, fn, params) {
       this.confirmDialogText = text;
       this.confirmDialogAction = fn;
       this.confirmDialogActionParams = params;
@@ -76,12 +73,12 @@ export default {
     },
     handleConfirm() {
       this.confirmDialogAction(this.confirmDialogActionParams);
-      this.confirmDialogText = '';
+      this.confirmDialogText = "";
       this.confirmDialogActionParams = null;
       this.confirmDialogAction = () => {};
       this.confirmDialogVisible = false;
     }
-  },
+  }
 };
 </script>
 

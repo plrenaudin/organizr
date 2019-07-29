@@ -27,12 +27,12 @@ passwordless.addDelivery((tokenToSend, uidToSend, recipient, callback) => {
     return;
   }
   smtpServer.send({
-    text: `Welcome to Organizr.io!
+    text: `Welcome to Organizr!
 
 Here is your magic link: ${env.SERVER_URL}/api/auth/passwordless?token=${tokenToSend}&uid=${encodeURIComponent(uidToSend)}
 
 This link is valid only once!`,
-    from: 'Organizr.io <admin@organizr.io>',
+    from: `Organizr <${env.SMTP_USER}>`,
     to: recipient,
     subject: 'Your magic link'
   }, function (err) {
@@ -50,7 +50,7 @@ let providers = {
 const createJwt = profile => {
   let payload = JSON.parse(JSON.stringify(profile));
   payload.exp = Number(payload.exp);
-  return jwt.sign(payload, env.pk, { issuer: 'Organizr.io' });
+  return jwt.sign(payload, env.pk, { issuer: 'Organizr' });
 };
 
 const validateWithProvider = (network, socialToken) =>

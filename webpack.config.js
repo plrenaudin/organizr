@@ -1,14 +1,14 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const env = require('./server/.env')
-const ManifestPlugin = require('webpack-manifest-plugin')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const env = require('./server/.env');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const googleClientId = "'" + env.GOOGLE_CLIENT_ID + "'"
-const facebookClientId = "'" + env.FACEBOOK_CLIENT_ID + "'"
-const apiHost = "'" + env.SERVER_URL + "'"
+const googleClientId = `"${env.GOOGLE_CLIENT_ID}"`;
+const facebookClientId = `"${env.FACEBOOK_CLIENT_ID}"`;
+const apiHost = `"${env.SERVER_URL}"`;
 
 module.exports = {
   entry: './src/main.js',
@@ -20,30 +20,37 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.vue$/, loader: 'vue-loader'},
+      { test: /\.vue$/, loader: 'vue-loader' },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.(png|jpg|gif|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader', options: { name: '[name].[ext]?[hash]' } },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" }
+      {
+        test: /\.(png|jpg|gif|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader',
+        options: { name: '[name].[ext]?[hash]' }
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&minetype=application/font-woff'
+      }
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     historyApiFallback: true,
     noInfo: true
   },
   performance: {
     hints: false
   },
-  optimization:{
-    splitChunks:{
-      chunks: "all",
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
       cacheGroups: {
         vue: {
-            name: 'vue',
-            test: /\/node_modules\/vue.*/
+          name: 'vue',
+          test: /\/node_modules\/vue.*/
         },
-        vendors: { test: /\/node_modules\/[^vue].*/, name: "vendors" }
+        vendors: { test: /\/node_modules\/[^vue].*/, name: 'vendors' }
       }
     }
   },
@@ -60,7 +67,7 @@ module.exports = {
       hash: true
     }),
     new ManifestPlugin({
-      fileName: 'asset-manifest.json',
+      fileName: 'asset-manifest.json'
     }),
     new CopyWebpackPlugin([
       { from: 'src/assets/manifest.json' },
@@ -82,13 +89,13 @@ module.exports = {
       },
       minify: true, // minify and uglify the script
       navigateFallback: '/',
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
     })
   ]
-}
+};
 
 if (['production', 'staging'].indexOf(process.env.NODE_ENV) > -1) {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
@@ -96,5 +103,5 @@ if (['production', 'staging'].indexOf(process.env.NODE_ENV) > -1) {
         NODE_ENV: '"production"'
       }
     })
-  ])
+  ]);
 }
