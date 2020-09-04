@@ -19,7 +19,7 @@
     "bunyan": "^1.8.12",
     "emailjs": "^1.0.9",
     "jsonwebtoken": "^8.1.0",
-    "mongodb": "^2.2.25",
+    "mongodb": "^3.1.13",
     "monk": "^6.0.5",
     "passwordless": "^1.1.2",
     "passwordless-mongostore": "^0.1.4",
