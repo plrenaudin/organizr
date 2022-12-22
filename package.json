@@ -18,7 +18,7 @@
   "dependencies": {
     "bunyan": "^1.8.12",
     "emailjs": "^1.0.9",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^2.2.25",
     "monk": "^6.0.5",
     "passwordless": "^1.1.2",
